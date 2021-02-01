@@ -5,4 +5,5 @@ using UnityEngine;
 public class RoadBlockController : MonoBehaviour
 {
     public Transform endPoint;
+    public Transform[] obstaclePoints;
 }

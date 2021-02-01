@@ -6,9 +6,6 @@ using Random = UnityEngine.Random;
 
 public class WorldBuilder : MonoBehaviour
 {
-    public GameObject[] freePlatforms;
-    public GameObject[] obstaclePlatforms;
-    public GameObject[] crossPlatforms;
     public Transform platformContainer;
 
     private Transform _lastPlatform = null;
@@ -16,6 +13,9 @@ public class WorldBuilder : MonoBehaviour
     private bool _isObstacle;
     private bool _isCross;
 
+    private string RoadStraight = "RoadStraight";
+    private string RoadBend = "RoadBend";
+    
     private void OnEnable()
     {
         Destroyer.spawnNewRoad += CreatePlatform;
@@ -33,9 +33,7 @@ public class WorldBuilder : MonoBehaviour
 
     public void Init()
     {
-        //CreateFreePlatform(0);
         CreateFreePlatform();
-        //CreateFreePlatform();
 
         for (int i = 0; i < 10; i++)
         {
@@ -58,51 +56,38 @@ public class WorldBuilder : MonoBehaviour
         }
     }
 
-    private void CreateFreePlatform()
+    private void CreateBasePlatform(String platformType)
     {
         Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
         Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
-        
-        //int index = Random.Range(0, freePlatforms.Length);
-        //GameObject result = Instantiate(freePlatforms[index], pos, endPoint.rotation, platformContainer);
-        
-        GameObject result = Pool.singleton.Get("RoadStraight");
+
+        GameObject result = Pool.singleton.Get(platformType);
         SetSpawnSettings(result, pos, endPoint);
         
         _lastPlatform = result.transform;
+    }
+
+    private void CreateFreePlatform()
+    {
+        CreateBasePlatform(RoadStraight);
+        
         _isObstacle = false;
     }
 
     private void CreateObstaclePlatform()
     {
-        Transform endPoint = _lastPlatform.GetComponent<RoadBlockController>().endPoint;
-        Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
-    
-        //int index = Random.Range(0, obstaclePlatforms.Length);
-        //GameObject result = Instantiate(obstaclePlatforms[index], pos, endPoint.rotation , platformContainer);
+        CreateBasePlatform(RoadStraight);
         
-        GameObject result = Pool.singleton.Get("RoadStraight");
-        SetSpawnSettings(result, pos, endPoint);
+        ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
         
-        //result.GetComponent<ObstacleGenerator>().GenerateObstacles();
-        
-        _lastPlatform = result.transform;
         _isObstacle = true;
         _isCross = false;
     }
-    
+
     private void CreateCrossPlatform()
     {
-        Transform endPoint = _lastPlatform.GetComponent<RoadBlockController>().endPoint;
-        Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
-
-        //int index = Random.Range(0, crossPlatforms.Length);
-        //GameObject result = Instantiate(crossPlatforms[index], pos, endPoint.rotation, platformContainer);
+        CreateBasePlatform(RoadBend);
         
-        GameObject result = Pool.singleton.Get("RoadBend");
-        SetSpawnSettings(result, pos, endPoint);
-
-        _lastPlatform = result.transform;
         _isCross = true;
         _isObstacle = false;
     }
@@ -116,13 +101,21 @@ public class WorldBuilder : MonoBehaviour
 }
 
 
-
-
-
 internal class ObstacleGenerator
 {
-    public void GenerateObstacles()
+    public static void GenerateObstacles(GameObject platform)
     {
-        
+       Transform[] obstaclePoints = platform.GetComponent<RoadBlockController>().obstaclePoints;
+       
+       if (obstaclePoints.Length > 0)
+       {
+           for (int i = 0; i < obstaclePoints.Length; i++)
+           {
+               if (Random.Range(0, 101) < 50)
+               {
+                   obstaclePoints[i].gameObject.SetActive(true);
+               }
+           }
+       }
     }
 }

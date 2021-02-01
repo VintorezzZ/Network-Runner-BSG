@@ -14,6 +14,8 @@ TagManager:
   - Cross left
   - Cross right
   - Cross
+  - RoadStraight
+  - RoadBend
   layers:
   - Default
   - TransparentFX
