@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - AwesomeTrigger
+  - Ground
+  - GameManager
+  - Music
+  - UI_manager
+  - Bullet
+  - Cross left
+  - Cross right
+  - Cross
   layers:
   - Default
   - TransparentFX

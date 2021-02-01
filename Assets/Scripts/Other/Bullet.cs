@@ -9,7 +9,8 @@ public class Bullet : MonoBehaviour
 
    private void Start()
    {
-      Destroy(gameObject, 2f);
+      //Destroy(gameObject, 2f);
+      StartCoroutine(Pool.singleton.ReturnToPool(gameObject, 2));
    }
 
    private void Update()
@@ -22,8 +23,11 @@ public class Bullet : MonoBehaviour
    {
       if (other.CompareTag("Obstacle"))
       {
-         Destroy(other.gameObject);
-         Destroy(gameObject);
+         //Destroy(other.gameObject);
+         //Destroy(gameObject);
+
+         Pool.singleton.ReturnToPool(other.gameObject);
+         Pool.singleton.ReturnToPool(gameObject);
       }
    }
 }

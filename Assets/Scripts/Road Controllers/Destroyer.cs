@@ -13,7 +13,8 @@ public class Destroyer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             spawnNewRoad?.Invoke();
-            Destroy(transform.parent.gameObject, 2f);
+            //Destroy(transform.parent.gameObject, 2f);
+            StartCoroutine(Pool.singleton.ReturnToPool(transform.parent.gameObject, 2));
         }
     }
 }

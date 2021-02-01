@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: -4506756382314687452}
   m_Layer: 0
   m_Name: turn left roads
-  m_TagString: Untagged
+  m_TagString: RoadBend
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

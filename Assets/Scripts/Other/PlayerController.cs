@@ -82,25 +82,39 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(Shoot());
             }
-            
         }
         
+        SpeedControl();
+        Move();
+    }
+
+    private void SpeedControl()
+    {
         speed += acceleration * Time.deltaTime;
         if (speed > maxSpeed)
             speed = maxSpeed;
-        
-        Move();
     }
 
     private IEnumerator Shoot()
     {
-        Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
+        //Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
+        
+        InstantiateBullet();
+
         bulletAmount--;
         ui.UpdateBulletstext(bulletAmount);
         
         canShoot = false;
         yield return new WaitForSeconds(0.5f);
         canShoot = true;
+    }
+
+    private void InstantiateBullet()
+    {
+        GameObject bullet = Pool.singleton.Get("Bullet");
+        bullet.SetActive(true);
+        bullet.transform.position = gameObject.transform.position + transform.forward;
+        bullet.transform.rotation = gameObject.transform.rotation;
     }
 
     private void Move()
