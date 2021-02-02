@@ -15,12 +15,14 @@ public class WorldBuilder : MonoBehaviour
     
     private void OnEnable()
     {
-        Destroyer.spawnNewRoad += CreatePlatform;
+        Destroyer.onRoadEnds += CreatePlatform;
+        Destroyer.onRoadEnds += ReturnToPool;
     }
 
     private void OnDisable()
     {
-        Destroyer.spawnNewRoad -= CreatePlatform;
+        Destroyer.onRoadEnds -= CreatePlatform;
+        Destroyer.onRoadEnds -= ReturnToPool;
     }
 
     void Start()
@@ -32,13 +34,13 @@ public class WorldBuilder : MonoBehaviour
     {
         CreateFreePlatform();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
-            CreatePlatform();
+            CreatePlatform(null);
         }
     }
 
-    public void CreatePlatform()
+    public void CreatePlatform(PoolItem nothing)
     {
         if (_isObstacle)
             CreateFreePlatform();
@@ -55,10 +57,10 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateBasePlatform(PoolType platformType)
     {
-        Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockSettings>().endPoint;
+        Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
         Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
 
-        PoolItem result = Pool.Get(platformType);
+        PoolItem result = PoolManager.Get(platformType);
         SetSpawnSettings(result, pos, endPoint);
 
         _lastPlatform = result.transform;
@@ -100,24 +102,9 @@ public class WorldBuilder : MonoBehaviour
         
         result.gameObject.SetActive(true);
     }
-}
 
-
-internal class ObstacleGenerator
-{
-    public static void GenerateObstacles(GameObject platform)
+    private void ReturnToPool(PoolItem poolItem)
     {
-       Transform[] obstaclePoints = platform.GetComponent<RoadBlockSettings>().obstaclePoints;
-       
-       if (obstaclePoints.Length > 0)
-       {
-           for (int i = 0; i < obstaclePoints.Length; i++)
-           {
-               if (Random.Range(0, 101) < 50)
-               {
-                   obstaclePoints[i].gameObject.SetActive(true);
-               }
-           }
-       }
+        PoolManager.Return(poolItem);
     }
 }

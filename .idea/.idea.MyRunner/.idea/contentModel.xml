@@ -30,14 +30,14 @@
             <e p="PlayerController.cs" t="Include" />
           </e>
           <e p="Pool" t="Include">
-            <e p="Pool.cs" t="Include" />
             <e p="PoolContainer.cs" t="Include" />
             <e p="PoolItem.cs" t="Include" />
+            <e p="PoolManager.cs" t="Include" />
             <e p="PoolType.cs" t="Include" />
           </e>
           <e p="Road Controllers" t="Include">
             <e p="Destroyer.cs" t="Include" />
-            <e p="RoadBlockSettings.cs" t="Include" />
+            <e p="RoadBlockController.cs" t="Include" />
             <e p="TextureOffset.cs" t="Include" />
             <e p="WorldBuilder.cs" t="Include" />
           </e>

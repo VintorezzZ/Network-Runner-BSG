@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-    public delegate void SpawnNewRoad();
-    public static event SpawnNewRoad spawnNewRoad;
+    public delegate void OnRoadEnds(PoolItem poolItem);
+    public static event OnRoadEnds onRoadEnds; 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            spawnNewRoad?.Invoke();
-
-            StartCoroutine(Pool.Instance.ReturnToPool(transform.parent.gameObject.GetComponent<PoolItem>(), 2));
+            Invoke(nameof(SendMessage), 1);
         }
+    }
+
+    private void SendMessage()
+    {
+        onRoadEnds?.Invoke(transform.parent.gameObject.GetComponent<PoolItem>());
     }
 }

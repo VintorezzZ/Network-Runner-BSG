@@ -11,22 +11,25 @@ public class Bullet : MonoBehaviour
    private void Start()
    {
       poolItem = GetComponent<PoolItem>();
-      
-      StartCoroutine(Pool.Instance.ReturnToPool(gameObject.GetComponent<PoolItem>(), 2));
+
+      Invoke(nameof(ReturnToPool), 2);
    }
 
    private void Update()
    {
-      //transform.localPosition += new Vector3(0, 0, speed);
       transform.Translate(Vector3.forward * speed, Space.Self);
+   }
+
+   private void ReturnToPool()
+   {
+      PoolManager.Return(gameObject.GetComponent<PoolItem>());
    }
 
    private void OnTriggerEnter(Collider other)
    {
       if (other.CompareTag("Obstacle"))
       {
-         //Pool.Instance.ReturnToPool(other.gameObject.GetComponent<PoolItem>());
-         Pool.Instance.ReturnToPool(poolItem);
+         ReturnToPool();
       }
    }
 }

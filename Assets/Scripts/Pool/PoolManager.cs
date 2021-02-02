@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Pool : MonoBehaviour
+public class PoolManager : MonoBehaviour
 {
-    public static Pool Instance;
+    public static PoolManager Instance;
 
     private Dictionary<PoolType, PoolContainer> _pools = new Dictionary<PoolType, PoolContainer>();
 
@@ -42,7 +42,7 @@ public class Pool : MonoBehaviour
         }
 
         Instance._pools[item.PoolType].ReturnToPool(item);
-    }
+    }  
 
 
     #region expand code
@@ -73,18 +73,6 @@ public class Pool : MonoBehaviour
 //}
 
     #endregion
-
+   
     
-    public void ReturnToPool(PoolItem poolItem)
-    {
-        poolItem.gameObject.SetActive(false);
-        Return(poolItem);
-    }
-
-    public IEnumerator ReturnToPool(PoolItem poolItem, float time)
-    {
-        yield return new WaitForSeconds(time);
-        Return(poolItem);
-        poolItem.gameObject.SetActive(false);
-    }
 }
