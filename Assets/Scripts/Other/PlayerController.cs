@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int health = 3;
     private int bulletAmount = 3;
     private bool canShoot = true;
-    [SerializeField] GameObject bulletPrefab;
 
     private void Awake()
     {
@@ -97,8 +96,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        //Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
-        
         InstantiateBullet();
 
         bulletAmount--;

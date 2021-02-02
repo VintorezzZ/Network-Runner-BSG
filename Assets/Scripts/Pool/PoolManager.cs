@@ -42,37 +42,5 @@ public class PoolManager : MonoBehaviour
         }
 
         Instance._pools[item.PoolType].ReturnToPool(item);
-    }  
-
-
-    #region expand code
-
-    // for (int i = 0; i < pooledItems.Count; i++)
-    // {
-    //     if(!pooledItems[i].activeInHierarchy && pooledItems[i].tag == tag)  //проверять не по иерархии, а по флагу в скрипте
-    //     {
-    //         return pooledItems[i];
-    //     }
-    // }
-    //
-    // for (int i = 0; i < items.Count; i++)
-    // {
-    //     for (int j = 0; j < items[i].prefabs.Count; j++)
-    //     {
-    //         if(items[i].prefabs[j].tag == tag && items[i].expandable)
-    //         {
-    //             GameObject obj = Instantiate(items[i].prefabs[j]);
-    //             obj.SetActive(false);
-    //             pooledItems.Add(obj);
-    //             return obj;
-    //         }
-    //     }
-    // }
-    //
-    // return null;
-//}
-
-    #endregion
-   
-    
+    }
 }

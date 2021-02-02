@@ -6,8 +6,6 @@ using Random = UnityEngine.Random;
 
 public class WorldBuilder : MonoBehaviour
 {
-    public Transform platformContainer;
-
     private Transform _lastPlatform = null;
 
     private bool _isObstacle;
@@ -57,8 +55,8 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateBasePlatform(PoolType platformType)
     {
-        Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
-        Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
+        Transform endPoint = (_lastPlatform == null) ? transform : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
+        Vector3 pos = (_lastPlatform == null) ? transform.position : endPoint.position;
 
         PoolItem result = PoolManager.Get(platformType);
         SetSpawnSettings(result, pos, endPoint);
