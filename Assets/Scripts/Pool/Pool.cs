@@ -85,6 +85,6 @@ public class Pool : MonoBehaviour
     {
         Return(poolItem);
         yield return new WaitForSeconds(time);
-        gameObject.SetActive(false);
+        poolItem.gameObject.SetActive(false);
     }
 }
