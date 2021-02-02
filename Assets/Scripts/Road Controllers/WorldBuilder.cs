@@ -55,7 +55,7 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateBasePlatform(PoolType platformType)
     {
-        Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
+        Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockSettings>().endPoint;
         Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
 
         PoolItem result = Pool.Get(platformType);
@@ -107,7 +107,7 @@ internal class ObstacleGenerator
 {
     public static void GenerateObstacles(GameObject platform)
     {
-       Transform[] obstaclePoints = platform.GetComponent<RoadBlockController>().obstaclePoints;
+       Transform[] obstaclePoints = platform.GetComponent<RoadBlockSettings>().obstaclePoints;
        
        if (obstaclePoints.Length > 0)
        {

@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 2554262883022002116}
   m_Layer: 0
   m_Name: turn right roads
-  m_TagString: RoadBend
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {fileID: 8305282428011296562}
+  obstaclePoints: []
 --- !u!1 &7241730976479124484
 GameObject:
   m_ObjectHideFlags: 0

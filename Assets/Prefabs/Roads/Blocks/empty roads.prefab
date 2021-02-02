@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 6954136667785461090}
   m_Layer: 0
   m_Name: empty roads
-  m_TagString: RoadStraight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {fileID: 2012088121}
+  obstaclePoints: []
 --- !u!1001 &1635881627792318827
 PrefabInstance:
   m_ObjectHideFlags: 0

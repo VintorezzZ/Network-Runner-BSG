@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 5580567398860720629}
   m_Layer: 0
   m_Name: obstacle roads 2
-  m_TagString: RoadStraight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {fileID: 3310187573913645998}
+  obstaclePoints: []
 --- !u!1 &8103146515116463288
 GameObject:
   m_ObjectHideFlags: 0

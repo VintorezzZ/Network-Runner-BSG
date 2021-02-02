@@ -37,7 +37,7 @@
           </e>
           <e p="Road Controllers" t="Include">
             <e p="Destroyer.cs" t="Include" />
-            <e p="RoadBlockController.cs" t="Include" />
+            <e p="RoadBlockSettings.cs" t="Include" />
             <e p="TextureOffset.cs" t="Include" />
             <e p="WorldBuilder.cs" t="Include" />
           </e>

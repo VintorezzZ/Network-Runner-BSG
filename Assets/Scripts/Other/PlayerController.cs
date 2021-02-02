@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     
     public Action onGameOver;
 
-    private int health = 3;
+    [SerializeField] private int health = 3;
     private int bulletAmount = 3;
     private bool canShoot = true;
     [SerializeField] GameObject bulletPrefab;

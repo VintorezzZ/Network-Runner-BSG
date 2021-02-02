@@ -77,14 +77,14 @@ public class Pool : MonoBehaviour
     
     public void ReturnToPool(PoolItem poolItem)
     {
-        Return(poolItem);
         poolItem.gameObject.SetActive(false);
+        Return(poolItem);
     }
 
     public IEnumerator ReturnToPool(PoolItem poolItem, float time)
     {
-        Return(poolItem);
         yield return new WaitForSeconds(time);
+        Return(poolItem);
         poolItem.gameObject.SetActive(false);
     }
 }
