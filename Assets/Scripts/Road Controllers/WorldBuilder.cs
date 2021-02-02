@@ -12,9 +12,6 @@ public class WorldBuilder : MonoBehaviour
 
     private bool _isObstacle;
     private bool _isCross;
-
-    private string RoadStraight = "RoadStraight";
-    private string RoadBend = "RoadBend";
     
     private void OnEnable()
     {
@@ -56,12 +53,12 @@ public class WorldBuilder : MonoBehaviour
         }
     }
 
-    private void CreateBasePlatform(String platformType)
+    private void CreateBasePlatform(PoolType platformType)
     {
         Transform endPoint = (_lastPlatform == null) ? platformContainer : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
         Vector3 pos = (_lastPlatform == null) ? platformContainer.position : endPoint.position;
 
-        GameObject result = Pool.singleton.Get(platformType);
+        PoolItem result = Pool.Get(platformType);
         SetSpawnSettings(result, pos, endPoint);
         
         _lastPlatform = result.transform;
@@ -69,14 +66,14 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateFreePlatform()
     {
-        CreateBasePlatform(RoadStraight);
+        CreateBasePlatform(PoolType.RoadStraight);
         
         _isObstacle = false;
     }
 
     private void CreateObstaclePlatform()
     {
-        CreateBasePlatform(RoadStraight);
+        CreateBasePlatform(PoolType.RoadStraight);
         
         ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
         
@@ -86,17 +83,18 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateCrossPlatform()
     {
-        CreateBasePlatform(RoadBend);
+        CreateBasePlatform(PoolType.RoadBend);
         
         _isCross = true;
         _isObstacle = false;
     }
 
-    private static void SetSpawnSettings(GameObject result, Vector3 pos, Transform endPoint)
+    private void SetSpawnSettings(PoolItem result, Vector3 pos, Transform endPoint)
     {
         result.transform.position = pos;
         result.transform.rotation = endPoint.rotation;
-        result.SetActive(true);
+        result.isActive = true;
+        //result.SetActive(true);
     }
 }
 

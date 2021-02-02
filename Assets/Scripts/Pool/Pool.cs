@@ -2,71 +2,88 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class PoolItem
-{
-    //public GameObject prefab;
-    public List<GameObject> prefabs;
-    public int amount;
-    public bool expandable;
-}
 
-public class Pool : MonoBehaviour 
+public class Pool : MonoBehaviour
 {
-    public static Pool singleton;
-    public List<PoolItem> items;
-    public List<GameObject> pooledItems;
+    public static Pool Instance;
+
+    //public List<PoolContainer> items;
+    //public List<GameObject> pooledItems;
+    private Dictionary<PoolType, PoolContainer> _pools = new Dictionary<PoolType, PoolContainer>();
 
     void Awake()
     {
-        singleton = this;
+        Instance = this;
+
+
+        // пройти по всем дочерним контейнерам, добав в дикт и вызыв у него  инит. там он делает что-то, вешает на себя пул итем.
+        foreach (PoolContainer poolContainer in GetComponentsInChildren<PoolContainer>())
+        {
+            _pools.Add(poolContainer.poolType, poolContainer);
+            poolContainer.Init();
+        }
+
+        //pooledItems = new List<GameObject>();
+
     }
 
-    // Use this for initialization
-    void Start() 
+    public static PoolItem Get(PoolType poolType)
     {
-        pooledItems = new List<GameObject>();
-        foreach(PoolItem item in items)
+        if (!Instance._pools.ContainsKey(poolType))
         {
-            for (int i = 0; i < item.amount; i++)
-            {
-                for (int j = 0; j < item.prefabs.Count; j++)
-                {
-                    GameObject obj = Instantiate(item.prefabs[j], gameObject.transform, true);
-                    obj.SetActive(false);
-                    pooledItems.Add(obj);   
-                }
-            }
+            Debug.LogError("Unknown pool name: " + poolType);
+            return null;
         }
+
+        return Instance._pools[poolType].TakeFromPool();
     }
-    public GameObject Get(string tag)
+
+    public static void Return(PoolItem item)
     {
-        for (int i = 0; i < pooledItems.Count; i++)
+        if (!Instance._pools.ContainsKey(item.PoolName))
         {
-            if(!pooledItems[i].activeInHierarchy && pooledItems[i].tag == tag)
-            {
-                return pooledItems[i];
-            }
+            Debug.LogError("Unknown pool name: " + item.PoolName);
+            return;
         }
 
-        for (int i = 0; i < items.Count; i++)
-        {
-            for (int j = 0; j < items[i].prefabs.Count; j++)
-            {
-                if(items[i].prefabs[j].tag == tag && items[i].expandable)
-                {
-                    GameObject obj = Instantiate(items[i].prefabs[j]);
-                    obj.SetActive(false);
-                    pooledItems.Add(obj);
-                    return obj;
-                }
-            }
-        }
-
-        return null;
+        Instance._pools[item.PoolName].ReturnToPool(item);
     }
 
-    public void ReturnToPool(GameObject gameObject)
+
+
+
+
+
+
+
+
+
+    // for (int i = 0; i < pooledItems.Count; i++)
+    // {
+    //     if(!pooledItems[i].activeInHierarchy && pooledItems[i].tag == tag)  //проверять не по иерархии, а по флагу в скрипте
+    //     {
+    //         return pooledItems[i];
+    //     }
+    // }
+    //
+    // for (int i = 0; i < items.Count; i++)
+    // {
+    //     for (int j = 0; j < items[i].prefabs.Count; j++)
+    //     {
+    //         if(items[i].prefabs[j].tag == tag && items[i].expandable)
+    //         {
+    //             GameObject obj = Instantiate(items[i].prefabs[j]);
+    //             obj.SetActive(false);
+    //             pooledItems.Add(obj);
+    //             return obj;
+    //         }
+    //     }
+    // }
+    //
+    // return null;
+//}
+
+public void ReturnToPool(GameObject gameObject)
     {
         gameObject.SetActive(false);
     }

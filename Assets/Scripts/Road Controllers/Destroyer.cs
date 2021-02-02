@@ -14,7 +14,7 @@ public class Destroyer : MonoBehaviour
         {
             spawnNewRoad?.Invoke();
             //Destroy(transform.parent.gameObject, 2f);
-            StartCoroutine(Pool.singleton.ReturnToPool(transform.parent.gameObject, 2));
+            StartCoroutine(Pool.Instance.ReturnToPool(transform.parent.gameObject, 2));
         }
     }
 }

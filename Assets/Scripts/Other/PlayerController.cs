@@ -111,8 +111,8 @@ public class PlayerController : MonoBehaviour
 
     private void InstantiateBullet()
     {
-        GameObject bullet = Pool.singleton.Get("Bullet");
-        bullet.SetActive(true);
+        PoolItem bullet = Pool.Get(PoolType.Bullets);
+        bullet.isActive = true;
         bullet.transform.position = gameObject.transform.position + transform.forward;
         bullet.transform.rotation = gameObject.transform.rotation;
     }

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
    private void Start()
    {
       //Destroy(gameObject, 2f);
-      StartCoroutine(Pool.singleton.ReturnToPool(gameObject, 2));
+      StartCoroutine(Pool.Instance.ReturnToPool(gameObject, 2));
    }
 
    private void Update()
@@ -26,8 +26,8 @@ public class Bullet : MonoBehaviour
          //Destroy(other.gameObject);
          //Destroy(gameObject);
 
-         Pool.singleton.ReturnToPool(other.gameObject);
-         Pool.singleton.ReturnToPool(gameObject);
+         Pool.Instance.ReturnToPool(other.gameObject);
+         Pool.Instance.ReturnToPool(gameObject);
       }
    }
 }
