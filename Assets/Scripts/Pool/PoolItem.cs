@@ -4,5 +4,22 @@ using UnityEngine;
 
 public class PoolItem : MonoBehaviour
 {
-    public bool isActive = false;
+    public bool isFree { get; private set; }
+    public PoolType PoolType { get; private set; }
+
+    public void Init(PoolType poolType)
+    {
+        isFree = true;
+        PoolType = poolType;
+    }
+
+    public void TakeFromPool()
+    {
+        isFree = false;
+    }
+
+    public void ReturnToPool()
+    {
+        isFree = true;
+    }
 }

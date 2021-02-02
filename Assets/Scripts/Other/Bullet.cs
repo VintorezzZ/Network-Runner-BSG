@@ -6,11 +6,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
    private float speed = 0.3f;
+   private PoolItem poolItem;
 
    private void Start()
    {
-      //Destroy(gameObject, 2f);
-      StartCoroutine(Pool.Instance.ReturnToPool(gameObject, 2));
+      poolItem = GetComponent<PoolItem>();
+      
+      StartCoroutine(Pool.Instance.ReturnToPool(gameObject.GetComponent<PoolItem>(), 2));
    }
 
    private void Update()
@@ -23,11 +25,8 @@ public class Bullet : MonoBehaviour
    {
       if (other.CompareTag("Obstacle"))
       {
-         //Destroy(other.gameObject);
-         //Destroy(gameObject);
-
-         Pool.Instance.ReturnToPool(other.gameObject);
-         Pool.Instance.ReturnToPool(gameObject);
+         //Pool.Instance.ReturnToPool(other.gameObject.GetComponent<PoolItem>());
+         Pool.Instance.ReturnToPool(poolItem);
       }
    }
 }

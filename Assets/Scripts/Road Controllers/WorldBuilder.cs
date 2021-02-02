@@ -60,8 +60,10 @@ public class WorldBuilder : MonoBehaviour
 
         PoolItem result = Pool.Get(platformType);
         SetSpawnSettings(result, pos, endPoint);
-        
+
         _lastPlatform = result.transform;
+        
+        result.gameObject.SetActive(true);
     }
 
     private void CreateFreePlatform()
@@ -75,7 +77,7 @@ public class WorldBuilder : MonoBehaviour
     {
         CreateBasePlatform(PoolType.RoadStraight);
         
-        ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
+        //ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
         
         _isObstacle = true;
         _isCross = false;
@@ -91,10 +93,12 @@ public class WorldBuilder : MonoBehaviour
 
     private void SetSpawnSettings(PoolItem result, Vector3 pos, Transform endPoint)
     {
-        result.transform.position = pos;
-        result.transform.rotation = endPoint.rotation;
-        result.isActive = true;
-        //result.SetActive(true);
+        Transform resultTransform = result.gameObject.transform;
+        
+        resultTransform.position = pos;
+        resultTransform.rotation = endPoint.rotation;
+        
+        result.gameObject.SetActive(true);
     }
 }
 

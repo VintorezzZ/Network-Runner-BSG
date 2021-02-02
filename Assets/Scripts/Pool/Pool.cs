@@ -7,8 +7,6 @@ public class Pool : MonoBehaviour
 {
     public static Pool Instance;
 
-    //public List<PoolContainer> items;
-    //public List<GameObject> pooledItems;
     private Dictionary<PoolType, PoolContainer> _pools = new Dictionary<PoolType, PoolContainer>();
 
     void Awake()
@@ -22,9 +20,6 @@ public class Pool : MonoBehaviour
             _pools.Add(poolContainer.poolType, poolContainer);
             poolContainer.Init();
         }
-
-        //pooledItems = new List<GameObject>();
-
     }
 
     public static PoolItem Get(PoolType poolType)
@@ -40,23 +35,17 @@ public class Pool : MonoBehaviour
 
     public static void Return(PoolItem item)
     {
-        if (!Instance._pools.ContainsKey(item.PoolName))
+        if (!Instance._pools.ContainsKey(item.PoolType))
         {
-            Debug.LogError("Unknown pool name: " + item.PoolName);
+            Debug.LogError("Unknown pool name: " + item.PoolType);
             return;
         }
 
-        Instance._pools[item.PoolName].ReturnToPool(item);
+        Instance._pools[item.PoolType].ReturnToPool(item);
     }
 
 
-
-
-
-
-
-
-
+    #region expand code
 
     // for (int i = 0; i < pooledItems.Count; i++)
     // {
@@ -83,13 +72,18 @@ public class Pool : MonoBehaviour
     // return null;
 //}
 
-public void ReturnToPool(GameObject gameObject)
+    #endregion
+
+    
+    public void ReturnToPool(PoolItem poolItem)
     {
-        gameObject.SetActive(false);
+        Return(poolItem);
+        poolItem.gameObject.SetActive(false);
     }
 
-    public IEnumerator ReturnToPool(GameObject gameObject, float time)
+    public IEnumerator ReturnToPool(PoolItem poolItem, float time)
     {
+        Return(poolItem);
         yield return new WaitForSeconds(time);
         gameObject.SetActive(false);
     }

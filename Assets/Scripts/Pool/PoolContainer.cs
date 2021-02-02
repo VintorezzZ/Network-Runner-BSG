@@ -5,17 +5,22 @@ using UnityEngine;
 public class PoolContainer : MonoBehaviour  // container
 {
     public PoolType poolType;
-    public bool expandable;
-    public List<GameObject> prefabs;
+    public int amount;
+    //public bool expandable;
+    public List<GameObject> examplePrefabs; // only for set
     public List<PoolItem> pooledItems;
     public void Init()
     {
-        foreach (GameObject prefab in prefabs)
+        for (int i = 0; i < amount; i++)
         {
-            GameObject obj = Instantiate(prefab, gameObject.transform, true);
-            obj.SetActive(false);
-            obj.AddComponent<PoolItem>();
-            pooledItems.Add(obj.GetComponent<PoolItem>());
+            for (int j = 0; j < examplePrefabs.Count; j++)
+            {
+                GameObject obj = Instantiate(examplePrefabs[j], gameObject.transform, true); // создаем объект
+                obj.SetActive(false); // деактивируем 
+                PoolItem objPoolItem = obj.AddComponent<PoolItem>(); // добавляем на каждый объект контракт 
+                objPoolItem.Init(poolType);  // вызываем инициализацию в объекте
+                pooledItems.Add(objPoolItem);  // добавляем в массив созданных объектов
+            }
         }
     }
 
@@ -23,18 +28,20 @@ public class PoolContainer : MonoBehaviour  // container
     {
         for (int i = 0; i < pooledItems.Count; i++)
         {
-            if(!pooledItems[i].isActive)  //проверять не по иерархии, а по флагу в скрипте
+            //print("pool count: " + pooledItems.Count);
+            if(pooledItems[i].isFree)  //проверять не по иерархии, а по флагу в скрипте
             {
-                return pooledItems[i];
+                pooledItems[i].TakeFromPool();  // меняем флаг у объекта
+                return pooledItems[i]; // возврашаем объект
             }
         }
-
+        //print("not take");
         return null;
     }
 
     public void ReturnToPool(PoolItem item)
     {
-        
+        item.ReturnToPool();
     }
 }
 
