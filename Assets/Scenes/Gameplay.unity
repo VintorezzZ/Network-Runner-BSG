@@ -3446,7 +3446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 3
-  amount: 5
+  amount: 2
   expandable: 1
   examplePrefabs:
   - {fileID: 8996973412098294015, guid: 286acd7eb8bd247c69fbef839e85661a, type: 3}
@@ -4163,8 +4163,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1598334023, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598334023, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
       propertyPath: health
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598334023, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
+      propertyPath: maxSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6184498586738042728, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
       propertyPath: m_Name

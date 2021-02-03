@@ -8,15 +8,19 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 {
     public Transform endPoint;
     public Transform[] obstaclePoints;
-    public List<PoolItem> pooledObstacles;
+    public List<Obstacle> pooledObstacles;
 
     private PoolItem poolItem;
     private Destroyer[] destroyers;
     Transform generatedObstacles;
+
+    private void Awake()
+    {
+        CreateObstaclesContainer();
+    }
+
     private void Start()
     {
-       generatedObstacles = new GameObject("GeneratedObstacles").transform;
-        generatedObstacles.SetParent(transform);
        poolItem = GetComponent<PoolItem>();
        destroyers = GetComponentsInChildren<Destroyer>();
 
@@ -24,6 +28,12 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
        {
            destroyer.parentPoolItem = poolItem;
        }
+    }
+
+    private void CreateObstaclesContainer()
+    {
+        generatedObstacles = new GameObject("GeneratedObstacles").transform;
+        generatedObstacles.SetParent(FindObjectOfType<WorldBuilder>().transform);
     }
 
     public void GenerateObstacles()
@@ -35,43 +45,56 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
             {
                 if (i % 2 == 0)
                 {
-                    PoolItem roadItem = null;
+                    Obstacle roadItem = null;
 
-                    if (Random.Range(0, 101) < 30) 
-                    {
-                        roadItem = PoolManager.Get(PoolType.Bonuses);
-                    }
-                    else
-                    {
-                        roadItem = PoolManager.Get(PoolType.Obstacles); 
-                    }
-                    
-                    roadItem.gameObject.SetActive(true);
+                    roadItem = GetRoadItem();
+
+                    roadItem.onReturnToPool += RemoveObstacleFromList;
+
                     roadItem.transform.SetParent(generatedObstacles);
-
                     roadItem.transform.position = obstaclePoints[i].position;
                     roadItem.transform.rotation = obstaclePoints[i].rotation;
                     
+                    roadItem.gameObject.SetActive(true);
+
                     pooledObstacles.Add(roadItem);
                 }
             }
         }
     }
 
+    private static Obstacle GetRoadItem()
+    {
+        Obstacle roadItem;
+        
+        if (Random.Range(0, 101) < 30)
+            roadItem = PoolManager.Get(PoolType.Bonuses).GetComponent<Obstacle>();
+        else
+            roadItem = PoolManager.Get(PoolType.Obstacles).GetComponent<Obstacle>();
+
+        return roadItem;
+    }
+
     public void ReturnObstaclesToPool()
     {
         foreach (var obst in pooledObstacles)
         {
-            PoolManager.Return(obst);
+            obst.onReturnToPool -= RemoveObstacleFromList;
+            obst.RemoveObstacle();
         }
 
         pooledObstacles.Clear();
     }
-    
+
+    private void RemoveObstacleFromList(Obstacle obst)
+    {
+        obst.onReturnToPool -= RemoveObstacleFromList;
+        pooledObstacles.Remove(obst);
+    }
 
     public void OnReturnToPool()
     {
-        ReturnObstaclesToPool(); 
+        ReturnObstaclesToPool();
     }
 
     public void OnTakeFromPool()

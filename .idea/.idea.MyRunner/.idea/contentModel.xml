@@ -16,6 +16,7 @@
             </e>
           </e>
         </e>
+        <e p="Obstacle.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Managers" t="Include">
             <e p="AudioManager.cs" t="Include" />

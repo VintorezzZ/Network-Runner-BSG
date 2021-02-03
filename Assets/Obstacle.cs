@@ -1,28 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour, IPoolObservable
 {
-    public event System.Action asd;
+    public event Action<Obstacle> onReturnToPool;
+
+    private PoolItem poolItem;
+
+    private void Start()
+    {
+        poolItem = GetComponent<PoolItem>();
+    }
+
+    public void RemoveObstacle()
+    {
+        PoolManager.Return(poolItem);
+    }
     public void OnReturnToPool()
     {
-        Debug.LogError("OnReturnToPool");
+        onReturnToPool?.Invoke(GetComponent<Obstacle>());  
     }
 
     public void OnTakeFromPool()
     {
-        Debug.LogError("OnTakeFromPool");
-    }
-
-    void Start()
-    {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

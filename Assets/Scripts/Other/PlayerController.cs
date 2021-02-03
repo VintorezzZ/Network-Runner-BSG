@@ -30,8 +30,11 @@ public class PlayerController : MonoBehaviour
     private int bulletAmount = 3;
     private bool canShoot = true;
 
+    private Transform generatedBullets;
     private void Awake()
     {
+        CreateBulletsContainer();
+
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
         am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
@@ -87,6 +90,12 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
+    private void CreateBulletsContainer()
+    {
+        generatedBullets = new GameObject("generatedBullets").transform;
+        generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
+    }
+
     private void SpeedControl()
     {
         speed += acceleration * Time.deltaTime;
@@ -110,6 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = PoolManager.Get(PoolType.Bullets).gameObject;
         bullet.SetActive(true);
+        bullet.transform.SetParent(generatedBullets);
         bullet.transform.position = gameObject.transform.position + transform.forward;
         bullet.transform.rotation = gameObject.transform.rotation;
     }
