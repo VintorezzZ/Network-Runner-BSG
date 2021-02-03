@@ -20,6 +20,12 @@ public class PoolItem : MonoBehaviour
 
     public void TakeFromPool()
     {
+
+        if (!isFree)
+        {
+            Debug.LogError("TakeFromPool !isFree");
+        }
+
         isFree = false;
 
         foreach (var observableComponent in _observableComponents)

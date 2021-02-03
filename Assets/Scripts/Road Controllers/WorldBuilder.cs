@@ -59,6 +59,7 @@ public class WorldBuilder : MonoBehaviour
         Vector3 pos = (_lastPlatform == null) ? transform.position : endPoint.position;
 
         PoolItem result = PoolManager.Get(platformType);
+        result.transform.SetParent(transform);
         SetSpawnSettings(result, pos, endPoint);
 
         _lastPlatform = result.transform;

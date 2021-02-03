@@ -47,7 +47,7 @@ public class PoolContainer : MonoBehaviour  // container
         {
             if(pooledItems[i].isFree)  //проверять не по иерархии, а по флагу в скрипте
             {
-                pooledItems[i].transform.SetParent(worldBuilder);
+                //pooledItems[i].transform.SetParent(worldBuilder);
                 pooledItems[i].TakeFromPool();  // меняем флаг у объекта
                 return pooledItems[i]; // возврашаем объект
             }

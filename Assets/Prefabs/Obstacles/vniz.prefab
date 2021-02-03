@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7459008192906403748}
   - component: {fileID: 12500427190720373}
+  - component: {fileID: 5243025900464530168}
   m_Layer: 0
   m_Name: vniz
   m_TagString: Obstacle
@@ -291,6 +292,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8275983, y: 2.7027516, z: 0.3266611}
   m_Center: {x: -0.034991354, y: 1.28, z: 0.20740843}
+--- !u!114 &5243025900464530168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838630334011426078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8906f0903ec28884ea76fa3a5924397f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8502313457520568365
 GameObject:
   m_ObjectHideFlags: 0

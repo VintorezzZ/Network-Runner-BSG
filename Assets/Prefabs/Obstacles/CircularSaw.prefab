@@ -10006,6 +10006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8996973412098294014}
   - component: {fileID: 676045540}
+  - component: {fileID: -2519141118163068972}
   m_Layer: 0
   m_Name: CircularSaw
   m_TagString: Obstacle
@@ -10045,3 +10046,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10492759, y: 2.59, z: 2.375822}
   m_Center: {x: 0.010772977, y: -0.013972878, z: 0.0748148}
+--- !u!114 &-2519141118163068972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996973412098294015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8906f0903ec28884ea76fa3a5924397f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

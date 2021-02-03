@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6484709887085251227}
   - component: {fileID: 4394361932047951265}
+  - component: {fileID: -5597909614282380542}
   m_Layer: 0
   m_Name: vverh
   m_TagString: Obstacle
@@ -291,6 +292,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8275983, y: 2.7027516, z: 0.3266611}
   m_Center: {x: -0.034991354, y: 1.78, z: 0.20740843}
+--- !u!114 &-5597909614282380542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5959812500053446689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8906f0903ec28884ea76fa3a5924397f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6194854916550385428
 GameObject:
   m_ObjectHideFlags: 0

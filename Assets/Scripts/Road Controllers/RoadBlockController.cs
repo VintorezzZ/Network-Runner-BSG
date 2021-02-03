@@ -12,10 +12,11 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 
     private PoolItem poolItem;
     private Destroyer[] destroyers;
-    public bool hasObstacles { get; private set; } = false;
-
+    Transform generatedObstacles;
     private void Start()
-    { 
+    {
+       generatedObstacles = new GameObject("GeneratedObstacles").transform;
+        generatedObstacles.SetParent(transform);
        poolItem = GetComponent<PoolItem>();
        destroyers = GetComponentsInChildren<Destroyer>();
 
@@ -29,7 +30,6 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     {
         if (obstaclePoints.Length > 0)
         {
-            hasObstacles = true;
             
             for (int i = 0; i < obstaclePoints.Length; i++)
             {
@@ -47,6 +47,8 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
                     }
                     
                     roadItem.gameObject.SetActive(true);
+                    roadItem.transform.SetParent(generatedObstacles);
+
                     roadItem.transform.position = obstaclePoints[i].position;
                     roadItem.transform.rotation = obstaclePoints[i].rotation;
                     
@@ -60,23 +62,16 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     {
         foreach (var obst in pooledObstacles)
         {
-            if (!obst.isFree)  // somewhere in the world
-            {
-                PoolManager.Return(obst);
-            }
+            PoolManager.Return(obst);
         }
 
         pooledObstacles.Clear();
-        hasObstacles = false;
     }
     
 
     public void OnReturnToPool()
     {
-        if (hasObstacles)
-        {
-            ReturnObstaclesToPool(); 
-        }
+        ReturnObstaclesToPool(); 
     }
 
     public void OnTakeFromPool()
