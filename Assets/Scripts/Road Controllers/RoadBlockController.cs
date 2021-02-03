@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class RoadBlockController : MonoBehaviour
+public class RoadBlockController : MonoBehaviour, IPoolObservable
 {
     public Transform endPoint;
     public Transform[] obstaclePoints;
@@ -56,7 +56,6 @@ public class RoadBlockController : MonoBehaviour
         }
     }
 
-
     public void ReturnObstaclesToPool()
     {
         foreach (var obst in pooledObstacles)
@@ -69,5 +68,19 @@ public class RoadBlockController : MonoBehaviour
 
         pooledObstacles.Clear();
         hasObstacles = false;
+    }
+    
+
+    public void OnReturnToPool()
+    {
+        if (hasObstacles)
+        {
+            ReturnObstaclesToPool(); 
+        }
+    }
+
+    public void OnTakeFromPool()
+    {
+
     }
 }

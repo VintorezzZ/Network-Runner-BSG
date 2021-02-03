@@ -102,15 +102,7 @@ public class WorldBuilder : MonoBehaviour
     }
 
     private void ReturnToPool(PoolItem poolItem)
-    {
-        if (poolItem.gameObject.TryGetComponent(out RoadBlockController rbc))
-        {
-            if (rbc.hasObstacles)
-            {
-                rbc.ReturnObstaclesToPool();
-            }
-        }
-        
+    { 
         PoolManager.Return(poolItem);
     }
 }

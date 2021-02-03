@@ -12,23 +12,25 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pool/Pool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/Destroyer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
       </list>
     </option>
   </component>
@@ -74,7 +76,7 @@
       <updated>1612177491277</updated>
       <workItem from="1612177493884" duration="12971000" />
       <workItem from="1612248798855" duration="19120000" />
-      <workItem from="1612336547768" duration="10892000" />
+      <workItem from="1612336547768" duration="14952000" />
     </task>
     <servers />
   </component>
@@ -87,6 +89,14 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="794" y="221" key="RiderGenerateDialog" timestamp="1612351504636">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612351504636" />
+    <state x="638" y="119" width="644" height="801" key="find.popup" timestamp="1612350596345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="638" y="119" width="644" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1612350596345" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1612277793971">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

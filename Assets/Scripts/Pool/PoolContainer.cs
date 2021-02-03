@@ -36,6 +36,7 @@ public class PoolContainer : MonoBehaviour  // container
         PoolItem objPoolItem = item.AddComponent<PoolItem>(); // добавляем на каждый объект контракт 
         objPoolItem.Init(poolType); // вызываем инициализацию в объекте
         pooledItems.Add(objPoolItem); // добавляем в массив созданных объектов
+        item.transform.SetParent(transform);
         
         return objPoolItem;
     }
@@ -46,8 +47,8 @@ public class PoolContainer : MonoBehaviour  // container
         {
             if(pooledItems[i].isFree)  //проверять не по иерархии, а по флагу в скрипте
             {
-                pooledItems[i].TakeFromPool();  // меняем флаг у объекта
                 pooledItems[i].transform.SetParent(worldBuilder);
+                pooledItems[i].TakeFromPool();  // меняем флаг у объекта
                 return pooledItems[i]; // возврашаем объект
             }
         }
@@ -65,6 +66,7 @@ public class PoolContainer : MonoBehaviour  // container
         GameObject obj = Instantiate(examplePrefabs[0], gameObject.transform, true); // создаем объект
 
         PoolItem lastAddedItem = SetPooledItemSettings(obj); 
+        lastAddedItem.transform.SetParent(worldBuilder);
         lastAddedItem.TakeFromPool(); // меняем флаг у последнего объекта
         
         return lastAddedItem; // возврашаем объект
