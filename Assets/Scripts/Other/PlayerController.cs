@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             {
                 health--;
                 ui.UpdateHealttext(health);
-                Destroy(other.gameObject);
+                PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
             }
             else
             {
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
                 bulletAmount = 30;
             
             ui.UpdateBulletstext(bulletAmount);
-            Destroy(other.gameObject);
+            PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
         }
 
         if (other.gameObject.CompareTag("Cross left"))

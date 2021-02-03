@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8551352654876381079
 Transform:
   m_ObjectHideFlags: 0
@@ -93,7 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {fileID: 3833045865894046570}
-  obstaclePoints: []
 --- !u!1 &1181132471134402218
 GameObject:
   m_ObjectHideFlags: 0

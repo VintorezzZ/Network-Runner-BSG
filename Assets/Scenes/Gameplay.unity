@@ -641,9 +641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 1
   amount: 3
-  expandable: 0
+  expandable: 1
   examplePrefabs:
-  - {fileID: 4137699607658650549, guid: 30e520d2e5b358441a3d65d5b76798bb, type: 3}
   - {fileID: 984865521503552712, guid: 3e23eb9ebf9de2e4fb33986145eb25b2, type: 3}
   - {fileID: 6562940014309130760, guid: 68a23c0a5b1f1f94d81353f7a24e9df7, type: 3}
   pooledItems: []
@@ -1841,13 +1840,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 2
-  amount: 5
-  expandable: 0
+  amount: 10
+  expandable: 1
   examplePrefabs:
-  - {fileID: 8553928429743829586, guid: ce2d18d1026f48e438649eb27df043e6, type: 3}
   - {fileID: 5421442304713297008, guid: 43cefb32a2d3f93469d54bebbcda60fd, type: 3}
-  - {fileID: 6576819618962736837, guid: dcb1f15cf40f14647ac82bf1b2e8a9b1, type: 3}
-  - {fileID: 7676112820431792615, guid: ffe0f75d95e9f784ba7465556aebd941, type: 3}
   pooledItems: []
 --- !u!4 &1122492029
 Transform:
@@ -2538,6 +2534,8 @@ Transform:
   - {fileID: 178422990}
   - {fileID: 1122041277}
   - {fileID: 654343334}
+  - {fileID: 1998025707}
+  - {fileID: 1795545203}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3203,6 +3201,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776933228}
   m_CullTransparentMesh: 0
+--- !u!1 &1795545202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795545203}
+  - component: {fileID: 1795545204}
+  m_Layer: 0
+  m_Name: Bonus Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1795545203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795545202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1444426652}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1795545204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795545202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 4
+  amount: 10
+  expandable: 1
+  examplePrefabs:
+  - {fileID: 4627257459412399393, guid: 24ae8a922db603a499d3c348391d8add, type: 3}
+  pooledItems: []
 --- !u!1001 &1796293661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3355,6 +3402,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967067743}
   m_CullTransparentMesh: 0
+--- !u!1 &1998025706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998025707}
+  - component: {fileID: 1998025708}
+  m_Layer: 0
+  m_Name: Obstacle Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998025707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998025706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1444426652}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1998025708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998025706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 3
+  amount: 10
+  expandable: 1
+  examplePrefabs:
+  - {fileID: 8996973412098294015, guid: 286acd7eb8bd247c69fbef839e85661a, type: 3}
+  - {fileID: 7838630334011426078, guid: dbb3ddaa5e9634ebb8ae821039efb2f3, type: 3}
+  - {fileID: 5959812500053446689, guid: 3d73abaca19864963be92618ea9fdd75, type: 3}
+  pooledItems: []
 --- !u!4 &2079735933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8996973412098294014, guid: 286acd7eb8bd247c69fbef839e85661a, type: 3}

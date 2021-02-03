@@ -3,5 +3,6 @@ public enum PoolType
     Bullets,
     RoadBend,
     RoadStraight,
-    Obstacles
+    Obstacles,
+    Bonuses
 }

@@ -17,7 +17,7 @@ public class WorldBuilder : MonoBehaviour
         Destroyer.onRoadEnds += ReturnToPool;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         Destroyer.onRoadEnds -= CreatePlatform;
         Destroyer.onRoadEnds -= ReturnToPool;
@@ -78,6 +78,7 @@ public class WorldBuilder : MonoBehaviour
         CreateBasePlatform(PoolType.RoadStraight);
         
         //ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
+        _lastPlatform.GetComponent<RoadBlockController>().GenerateObstacles();
         
         _isObstacle = true;
         _isCross = false;
@@ -103,6 +104,11 @@ public class WorldBuilder : MonoBehaviour
 
     private void ReturnToPool(PoolItem poolItem)
     {
+        if (poolItem.gameObject.TryGetComponent(out RoadBlockController rbc))
+        {
+            rbc.ReturnObstaclesToPool();
+        }
+        
         PoolManager.Return(poolItem);
     }
 }

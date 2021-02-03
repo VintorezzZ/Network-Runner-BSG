@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
    {
       if (other.CompareTag("Obstacle"))
       {
+         PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
+         
          ReturnToPool();
       }
    }

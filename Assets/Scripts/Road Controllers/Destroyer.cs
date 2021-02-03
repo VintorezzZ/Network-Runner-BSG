@@ -3,8 +3,10 @@ using UnityEngine;
 public class Destroyer : MonoBehaviour
 {
     public delegate void OnRoadEnds(PoolItem poolItem);
-    public static event OnRoadEnds onRoadEnds; 
+    public static event OnRoadEnds onRoadEnds;
 
+    public PoolItem parentPoolItem;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -15,6 +17,6 @@ public class Destroyer : MonoBehaviour
 
     private void SendMessage()
     {
-        onRoadEnds?.Invoke(transform.parent.gameObject.GetComponent<PoolItem>());
+        onRoadEnds?.Invoke(parentPoolItem);
     }
 }
