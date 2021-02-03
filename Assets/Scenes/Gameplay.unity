@@ -3446,7 +3446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 3
-  amount: 10
+  amount: 5
   expandable: 1
   examplePrefabs:
   - {fileID: 8996973412098294015, guid: 286acd7eb8bd247c69fbef839e85661a, type: 3}

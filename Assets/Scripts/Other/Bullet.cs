@@ -22,15 +22,17 @@ public class Bullet : MonoBehaviour
 
    private void ReturnToPool()
    {
-      PoolManager.Return(gameObject.GetComponent<PoolItem>());
+      PoolManager.Return(poolItem);
    }
 
    private void OnTriggerEnter(Collider other)
    {
       if (other.CompareTag("Obstacle"))
       {
-         PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
+         CancelInvoke();
          
+         PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
+
          ReturnToPool();
       }
    }

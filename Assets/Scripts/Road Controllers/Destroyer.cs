@@ -11,11 +11,11 @@ public class Destroyer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Invoke(nameof(SendMessage), 1);
+            Invoke(nameof(ActivateEvent), 1);
         }
     }
 
-    private void SendMessage()
+    private void ActivateEvent()
     {
         onRoadEnds?.Invoke(parentPoolItem);
     }

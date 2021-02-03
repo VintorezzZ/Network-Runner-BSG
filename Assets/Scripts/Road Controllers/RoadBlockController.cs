@@ -14,7 +14,7 @@ public class RoadBlockController : MonoBehaviour
     private Destroyer[] destroyers;
     public bool hasObstacles { get; private set; } = false;
 
-    private void Awake()
+    private void Start()
     { 
        poolItem = GetComponent<PoolItem>();
        destroyers = GetComponentsInChildren<Destroyer>();
@@ -35,12 +35,22 @@ public class RoadBlockController : MonoBehaviour
             {
                 if (i % 2 == 0)
                 {
-                    PoolItem obst = PoolManager.Get(PoolType.Obstacles);
-                    obst.gameObject.SetActive(true);
-                    obst.transform.position = obstaclePoints[i].position;
-                    obst.transform.rotation = obstaclePoints[i].rotation;
+                    PoolItem roadItem = null;
+
+                    if (Random.Range(0, 101) < 30) 
+                    {
+                        roadItem = PoolManager.Get(PoolType.Bonuses);
+                    }
+                    else
+                    {
+                        roadItem = PoolManager.Get(PoolType.Obstacles); 
+                    }
                     
-                    pooledObstacles.Add(obst);
+                    roadItem.gameObject.SetActive(true);
+                    roadItem.transform.position = obstaclePoints[i].position;
+                    roadItem.transform.rotation = obstaclePoints[i].rotation;
+                    
+                    pooledObstacles.Add(roadItem);
                 }
             }
         }
@@ -51,9 +61,13 @@ public class RoadBlockController : MonoBehaviour
     {
         foreach (var obst in pooledObstacles)
         {
-            PoolManager.Return(obst);
+            if (!obst.isFree)  // somewhere in the world
+            {
+                PoolManager.Return(obst);
+            }
         }
 
+        pooledObstacles.Clear();
         hasObstacles = false;
     }
 }

@@ -77,7 +77,6 @@ public class WorldBuilder : MonoBehaviour
     {
         CreateBasePlatform(PoolType.RoadStraight);
         
-        //ObstacleGenerator.GenerateObstacles(_lastPlatform.gameObject);
         _lastPlatform.GetComponent<RoadBlockController>().GenerateObstacles();
         
         _isObstacle = true;
@@ -106,7 +105,10 @@ public class WorldBuilder : MonoBehaviour
     {
         if (poolItem.gameObject.TryGetComponent(out RoadBlockController rbc))
         {
-            rbc.ReturnObstaclesToPool();
+            if (rbc.hasObstacles)
+            {
+                rbc.ReturnObstaclesToPool();
+            }
         }
         
         PoolManager.Return(poolItem);
