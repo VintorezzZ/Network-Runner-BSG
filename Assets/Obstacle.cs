@@ -20,7 +20,7 @@ public class Obstacle : MonoBehaviour, IPoolObservable
     }
     public void OnReturnToPool()
     {
-        onReturnToPool?.Invoke(GetComponent<Obstacle>());  
+        onReturnToPool?.Invoke(this);  
     }
 
     public void OnTakeFromPool()

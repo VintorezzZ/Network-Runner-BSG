@@ -33,7 +33,7 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     private void CreateObstaclesContainer()
     {
         generatedObstacles = new GameObject("GeneratedObstacles").transform;
-        generatedObstacles.SetParent(FindObjectOfType<WorldBuilder>().transform);
+        generatedObstacles.SetParent(transform);
     }
 
     public void GenerateObstacles()
