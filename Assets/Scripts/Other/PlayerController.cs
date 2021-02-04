@@ -31,9 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool canShoot = true;
 
     private Transform generatedBullets;
-    private static readonly int Run = Animator.StringToHash("Run");
-    private static readonly int RunLeft = Animator.StringToHash("RunLeft");
-    private static readonly int RunRight = Animator.StringToHash("RunRight");
+    private static readonly int Blend = Animator.StringToHash("Blend");
 
     private void Awake()
     {
@@ -91,47 +89,9 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessAnimation(float horizontalInput)
     {
-        if (horizontalInput > 0)
-        {
-            CheckForAwesomeTrigger();
-
-            SetRunRightAnimation();
-        }
-        else if (horizontalInput < 0)
-        {
-            CheckForAwesomeTrigger();
-
-            SetRunLeftAnimation();
-        }
-        else if (horizontalInput < 0.2f || horizontalInput > -0.2f)
-        {
-            SetRunAnimation();
-        }
+        animator.SetFloat(Blend, horizontalInput);
     }
 
-    private void SetRunAnimation()
-    {
-        animator.SetBool(Run, true);
-
-        animator.SetBool(RunLeft, false);
-        animator.SetBool(RunRight, false);
-    }
-
-    private void SetRunLeftAnimation()
-    {
-        animator.SetBool(RunLeft, true);
-
-        animator.SetBool(RunRight, false);
-        animator.SetBool(Run, false);
-    }
-
-    private void SetRunRightAnimation()
-    {
-        animator.SetBool(RunRight, true);
-
-        animator.SetBool(RunLeft, false);
-        animator.SetBool(Run, false);
-    }
 
     private void CreateBulletsContainer()
     {
