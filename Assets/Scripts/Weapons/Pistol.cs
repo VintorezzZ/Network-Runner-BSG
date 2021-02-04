@@ -14,14 +14,12 @@ public class Pistol : BaseWeapon
 
     private void ProcessShoot()
     {
-        print("Pistol shoot");
-        
         RaycastHit hit;
         
         if (Physics.Raycast(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward), out hit, 500f))
         {
             
-            Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * 500, Color.red);
+            Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * Mathf.Infinity, Color.red);
             
             Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
             

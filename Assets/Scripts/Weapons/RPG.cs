@@ -12,8 +12,6 @@ public class RPG : BaseWeapon
 
     private void ProcessShoot()
     {
-       print("RPG shoot");
-       
        InstantiateBullet();
     }
     

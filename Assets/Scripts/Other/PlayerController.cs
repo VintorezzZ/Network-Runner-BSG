@@ -210,8 +210,8 @@ public class PlayerController : MonoBehaviour
             
             bulletAmount++;
             
-            if (bulletAmount > 30) 
-                bulletAmount = 30;
+            // if (bulletAmount > 30) 
+            //     bulletAmount = 30;
             
             ui.UpdateBulletstext(bulletAmount);
             PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
