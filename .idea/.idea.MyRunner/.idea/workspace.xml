@@ -30,8 +30,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -78,7 +78,7 @@
       <workItem from="1612177493884" duration="12971000" />
       <workItem from="1612248798855" duration="19120000" />
       <workItem from="1612336547768" duration="14952000" />
-      <workItem from="1612424596556" duration="1820000" />
+      <workItem from="1612424596556" duration="5172000" />
     </task>
     <servers />
   </component>

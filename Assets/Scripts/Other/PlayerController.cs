@@ -24,13 +24,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float acceleration = 1;
     [SerializeField] private float maxSpeed = 20;
     
-    public Action onGameOver;
+    public event Action onGameOver;
 
     [SerializeField] private int health = 3;
     private int bulletAmount = 3;
     private bool canShoot = true;
 
     private Transform generatedBullets;
+    private static readonly int Run = Animator.StringToHash("Run");
+    private static readonly int RunLeft = Animator.StringToHash("RunLeft");
+    private static readonly int RunRight = Animator.StringToHash("RunRight");
+
     private void Awake()
     {
         CreateBulletsContainer();
@@ -63,31 +67,70 @@ public class PlayerController : MonoBehaviour
         if (!canMove)
             return;
         
-        if (Input.GetKeyDown(KeyCode.A) | Input.GetKeyDown(KeyCode.LeftArrow) | SwipeManager.swipeLeft)
-        {
-            CheckForAwesomeTrigger();
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-            if(!isStrafing)
-                StartCoroutine(Strafe());
-        }
-        else if (Input.GetKeyDown(KeyCode.D) | Input.GetKeyDown(KeyCode.RightArrow) | SwipeManager.swipeRight)
-        {
-            CheckForAwesomeTrigger();
+        ProcessAnimation(horizontalInput);
 
-            if(!isStrafing)
-                StartCoroutine(Strafe());
-        }
+        SpeedControl();
+        
+        Move(horizontalInput);
+        
+        ProcessShoot();
+    }
 
+    private void ProcessShoot()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            if (canShoot && bulletAmount > 0) 
+            if (canShoot && bulletAmount > 0)
             {
                 StartCoroutine(Shoot());
             }
         }
-        
-        SpeedControl();
-        Move();
+    }
+
+    private void ProcessAnimation(float horizontalInput)
+    {
+        if (horizontalInput > 0)
+        {
+            CheckForAwesomeTrigger();
+
+            SetRunRightAnimation();
+        }
+        else if (horizontalInput < 0)
+        {
+            CheckForAwesomeTrigger();
+
+            SetRunLeftAnimation();
+        }
+        else if (horizontalInput < 0.2f || horizontalInput > -0.2f)
+        {
+            SetRunAnimation();
+        }
+    }
+
+    private void SetRunAnimation()
+    {
+        animator.SetBool(Run, true);
+
+        animator.SetBool(RunLeft, false);
+        animator.SetBool(RunRight, false);
+    }
+
+    private void SetRunLeftAnimation()
+    {
+        animator.SetBool(RunLeft, true);
+
+        animator.SetBool(RunRight, false);
+        animator.SetBool(Run, false);
+    }
+
+    private void SetRunRightAnimation()
+    {
+        animator.SetBool(RunRight, true);
+
+        animator.SetBool(RunLeft, false);
+        animator.SetBool(Run, false);
     }
 
     private void CreateBulletsContainer()
@@ -121,17 +164,20 @@ public class PlayerController : MonoBehaviour
         bulletScript.playerVelocity = speed;
         
         GameObject bullet = bulletScript.gameObject;
+        SetBulletSettings(bullet);
+    }
+
+    private void SetBulletSettings(GameObject bullet)
+    {
         bullet.SetActive(true);
         bullet.transform.SetParent(generatedBullets);
         bullet.transform.position = gameObject.transform.position + transform.forward;
         bullet.transform.rotation = gameObject.transform.rotation;
     }
 
-    private void Move()
+    private void Move(float horizontalInput)
     {
-        float x = Input.GetAxis("Horizontal");
-
-        Vector3 moveDir = transform.right * x * strafeSpeed + transform.forward * speed;
+        Vector3 moveDir = transform.right * horizontalInput * strafeSpeed + transform.forward * speed;
         characterController.Move(moveDir * Time.deltaTime);
 
         gravity.y += gravityAmount * Time.deltaTime;
