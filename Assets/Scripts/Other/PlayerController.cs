@@ -75,15 +75,16 @@ public class PlayerController : MonoBehaviour
         if (!canMove)
             return;
         
+        weaponManager.OnUpdate();
+        
         float horizontalInput = Input.GetAxis("Horizontal");
 
         ProcessAnimation(horizontalInput);
+        ProcessShoot();
 
         SpeedControl();
-        
+
         Move(horizontalInput);
-        
-        ProcessShoot();
     }
 
     private void ProcessShoot()
@@ -128,8 +129,8 @@ public class PlayerController : MonoBehaviour
         ui.UpdateBulletstext(bulletAmount);
         
         canShoot = false;
-        //yield return new WaitForSeconds(0.5f);
-        yield return null;
+        yield return new WaitForSeconds(0.3f);
+        //yield return null;
         canShoot = true;
     }
 
@@ -206,8 +207,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Bullet"))
         {
-            weaponManager.SwitchWeapon("RPG7");
-            
+            weaponManager.SwitchWeapon("RPG7", 5f);
+
             bulletAmount++;
             
             // if (bulletAmount > 30) 

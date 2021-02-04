@@ -2954,24 +2954,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: M1911
       objectReference: {fileID: 0}
+    - target: {fileID: 6049561329008263951, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.alignment
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.textureMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
@@ -2985,22 +2973,6 @@ PrefabInstance:
     - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968388662286614701, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.09999657
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf6e1d4f1b34c0448f467cbd64f38f2, type: 3}

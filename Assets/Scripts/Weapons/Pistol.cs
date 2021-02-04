@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,18 @@ using UnityEngine;
 public class Pistol : BaseWeapon
 {
     private LineRenderer lineRenderer;
-
-    public void Init()
+    private bool ShotLineCreated = false;
+    public override void Init()
     {
+        base.Init();
         lineRenderer = GetComponent<LineRenderer>();
     }
+
+    private void Update()
+    {
+        StartCoroutine(DisableShotLine(3));
+    }
+
     public override void Shoot()
     {
         base.Shoot();
@@ -20,21 +28,40 @@ public class Pistol : BaseWeapon
     {
         RaycastHit hit;
         
-        if (Physics.Raycast(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward), out hit, 500f))
+        if (Physics.Raycast(WeaponManager.gunHolder.position, transform.forward * -1, out hit, 500f))
         {
+            //Debug.DrawLine(WeaponManager.gunHolder.position, hit.point, Color.black, 2f);
             
-            Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * Mathf.Infinity, Color.red);
-            
-            Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
-            
-            Debug.Log("Did Hit");
+            CreateShotLine(transform.position, hit.point);
         }
-
-        CreateShotLine();
+        else
+        {
+            //CreateShotLine(transform.position, hit.point);
+            
+            //Debug.DrawRay(WeaponManager.gunHolder.position, transform.forward * -1 * 10f, Color.magenta, 2f);
+        }
     }
 
-    private void CreateShotLine()
+    private void CreateShotLine(Vector3 startPos, Vector3 endPos)
     {
+        if (endPos == Vector3.zero)
+            endPos = -transform.forward * 10f;
+
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, startPos);
+        lineRenderer.SetPosition(1, endPos);
         
+        ShotLineCreated = true;
+    }
+
+    private IEnumerator DisableShotLine(float time)
+    {
+        if (!ShotLineCreated)
+            yield break;
+        
+        yield return new WaitForSeconds(time);
+        
+        lineRenderer.enabled = false;
+        ShotLineCreated = false;
     }
 }

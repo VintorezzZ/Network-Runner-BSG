@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
 {
+
+    public virtual void Init()
+    {
+        
+    }
     public virtual void Shoot()
     {
         

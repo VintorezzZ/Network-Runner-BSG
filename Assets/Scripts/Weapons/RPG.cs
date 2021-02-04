@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class RPG : BaseWeapon
 {
+    public override void Init()
+    {
+        base.Init();
+    }
+
     public override void Shoot()
     {
         base.Shoot();
@@ -28,7 +33,7 @@ public class RPG : BaseWeapon
     {
         bullet.gameObject.SetActive(true);
         //bullet.transform.SetParent(generatedBullets);
-        bullet.transform.position = transform.position + transform.forward;
+        bullet.transform.position = transform.position + -transform.forward;
         bullet.transform.rotation = transform.rotation;
     }
 }

@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class WeaponManager
 {
-    private BaseWeapon currentWeapon;
-    private BaseWeapon previousWeapon;
     public static Transform gunHolder;
+    
+    private BaseWeapon currentWeapon;
+    private string previousWeaponName;
 
+    private float timer = 0f;
+    private bool timerStarted = false;
     public WeaponManager(Transform gunHolder)
     {
         WeaponManager.gunHolder = gunHolder;
@@ -17,6 +20,10 @@ public class WeaponManager
         LoadWeapon("M1911");
     }
 
+    public void OnUpdate()
+    {
+        DeactivateWeaponByTimer();
+    }
     public BaseWeapon LoadWeapon(string weaponName)
     {
         string path = "Weapons/" + weaponName;
@@ -24,21 +31,51 @@ public class WeaponManager
         BaseWeapon weapon = GameObject.Instantiate(Resources.Load<BaseWeapon>(path)).GetComponent<BaseWeapon>();
         SetWeaponSettings(weapon);
         currentWeapon = weapon;
-        Debug.Log(currentWeapon.name);
         return weapon;
-    }
-    public BaseWeapon LoadWeapon(BaseWeapon weapon)
-    {
-        string weaponName = weapon.name;  // name (clone)
-        
-        return LoadWeapon(weaponName);
     }
 
     private void SetWeaponSettings(BaseWeapon weapon)
     {
+        weapon.Init();
         weapon.transform.SetParent(gunHolder);
         weapon.transform.position = gunHolder.position;
         weapon.transform.rotation = gunHolder.rotation;
+    }
+
+    public void SwitchWeapon(string weaponName, float deactivationTime)
+    {
+        if (GetWeaponName(currentWeapon) == weaponName)
+            return;
+
+        SetTimer(deactivationTime);
+
+        previousWeaponName = GetWeaponName(currentWeapon);
+        
+        GameObject.Destroy(currentWeapon.gameObject);
+        currentWeapon = LoadWeapon(weaponName);
+    }
+
+    private void SetTimer(float time)
+    {
+        timer = time;
+        timerStarted = true;
+    }
+
+    private string GetWeaponName(BaseWeapon weapon)
+    {
+        return weapon.name.Replace("(Clone)", ""); // name(clone) => name
+    }
+
+    public void DeactivateWeaponByTimer()   
+    {
+        timer -= Time.deltaTime;
+
+        if (timerStarted && timer < 0)
+        {
+            timerStarted = false;
+            GameObject.Destroy(currentWeapon.gameObject);
+            LoadWeapon(previousWeaponName);
+        }
     }
 
     public void Shoot()
@@ -46,36 +83,6 @@ public class WeaponManager
         currentWeapon.Shoot();
     }
 
-    public void SwitchWeapon(string weaponName)
-    {
-        if (currentWeapon.name == weaponName)
-            return;
-
-        GameObject.Destroy(currentWeapon.gameObject);
-
-        previousWeapon = currentWeapon;
-        currentWeapon = LoadWeapon(weaponName);
-    }
-
-    public void DeactivateWeapon(float deactivationTime)   // chto delat' ?
-    {
-        deactivationTime -= Time.deltaTime;
-
-        if (deactivationTime < 0)
-        {
-            LoadWeapon(previousWeapon);
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     // в конструкторе передаем ганХолдер
     // на старре тэйк веарон из ресуррсес лоад 
