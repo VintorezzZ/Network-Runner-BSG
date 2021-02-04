@@ -5,7 +5,11 @@ using UnityEngine;
 public class Pistol : BaseWeapon
 {
     private LineRenderer lineRenderer;
-    
+
+    public void Init()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
     public override void Shoot()
     {
         base.Shoot();
@@ -25,5 +29,12 @@ public class Pistol : BaseWeapon
             
             Debug.Log("Did Hit");
         }
+
+        CreateShotLine();
+    }
+
+    private void CreateShotLine()
+    {
+        
     }
 }
