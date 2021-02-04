@@ -35,20 +35,13 @@ public class PlayerController : MonoBehaviour
     private static readonly int Blend = Animator.StringToHash("Blend");
 
     private WeaponManager weaponManager;
-    private Transform gunHolder;
+    //private Transform gunHolder;
 
     private void Awake()
     {
         CreateBulletsContainer();
 
-        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
-        am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
-
-        gunHolder = GameObject.Find("GunHolder").transform;
-        
-        weaponManager = new WeaponManager(gunHolder);
-        weaponManager.Init();
+        SetManagers();
     }
 
     private void Start()
@@ -58,7 +51,7 @@ public class PlayerController : MonoBehaviour
         characterController = gameObject.GetComponent<CharacterController>();
         animator = gameObject.GetComponentInChildren<Animator>();
         
-        ui.UpdateBulletstext(bulletAmount);
+        ui.UpdateBulletsText(bulletAmount);
         ui.UpdateHealttext(health);
         
         canMove = false;
@@ -83,8 +76,22 @@ public class PlayerController : MonoBehaviour
         ProcessShoot();
 
         SpeedControl();
-
         Move(horizontalInput);
+    }
+
+    private void SetManagers()
+    {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
+        am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
+        weaponManager = new WeaponManager(GameObject.Find("GunHolder").transform);
+        weaponManager.Init();
+    }
+
+    private void CreateBulletsContainer()
+    {
+        generatedBullets = new GameObject("generatedBullets").transform;
+        generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
     }
 
     private void ProcessShoot()
@@ -106,12 +113,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void CreateBulletsContainer()
-    {
-        generatedBullets = new GameObject("generatedBullets").transform;
-        generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
-    }
-
     private void SpeedControl()
     {
         speed += acceleration * Time.deltaTime;
@@ -121,35 +122,16 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        //InstantiateBullet();
-
         weaponManager.Shoot();
         
         bulletAmount--;
-        ui.UpdateBulletstext(bulletAmount);
+        ui.UpdateBulletsText(bulletAmount);
         
         canShoot = false;
         yield return new WaitForSeconds(0.3f);
         //yield return null;
         canShoot = true;
     }
-
-    // private void InstantiateBullet()
-    // {
-    //     Bullet bulletScript = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
-    //     bulletScript.playerVelocity = speed;
-    //     
-    //     GameObject bullet = bulletScript.gameObject;
-    //     SetBulletSettings(bullet);
-    // }
-
-    // private void SetBulletSettings(GameObject bullet)
-    // {
-    //     bullet.SetActive(true);
-    //     bullet.transform.SetParent(generatedBullets);
-    //     bullet.transform.position = gameObject.transform.position + transform.forward;
-    //     bullet.transform.rotation = gameObject.transform.rotation;
-    // }
 
     private void Move(float horizontalInput)
     {
@@ -188,6 +170,13 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        CheckForObstacle(other);
+        CheckForBulletBonus(other);
+        CheckForCrossBends(other);
+    }
+
+    private void CheckForObstacle(Collider other)
+    {
         if (other.gameObject.CompareTag("Obstacle"))
         {
             if (health > 0)
@@ -202,29 +191,34 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("dead");
                 am.PlayLoseSFX();
             }
-            
         }
+    }
 
+    private void CheckForBulletBonus(Collider other)
+    {
         if (other.CompareTag("Bullet"))
         {
             weaponManager.SwitchWeapon("RPG7", 5f);
 
             bulletAmount++;
-            
+
             // if (bulletAmount > 30) 
             //     bulletAmount = 30;
-            
-            ui.UpdateBulletstext(bulletAmount);
+
+            ui.UpdateBulletsText(bulletAmount);
             PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
         }
+    }
 
+    private void CheckForCrossBends(Collider other)
+    {
         if (other.gameObject.CompareTag("Cross left"))
         {
-            transform.localRotation *= Quaternion.Euler(0,  -90, 0);
+            transform.localRotation *= Quaternion.Euler(0, -90, 0);
         }
         else if (other.gameObject.CompareTag("Cross right"))
         {
-            transform.localRotation *= Quaternion.Euler(0,   90, 0);
+            transform.localRotation *= Quaternion.Euler(0, 90, 0);
         }
     }
 }

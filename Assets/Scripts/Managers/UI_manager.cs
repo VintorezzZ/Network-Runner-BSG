@@ -49,7 +49,7 @@ public class UI_manager : MonoBehaviour
         bestScoreText.text = PlayerPrefs.GetInt("Coins", 0).ToString();
     }
 
-    public void UpdateBulletstext(int amount)
+    public void UpdateBulletsText(int amount)
     {
         bulletsText.text = "Bullets:\n" + amount + "/30";
     }

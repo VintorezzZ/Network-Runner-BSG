@@ -37,9 +37,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/Pistol.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -87,7 +87,7 @@
       <workItem from="1612248798855" duration="19120000" />
       <workItem from="1612336547768" duration="14952000" />
       <workItem from="1612424596556" duration="17313000" />
-      <workItem from="1612451783214" duration="7701000" />
+      <workItem from="1612451783214" duration="8314000" />
     </task>
     <servers />
   </component>
