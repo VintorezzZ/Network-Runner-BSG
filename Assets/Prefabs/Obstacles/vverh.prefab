@@ -25,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2783958714414280032}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1.4266663, y: 0.41, z: 0.12668905}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -1.4266664, y: 0.41, z: 0.12668991}
   m_LocalScale: {x: 10, y: 10, z: 28.925436}
   m_Children: []
-  m_Father: {fileID: 6484709887085251227}
+  m_Father: {fileID: 7859833081334419323}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8301507781164193520
@@ -107,10 +107,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3078336760430832789}
   m_LocalRotation: {x: -0.7070219, y: 0.010957055, z: -0.010957055, w: 0.7070219}
-  m_LocalPosition: {x: -0.006286502, y: 0.82, z: 0.113062605}
-  m_LocalScale: {x: 200.0506, y: 6, z: 38.060364}
+  m_LocalPosition: {x: -0.006286502, y: 0.82, z: 0.11306381}
+  m_LocalScale: {x: 200.0506, y: 6, z: 38.06036}
   m_Children: []
-  m_Father: {fileID: 6484709887085251227}
+  m_Father: {fileID: 7859833081334419323}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8625132217111347872
@@ -162,6 +162,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4744313679917590342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7859833081334419323}
+  m_Layer: 0
+  m_Name: Graphics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7859833081334419323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744313679917590342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7894801191317737982}
+  - {fileID: 7412760733798839517}
+  - {fileID: 1198426989682847049}
+  - {fileID: 2157442458239933599}
+  m_Father: {fileID: 6484709887085251227}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5441368888406015250
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,10 +222,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441368888406015250}
   m_LocalRotation: {x: 0.31510776, y: -0.6330143, z: 0.6330143, w: -0.31510767}
-  m_LocalPosition: {x: -0.006286502, y: 0.89, z: 0.27036095}
-  m_LocalScale: {x: 41.299156, y: 5.757444, z: 41.299156}
+  m_LocalPosition: {x: -0.006286502, y: 0.89, z: 0.27036285}
+  m_LocalScale: {x: 41.29916, y: 5.757444, z: 41.299156}
   m_Children: []
-  m_Father: {fileID: 6484709887085251227}
+  m_Father: {fileID: 7859833081334419323}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2669984548288542154
@@ -272,10 +306,7 @@ Transform:
   m_LocalPosition: {x: 2.29, y: -0.43, z: 25.96}
   m_LocalScale: {x: 0.4, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 7894801191317737982}
-  - {fileID: 7412760733798839517}
-  - {fileID: 1198426989682847049}
-  - {fileID: 2157442458239933599}
+  - {fileID: 7859833081334419323}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -329,11 +360,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6194854916550385428}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 1.4247766, y: 0.41, z: 0.12668905}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 1.4247766, y: 0.41, z: 0.12668991}
   m_LocalScale: {x: 10, y: 10, z: 28.925436}
   m_Children: []
-  m_Father: {fileID: 6484709887085251227}
+  m_Father: {fileID: 7859833081334419323}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1473422866229651296

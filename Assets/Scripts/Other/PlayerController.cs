@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 gravity;
 
     private Animator animator;
-    private CharacterController controller;
+    private CharacterController characterController;
     private GameManager gm;
     private UI_manager ui;
     private AudioManager am;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         onGameOver += gm.OnGameOver;
         onGameOver += StartDeathRoutine;
-        controller = gameObject.GetComponent<CharacterController>();
+        characterController = gameObject.GetComponent<CharacterController>();
         animator = gameObject.GetComponentInChildren<Animator>();
         
         ui.UpdateBulletstext(bulletAmount);
@@ -117,7 +117,10 @@ public class PlayerController : MonoBehaviour
 
     private void InstantiateBullet()
     {
-        GameObject bullet = PoolManager.Get(PoolType.Bullets).gameObject;
+        Bullet bulletScript = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
+        bulletScript.playerVelocity = speed;
+        
+        GameObject bullet = bulletScript.gameObject;
         bullet.SetActive(true);
         bullet.transform.SetParent(generatedBullets);
         bullet.transform.position = gameObject.transform.position + transform.forward;
@@ -129,10 +132,10 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
 
         Vector3 moveDir = transform.right * x * strafeSpeed + transform.forward * speed;
-        controller.Move(moveDir * Time.deltaTime);
+        characterController.Move(moveDir * Time.deltaTime);
 
         gravity.y += gravityAmount * Time.deltaTime;
-        controller.Move(gravity * Time.deltaTime);
+        characterController.Move(gravity * Time.deltaTime);
     }
 
     private void CheckForAwesomeTrigger()

@@ -75,6 +75,11 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
         return roadItem;
     }
 
+    public void OnReturnToPool()
+    {
+        ReturnObstaclesToPool();
+    }
+
     public void ReturnObstaclesToPool()
     {
         foreach (var obst in pooledObstacles)
@@ -90,11 +95,6 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     {
         obst.onReturnToPool -= RemoveObstacleFromList;
         pooledObstacles.Remove(obst);
-    }
-
-    public void OnReturnToPool()
-    {
-        ReturnObstaclesToPool();
     }
 
     public void OnTakeFromPool()

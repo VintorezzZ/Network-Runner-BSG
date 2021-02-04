@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour, IPoolObservable
    private float speed = 0.3f;
    private PoolItem poolItem;
 
+   public float playerVelocity { get; set; }
    private void Start()
    {
       poolItem = GetComponent<PoolItem>();
@@ -19,9 +20,13 @@ public class Bullet : MonoBehaviour, IPoolObservable
 
    private void Update()
    {
-      transform.Translate(Vector3.forward * speed, Space.Self);
+      transform.Translate(Vector3.forward * speed * PlayerVelocity(), Space.Self);
    }
 
+   private float PlayerVelocity()
+   {
+      return playerVelocity * 0.1f;
+   }
    private void OnTriggerEnter(Collider other)
    {
       if (other.CompareTag("Obstacle"))
