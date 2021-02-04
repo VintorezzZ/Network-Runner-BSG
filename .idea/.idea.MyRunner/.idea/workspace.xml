@@ -11,8 +11,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/Pistol.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -30,8 +34,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/Pistol.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
       </list>
     </option>
   </component>
@@ -78,7 +86,7 @@
       <workItem from="1612177493884" duration="12971000" />
       <workItem from="1612248798855" duration="19120000" />
       <workItem from="1612336547768" duration="14952000" />
-      <workItem from="1612424596556" duration="5759000" />
+      <workItem from="1612424596556" duration="15621000" />
     </task>
     <servers />
   </component>
@@ -91,10 +99,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="794" y="221" key="RiderGenerateDialog" timestamp="1612351504636">
+    <state x="794" y="221" key="RiderGenerateDialog" timestamp="1612440845577">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612351504636" />
+    <state x="794" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612440845577" />
     <state x="638" y="119" width="644" height="801" key="find.popup" timestamp="1612350596345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

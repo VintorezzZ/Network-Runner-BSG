@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private UI_manager ui;
     private AudioManager am;
 
-    [SerializeField] public float speed = 5f;
+    [SerializeField] public static float speed = 5f;               // уточнить
     [SerializeField] private float strafeSpeed = 6;
     [SerializeField] private float acceleration = 1;
     [SerializeField] private float maxSpeed = 20;
@@ -31,7 +31,11 @@ public class PlayerController : MonoBehaviour
     private bool canShoot = true;
 
     private Transform generatedBullets;
+    
     private static readonly int Blend = Animator.StringToHash("Blend");
+
+    private WeaponManager weaponManager;
+    private Transform gunHolder;
 
     private void Awake()
     {
@@ -40,6 +44,11 @@ public class PlayerController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
         am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
+
+        gunHolder = GameObject.Find("GunHolder").transform;
+        
+        weaponManager = new WeaponManager(gunHolder);
+        weaponManager.Init();
     }
 
     private void Start()
@@ -54,6 +63,7 @@ public class PlayerController : MonoBehaviour
         
         canMove = false;
     }
+
 
     private void Update()
     {
@@ -90,6 +100,8 @@ public class PlayerController : MonoBehaviour
     private void ProcessAnimation(float horizontalInput)
     {
         animator.SetFloat(Blend, horizontalInput);
+        
+        CheckForAwesomeTrigger();
     }
 
 
@@ -108,8 +120,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        InstantiateBullet();
+        //InstantiateBullet();
 
+        weaponManager.Shoot();
+        
         bulletAmount--;
         ui.UpdateBulletstext(bulletAmount);
         
@@ -118,22 +132,22 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
     }
 
-    private void InstantiateBullet()
-    {
-        Bullet bulletScript = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
-        bulletScript.playerVelocity = speed;
-        
-        GameObject bullet = bulletScript.gameObject;
-        SetBulletSettings(bullet);
-    }
+    // private void InstantiateBullet()
+    // {
+    //     Bullet bulletScript = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
+    //     bulletScript.playerVelocity = speed;
+    //     
+    //     GameObject bullet = bulletScript.gameObject;
+    //     SetBulletSettings(bullet);
+    // }
 
-    private void SetBulletSettings(GameObject bullet)
-    {
-        bullet.SetActive(true);
-        bullet.transform.SetParent(generatedBullets);
-        bullet.transform.position = gameObject.transform.position + transform.forward;
-        bullet.transform.rotation = gameObject.transform.rotation;
-    }
+    // private void SetBulletSettings(GameObject bullet)
+    // {
+    //     bullet.SetActive(true);
+    //     bullet.transform.SetParent(generatedBullets);
+    //     bullet.transform.position = gameObject.transform.position + transform.forward;
+    //     bullet.transform.rotation = gameObject.transform.rotation;
+    // }
 
     private void Move(float horizontalInput)
     {
@@ -169,17 +183,6 @@ public class PlayerController : MonoBehaviour
     {
         canMove = false;
     }
-
-    IEnumerator Strafe()
-    {
-        isStrafing = true;
-        am.PlayTransitionSFX();
-        animator.SetBool("isStrafing", true);
-        //Invoke("AnimDelay", 0.3f);
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool("isStrafing", false);
-        isStrafing = false;
-    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -202,6 +205,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Bullet"))
         {
+            weaponManager.SwitchWeapon("RPG7");
+            
             bulletAmount++;
             
             if (bulletAmount > 30) 

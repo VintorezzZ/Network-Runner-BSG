@@ -16,6 +16,7 @@ TagManager:
   - Cross
   - RoadStraight
   - RoadBend
+  - GunHolder
   layers:
   - Default
   - TransparentFX

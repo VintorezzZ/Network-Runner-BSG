@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour, IPoolObservable
 
    private void Update()
    {
-      transform.Translate(Vector3.forward * speed * PlayerVelocity(), Space.Self);
+      transform.Translate(-Vector3.forward * speed, Space.Self);
    }
 
    private float PlayerVelocity()
