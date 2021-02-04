@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public event Action onGameOver;
 
     [SerializeField] private int health = 3;
-    private int bulletAmount = 3;
+    [SerializeField] private int bulletAmount = 3;
     private bool canShoot = true;
 
     private Transform generatedBullets;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessShoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (canShoot && bulletAmount > 0)
             {
@@ -128,7 +128,8 @@ public class PlayerController : MonoBehaviour
         ui.UpdateBulletstext(bulletAmount);
         
         canShoot = false;
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
+        yield return null;
         canShoot = true;
     }
 

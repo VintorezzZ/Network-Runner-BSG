@@ -21,8 +21,10 @@ public class Pistol : BaseWeapon
         if (Physics.Raycast(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward), out hit, 500f))
         {
             
+            Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * 500, Color.red);
             
             Debug.DrawRay(WeaponManager.gunHolder.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+            
             Debug.Log("Did Hit");
         }
     }

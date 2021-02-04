@@ -2967,6 +2967,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1598334023, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
+      propertyPath: bulletAmount
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 6184498586738042728, guid: e0bb807ebe9713b44a6882ebef5a1b0a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3175,7 +3179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7830139675168065391, guid: 2de659bc961069e45a449b568fd89169, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 686
+      value: 409
       objectReference: {fileID: 0}
     - target: {fileID: 7830139675168065391, guid: 2de659bc961069e45a449b568fd89169, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

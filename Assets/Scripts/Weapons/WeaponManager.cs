@@ -4,6 +4,7 @@ using UnityEngine;
 public class WeaponManager
 {
     private BaseWeapon currentWeapon;
+    private BaseWeapon previousWeapon;
     public static Transform gunHolder;
 
     public WeaponManager(Transform gunHolder)
@@ -26,6 +27,12 @@ public class WeaponManager
         Debug.Log(currentWeapon.name);
         return weapon;
     }
+    public BaseWeapon LoadWeapon(BaseWeapon weapon)
+    {
+        string weaponName = weapon.name;  // name (clone)
+        
+        return LoadWeapon(weaponName);
+    }
 
     private void SetWeaponSettings(BaseWeapon weapon)
     {
@@ -45,11 +52,20 @@ public class WeaponManager
             return;
 
         GameObject.Destroy(currentWeapon.gameObject);
-        
+
+        previousWeapon = currentWeapon;
         currentWeapon = LoadWeapon(weaponName);
     }
 
-    
+    public void DeactivateWeapon(float deactivationTime)   // chto delat' ?
+    {
+        deactivationTime -= Time.deltaTime;
+
+        if (deactivationTime < 0)
+        {
+            LoadWeapon(previousWeapon);
+        }
+    }
     
     
     
