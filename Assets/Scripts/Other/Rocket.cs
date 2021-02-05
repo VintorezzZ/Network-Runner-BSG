@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    private PoolItem poolItem;
+    private void Start()
+    {
+        poolItem = GetComponentInParent<PoolItem>();
+    }
+
     private void OnEnable()
     {
         // start Move
@@ -15,13 +21,28 @@ public class Rocket : MonoBehaviour
         // Stop Move
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.TryGetComponent(out IDamageable iDamageable))
-        {
-            iDamageable.TakeDamage();
-        }
-      
-        PoolManager.Return(GetComponentInParent<PoolItem>());
+        // print(other.gameObject.name);
+        // if (other.gameObject.TryGetComponent(out IDamageable iDamageable))
+        // {
+        //     print("get");
+        //     iDamageable.TakeDamage();
+        // }
+        
+        //Physics.OverlapSphere()
+        
+        Transform explosionFX = PoolManager.Get(PoolType.ExplosionsFX).transform;
+
+        SetExplosionFXSettings(explosionFX, other);
+        
+        PoolManager.Return(poolItem);
+    }
+
+    private void SetExplosionFXSettings(Transform explosion, Collision collision)
+    {
+        explosion.position = collision.transform.position;
+        explosion.gameObject.SetActive(true);
     }
 }

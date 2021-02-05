@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 178422990}
   - component: {fileID: 178422991}
   m_Layer: 0
-  m_Name: Rockets Pool
+  m_Name: Rocket Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1548,6 +1548,7 @@ Transform:
   - {fileID: 654343334}
   - {fileID: 1998025707}
   - {fileID: 1795545203}
+  - {fileID: 1570814997}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1787,6 +1788,55 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7830139675168065391, guid: 2de659bc961069e45a449b568fd89169, type: 3}
   m_PrefabInstance: {fileID: 7830139673775834957}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1570814996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570814997}
+  - component: {fileID: 1570814998}
+  m_Layer: 0
+  m_Name: Explosion Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570814997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570814996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1444426652}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1570814998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570814996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 5
+  amount: 5
+  expandable: 1
+  examplePrefabs:
+  - {fileID: 506915756496456240, guid: 5db3795d756110641a9311c8b88ef454, type: 3}
+  pooledItems: []
 --- !u!1 &1638130108
 GameObject:
   m_ObjectHideFlags: 0

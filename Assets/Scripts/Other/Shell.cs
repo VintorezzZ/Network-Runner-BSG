@@ -8,7 +8,8 @@ public class Shell : MonoBehaviour, IPoolObservable
    private PoolItem poolItem;
 
    public float playerVelocity { get; set; }
-   private void Start()
+  
+   public void Init()
    {
       poolItem = GetComponent<PoolItem>();
    }
@@ -27,7 +28,7 @@ public class Shell : MonoBehaviour, IPoolObservable
    {
       return playerVelocity * 0.1f;
    }
-   
+
 
    private IEnumerator ReturnToPool(float time)
    {

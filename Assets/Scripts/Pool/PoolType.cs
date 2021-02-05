@@ -4,5 +4,6 @@ public enum PoolType
     RoadBend,
     RoadStraight,
     Obstacles,
-    Bonuses
+    Bonuses,
+    ExplosionsFX
 }

@@ -22,6 +22,7 @@ public class RPG : BaseWeapon
     private void InstantiateBullet()
     {
         Shell shell = PoolManager.Get(PoolType.Rockets).GetComponent<Shell>();
+        shell.Init();
         shell.playerVelocity = GameManager.instance.playerController.speed;
         
         SetShellSettings(shell);
