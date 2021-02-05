@@ -5,28 +5,26 @@ using UnityEngine;
 
 public class LineCreator : MonoBehaviour
 {
-    private static LineCreator instance;
+    private LineRenderer lineRenderer;
+    private Coroutine prevCoroutine;
     
-    private static LineRenderer lineRenderer;
-    private static Coroutine prevCoroutine;
-
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public static void CreateShotLine(Vector3 startPos, Vector3 endPos, Color color)
+    public void CreateShotLine(Vector3 startPos, Vector3 endPos, Color color)
     {
         if(prevCoroutine != null)
-            instance.StopCoroutine(prevCoroutine);
+            StopCoroutine(prevCoroutine);
         
         SetShotLineSettings(startPos, endPos, color);
 
         print(prevCoroutine);
-        prevCoroutine = instance.StartCoroutine(DisableShotLine(0.3f));   // Why It is Null ?? 
+        prevCoroutine = StartCoroutine(DisableShotLine(0.3f));   // Why It is Null ?? 
     }
     
-    private static void SetShotLineSettings(Vector3 startPos, Vector3 endPos, Color color)
+    private void SetShotLineSettings(Vector3 startPos, Vector3 endPos, Color color)
     {
         Color startColor = color;
         startColor.a = 0;
@@ -36,10 +34,9 @@ public class LineCreator : MonoBehaviour
         lineRenderer.enabled = true;
     }
     
-    private static IEnumerator DisableShotLine(float time)
+    private IEnumerator DisableShotLine(float time)
     {
         yield return new WaitForSeconds(time);
         lineRenderer.enabled = false;
     }
-
 }
