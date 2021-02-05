@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 7420362237466074600}
   - component: {fileID: 1733505422559606302}
   - component: {fileID: 8849028687475777049}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Destroy trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 3926519941264523908}
   - component: {fileID: 4263876780419458869}
   - component: {fileID: 7403161989694006698}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: border left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 7709269612356141720}
   - component: {fileID: 5450692791491576905}
   - component: {fileID: 922426189329758712}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: border right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
