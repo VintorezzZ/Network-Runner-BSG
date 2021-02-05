@@ -29,12 +29,12 @@ public class Bullet : MonoBehaviour, IPoolObservable
    }
    private void OnTriggerEnter(Collider other)
    {
-      if (other.CompareTag("Obstacle"))
+      if (other.TryGetComponent(out IDamageable iDamageable))
       {
-         PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
-
-         PoolManager.Return(poolItem);
+         iDamageable.TakeDamage();
       }
+      
+      PoolManager.Return(poolItem);
    }
 
    private IEnumerator ReturnToPool(float time)

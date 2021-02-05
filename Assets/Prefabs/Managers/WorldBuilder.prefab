@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6949423329653903685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3281073899963991302}
+  m_Layer: 0
+  m_Name: GeneratedBullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3281073899963991302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949423329653903685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7074320015856561622}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7074320015856561616
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.518, y: 2.864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3281073899963991302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,14 +74,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b736c525d95597040b173febbfca6c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freePlatforms:
-  - {fileID: 8553928429743829586, guid: ce2d18d1026f48e438649eb27df043e6, type: 3}
-  obstaclePlatforms:
-  - {fileID: 5421442304713297008, guid: 43cefb32a2d3f93469d54bebbcda60fd, type: 3}
-  - {fileID: 6576819618962736837, guid: dcb1f15cf40f14647ac82bf1b2e8a9b1, type: 3}
-  - {fileID: 7676112820431792615, guid: ffe0f75d95e9f784ba7465556aebd941, type: 3}
-  crossPlatforms:
-  - {fileID: 4137699607658650549, guid: 30e520d2e5b358441a3d65d5b76798bb, type: 3}
-  - {fileID: 984865521503552712, guid: 3e23eb9ebf9de2e4fb33986145eb25b2, type: 3}
-  - {fileID: 6562940014309130760, guid: 68a23c0a5b1f1f94d81353f7a24e9df7, type: 3}
-  platformContainer: {fileID: 0}

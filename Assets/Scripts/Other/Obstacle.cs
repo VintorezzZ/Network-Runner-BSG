@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour, IPoolObservable
+public class Obstacle : MonoBehaviour, IPoolObservable, IDamageable
 {
     public event Action<Obstacle> onReturnToPool;
 
@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour, IPoolObservable
 
     public void RemoveObstacle()
     {
-        PoolManager.Return(poolItem);
+        PoolManager.Return(this.poolItem);
     }
     public void OnReturnToPool()
     {
@@ -28,5 +28,9 @@ public class Obstacle : MonoBehaviour, IPoolObservable
         
     }
 
-   
+
+    public void TakeDamage()
+    {
+        PoolManager.Return(this.poolItem);
+    }
 }

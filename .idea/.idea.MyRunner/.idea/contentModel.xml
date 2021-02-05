@@ -26,6 +26,7 @@
           <e p="Other" t="Include">
             <e p="BladeRotator.cs" t="Include" />
             <e p="Bullet.cs" t="Include" />
+            <e p="BulletsContainer.cs" t="Include" />
             <e p="ButtonDownClick.cs" t="Include" />
             <e p="Obstacle.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
@@ -45,6 +46,8 @@
           </e>
           <e p="Weapons" t="Include">
             <e p="BaseWeapon.cs" t="Include" />
+            <e p="IDamageable.cs" t="Include" />
+            <e p="LineCreator.cs" t="Include" />
             <e p="Pistol.cs" t="Include" />
             <e p="RPG.cs" t="Include" />
             <e p="WeaponManager.cs" t="Include" />

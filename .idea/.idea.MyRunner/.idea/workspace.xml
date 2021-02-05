@@ -19,6 +19,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/LineCreator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -34,12 +35,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/IDamageable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/Pistol.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/LineCreator.cs" />
       </list>
     </option>
   </component>
@@ -88,7 +93,7 @@
       <workItem from="1612336547768" duration="14952000" />
       <workItem from="1612424596556" duration="17313000" />
       <workItem from="1612451783214" duration="8485000" />
-      <workItem from="1612509741915" duration="4659000" />
+      <workItem from="1612509741915" duration="10450000" />
     </task>
     <servers />
   </component>

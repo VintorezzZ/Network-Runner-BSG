@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    [HideInInspector] public PlayerController playerController;
     
     public int score;
-    public bool isBestScore;
+    [HideInInspector] public bool isBestScore;
     private int bestScore;
 
     private void Awake()
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     private void Start()

@@ -24,7 +24,7 @@ public class RPG : BaseWeapon
     private void InstantiateBullet()
     {
         Bullet bullet = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
-        bullet.playerVelocity = PlayerController.speed;
+        bullet.playerVelocity = GameManager.instance.playerController.speed;
         
         SetBulletSettings(bullet);
     }

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private UI_manager ui;
     private AudioManager am;
 
-    [SerializeField] public static float speed = 5f;               // уточнить
+    [SerializeField] public float speed = 5f;               // уточнить
     [SerializeField] private float strafeSpeed = 6;
     [SerializeField] private float acceleration = 1;
     [SerializeField] private float maxSpeed = 20;
