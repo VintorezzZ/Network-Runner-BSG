@@ -19,7 +19,7 @@ public class WeaponManager
 
     public void Init()
     {
-        LoadWeapon("RPG7");
+        LoadWeapon("M1911");
     }
 
     public void OnUpdate()

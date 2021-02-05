@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
             {
                 health--;
                 ui.UpdateHealttext(health);
-                PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
+                PoolManager.Return(other.gameObject.GetComponentInParent<PoolItem>());
             }
             else
             {

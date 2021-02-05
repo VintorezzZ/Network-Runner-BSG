@@ -15,7 +15,7 @@ public class PoolItem : MonoBehaviour
         isFree = true;
         PoolType = poolType;
         
-        _observableComponents.AddRange(GetComponents<IPoolObservable>());
+        _observableComponents.AddRange(GetComponentsInChildren<IPoolObservable>());
     }
 
     public void TakeFromPool()

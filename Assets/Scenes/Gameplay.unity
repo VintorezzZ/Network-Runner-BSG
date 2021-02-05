@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 1
+  poolType: 2
   amount: 3
   expandable: 1
   examplePrefabs:
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 2
+  poolType: 3
   amount: 10
   expandable: 1
   examplePrefabs:
@@ -1549,6 +1549,7 @@ Transform:
   - {fileID: 1998025707}
   - {fileID: 1795545203}
   - {fileID: 1570814997}
+  - {fileID: 1804181176}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1831,7 +1832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 5
+  poolType: 6
   amount: 5
   expandable: 1
   examplePrefabs:
@@ -2187,11 +2188,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 4
+  poolType: 5
   amount: 10
   expandable: 1
   examplePrefabs:
   - {fileID: 4627257459412399393, guid: 24ae8a922db603a499d3c348391d8add, type: 3}
+  pooledItems: []
+--- !u!1 &1804181175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804181176}
+  - component: {fileID: 1804181177}
+  m_Layer: 0
+  m_Name: Decal Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1804181176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804181175}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1444426652}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1804181177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804181175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 1
+  amount: 5
+  expandable: 1
+  examplePrefabs:
+  - {fileID: 7728894842135338018, guid: 4760cae51503d564b8b1bfc0c64b73b5, type: 3}
   pooledItems: []
 --- !u!1 &1967067743
 GameObject:
@@ -2311,7 +2361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 3
+  poolType: 4
   amount: 2
   expandable: 1
   examplePrefabs:

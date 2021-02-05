@@ -22,17 +22,20 @@ public class RPG : BaseWeapon
     private void InstantiateBullet()
     {
         Shell shell = PoolManager.Get(PoolType.Rockets).GetComponent<Shell>();
-        shell.Init();
         shell.playerVelocity = GameManager.instance.playerController.speed;
         
         SetShellSettings(shell);
+        
     }
     
     private void SetShellSettings(Shell shell)                        // уточнить 
     {
-        shell.gameObject.SetActive(true);
         //bullet.transform.SetParent(generatedBullets);
         shell.transform.position = transform.position + -transform.forward;
         shell.transform.rotation = transform.rotation;
+        
+        shell.Init(targetDirection);
+        
+        shell.gameObject.SetActive(true);
     }
 }
