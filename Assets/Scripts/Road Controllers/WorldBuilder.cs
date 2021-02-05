@@ -31,7 +31,9 @@ public class WorldBuilder : MonoBehaviour
     public void Init()
     {
         CreateFreePlatform();
-
+        CreateObstaclePlatform();
+        CreateObstaclePlatform();
+        CreateCrossPlatform();
         for (int i = 0; i < 5; i++)
         {
             CreatePlatform(null);

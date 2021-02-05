@@ -11,11 +11,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/Pistol.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/RPG.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/JMO Assets/WarFX/Scripts/CFX_AutoDestructShuriken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" root0="FORCE_HIGHLIGHTING" />
@@ -30,7 +27,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/Destroyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/RoadBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
@@ -48,6 +44,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Rocket.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Shell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
       </list>
     </option>
   </component>
@@ -96,7 +93,7 @@
       <workItem from="1612336547768" duration="14952000" />
       <workItem from="1612424596556" duration="17313000" />
       <workItem from="1612451783214" duration="8485000" />
-      <workItem from="1612509741915" duration="33205000" />
+      <workItem from="1612509741915" duration="33908000" />
     </task>
     <servers />
   </component>
