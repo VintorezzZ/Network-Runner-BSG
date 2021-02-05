@@ -32,22 +32,23 @@ public class Pistol : BaseWeapon
         {
             //Debug.DrawLine(WeaponManager.gunHolder.position, hit.point, Color.black, 2f);
             
-            CreateShotLine(transform.position, hit.point);
+            CreateShotLine(transform.position, hit.point, Color.red);
         }
         else
         {
-            //CreateShotLine(transform.position, hit.point);
+            CreateShotLine(transform.position, hit.point, Color.yellow);
             
             //Debug.DrawRay(WeaponManager.gunHolder.position, transform.forward * -1 * 10f, Color.magenta, 2f);
         }
     }
 
-    private void CreateShotLine(Vector3 startPos, Vector3 endPos)
+    private void CreateShotLine(Vector3 startPos, Vector3 endPos, Color color)
     {
         if (endPos == Vector3.zero)
             endPos = -transform.forward * 10f;
 
         lineRenderer.enabled = true;
+        lineRenderer.SetColors(color, color);
         lineRenderer.SetPosition(0, startPos);
         lineRenderer.SetPosition(1, endPos);
         
