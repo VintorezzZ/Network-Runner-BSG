@@ -4,15 +4,17 @@ using UnityEngine;
 public class WeaponManager
 {
     public static Transform gunHolder;
+    public static Transform RayCastPoint;
     
     private BaseWeapon currentWeapon;
     private string previousWeaponName;
 
     private float timer = 0f;
     private bool timerStarted = false;
-    public WeaponManager(Transform gunHolder)
+    public WeaponManager(Transform gunHolder, Transform RayCastPoint)
     {
         WeaponManager.gunHolder = gunHolder;
+        WeaponManager.RayCastPoint = RayCastPoint;
     }
 
     public void Init()

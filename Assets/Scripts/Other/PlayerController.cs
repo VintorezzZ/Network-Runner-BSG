@@ -84,7 +84,9 @@ public class PlayerController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
         am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
-        weaponManager = new WeaponManager(GameObject.Find("GunHolder").transform);
+        weaponManager = new WeaponManager(
+            GameObject.Find("GunHolder").transform, 
+            GameObject.Find("RayCastPoint").transform);
         weaponManager.Init();
     }
 

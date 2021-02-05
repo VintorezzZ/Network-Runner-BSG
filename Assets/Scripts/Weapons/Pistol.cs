@@ -28,25 +28,22 @@ public class Pistol : BaseWeapon
     {
         RaycastHit hit;
         
-        if (Physics.Raycast(WeaponManager.gunHolder.position, transform.forward * -1, out hit, 500f))
+        if (Physics.Raycast(WeaponManager.RayCastPoint.position, transform.forward, out hit, 500f))
         {
-            //Debug.DrawLine(WeaponManager.gunHolder.position, hit.point, Color.black, 2f);
+            Debug.DrawLine(WeaponManager.RayCastPoint.position, hit.point, Color.black, 2f);
             
             CreateShotLine(transform.position, hit.point, Color.red);
         }
         else
         {
-            CreateShotLine(transform.position, hit.point, Color.yellow);
+            CreateShotLine(transform.position, transform.forward * -1 * 10f, Color.yellow);
             
-            //Debug.DrawRay(WeaponManager.gunHolder.position, transform.forward * -1 * 10f, Color.magenta, 2f);
+            Debug.DrawRay(WeaponManager.RayCastPoint.position, transform.forward * -1 * 10f, Color.magenta, 2f);
         }
     }
 
     private void CreateShotLine(Vector3 startPos, Vector3 endPos, Color color)
     {
-        if (endPos == Vector3.zero)
-            endPos = -transform.forward * 10f;
-
         lineRenderer.enabled = true;
         lineRenderer.SetColors(color, color);
         lineRenderer.SetPosition(0, startPos);
