@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LineCreator : MonoBehaviour
@@ -19,8 +17,7 @@ public class LineCreator : MonoBehaviour
             StopCoroutine(prevCoroutine);
         
         SetShotLineSettings(startPos, endPos, color);
-
-        print(prevCoroutine);
+        
         prevCoroutine = StartCoroutine(DisableShotLine(0.3f));   // Why It is Null ?? 
     }
     
@@ -28,7 +25,8 @@ public class LineCreator : MonoBehaviour
     {
         Color startColor = color;
         startColor.a = 0;
-        lineRenderer.SetColors(startColor, color);
+        lineRenderer.startColor = startColor;
+        lineRenderer.endColor = color;
         lineRenderer.SetPosition(0, startPos);
         lineRenderer.SetPosition(1, endPos);
         lineRenderer.enabled = true;

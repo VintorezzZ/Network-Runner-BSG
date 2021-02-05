@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IPoolObservable
+public class Shell : MonoBehaviour, IPoolObservable
 {
-   private float speed = 0.3f;
+   private float speed = 0.2f;
    private PoolItem poolItem;
 
    public float playerVelocity { get; set; }
@@ -27,15 +27,7 @@ public class Bullet : MonoBehaviour, IPoolObservable
    {
       return playerVelocity * 0.1f;
    }
-   private void OnTriggerEnter(Collider other)
-   {
-      if (other.TryGetComponent(out IDamageable iDamageable))
-      {
-         iDamageable.TakeDamage();
-      }
-      
-      PoolManager.Return(poolItem);
-   }
+   
 
    private IEnumerator ReturnToPool(float time)
    {

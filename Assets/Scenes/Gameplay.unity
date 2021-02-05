@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 178422990}
   - component: {fileID: 178422991}
   m_Layer: 0
-  m_Name: Bullet Pool
+  m_Name: Rockets Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,10 +270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
-  amount: 0
+  amount: 5
   expandable: 1
   examplePrefabs:
-  - {fileID: 6552156217935310276, guid: ce3e54959ca1952459b22eadd57f1f9f, type: 3}
+  - {fileID: 7157315484923823611, guid: ef8bd49b04e8b8742ad63b7037edcab1, type: 3}
   pooledItems: []
 --- !u!1 &421696567
 GameObject:

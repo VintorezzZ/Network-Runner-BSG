@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pistol : BaseWeapon
@@ -22,6 +19,11 @@ public class Pistol : BaseWeapon
     {
         if (hit.collider)
         {
+            if (hit.collider.TryGetComponent(out IDamageable iDamageable))
+            {
+                iDamageable.TakeDamage();
+            }
+            
             lineCreator.CreateShotLine(transform.position, hit.point, Color.red);
         }
         else

@@ -1,6 +1,6 @@
 public enum PoolType
 {
-    Bullets,
+    Rockets,
     RoadBend,
     RoadStraight,
     Obstacles,

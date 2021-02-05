@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private static readonly int Blend = Animator.StringToHash("Blend");
 
     private WeaponManager weaponManager;
-    //private Transform gunHolder;
 
     private void Awake()
     {

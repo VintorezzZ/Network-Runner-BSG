@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RPG : BaseWeapon
@@ -23,17 +21,17 @@ public class RPG : BaseWeapon
     
     private void InstantiateBullet()
     {
-        Bullet bullet = PoolManager.Get(PoolType.Bullets).GetComponent<Bullet>();
-        bullet.playerVelocity = GameManager.instance.playerController.speed;
+        Shell shell = PoolManager.Get(PoolType.Rockets).GetComponent<Shell>();
+        shell.playerVelocity = GameManager.instance.playerController.speed;
         
-        SetBulletSettings(bullet);
+        SetShellSettings(shell);
     }
     
-    private void SetBulletSettings(Bullet bullet)                        // уточнить 
+    private void SetShellSettings(Shell shell)                        // уточнить 
     {
-        bullet.gameObject.SetActive(true);
+        shell.gameObject.SetActive(true);
         //bullet.transform.SetParent(generatedBullets);
-        bullet.transform.position = transform.position + -transform.forward;
-        bullet.transform.rotation = transform.rotation;
+        shell.transform.position = transform.position + -transform.forward;
+        shell.transform.rotation = transform.rotation;
     }
 }

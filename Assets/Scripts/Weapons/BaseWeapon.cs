@@ -17,11 +17,7 @@ public class BaseWeapon : MonoBehaviour
         if (Physics.Raycast(rayCastPoint.position,rayCastPoint.forward , out hit, RAY_DISTANCE))
         {
             //Debug.DrawLine(WeaponManager.RayCastPoint.position, hit.point, Color.black, 2f);
-            
-            if (hit.collider.TryGetComponent(out IDamageable iDamageable))
-            {
-                iDamageable.TakeDamage();
-            }
+
         }
         else
         {
