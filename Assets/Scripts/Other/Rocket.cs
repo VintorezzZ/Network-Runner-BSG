@@ -21,7 +21,7 @@ public class Rocket : MonoBehaviour
         // Stop Move
     }
 
-
+    
     private void OnCollisionEnter(Collision other)
     {
         // print(other.gameObject.name);
@@ -31,7 +31,19 @@ public class Rocket : MonoBehaviour
         //     iDamageable.TakeDamage();
         // }
         
-        //Physics.OverlapSphere()
+        
+        Collider[] colliders;
+        colliders = Physics.OverlapSphere(other.transform.position, 10);
+        print(colliders.Length);
+        foreach (var i in colliders)
+        {
+            
+            if (i.gameObject.TryGetComponent(out IDamageable iDamageable))
+            {
+                print("get");
+                iDamageable.TakeDamage();
+            }
+        }
         
         Transform explosionFX = PoolManager.Get(PoolType.ExplosionsFX).transform;
 
