@@ -1,3 +1,4 @@
+using Com.MyCompany.MyGame;
 using UnityEngine;
 
 public class RPG : BaseWeapon

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Com.MyCompany.MyGame;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -64,18 +65,18 @@ public class UI_manager : MonoBehaviour
 
     public void ActivateHomeUI()
     {
-        home.SetActive(true);
         restart.SetActive(false);
         whilePlay.SetActive(false);
+        home.SetActive(true);
     }
 
 
     public void ActivateWhilePlayUI()
     {
-        home.SetActive(false);
         restart.SetActive(false);
         whilePlay.SetActive(true);
         PlayerController.canMove = true;
+        home.SetActive(false);
     }
 
 
