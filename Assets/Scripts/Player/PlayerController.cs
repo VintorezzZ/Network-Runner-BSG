@@ -1,18 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Com.MyCompany.MyGame;
+using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
+using GameManager = Com.MyCompany.MyGame.GameManager;
 using Object = UnityEngine.Object;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPun, IPunObservable
 {
-    public static bool canMove = true;
-    
-    private bool isStrafing;
+    #region Public Fields
 
-    private float gravityAmount = -20;
-    private Vector3 gravity;
+    public static bool canMove = true;
+    public event Action onGameOver;
+
+    #endregion
+
+    #region Private Variables
 
     private Animator animator;
     private CharacterController characterController;
@@ -20,28 +24,103 @@ public class PlayerController : MonoBehaviour
     private UI_manager ui;
     private AudioManager am;
 
-    [SerializeField] public float speed = 5f;               // уточнить
+    private Vector3 gravity;
+    private float gravityAmount = -20;
+    [SerializeField] public float speed = 5f;
     [SerializeField] private float strafeSpeed = 6;
     [SerializeField] private float acceleration = 1;
     [SerializeField] private float maxSpeed = 20;
-    
-    public event Action onGameOver;
-
     [SerializeField] private int health = 3;
     [SerializeField] private int bulletAmount = 3;
-    private bool canShoot = true;
-
     private Transform generatedBullets;
-    
-    private static readonly int Blend = Animator.StringToHash("Blend");
-
     private WeaponManager weaponManager;
+    private static readonly int Blend = Animator.StringToHash("Blend");
+    private bool canShoot = true;
+    private bool isFiring = false;
+    private float horizontalInput;
 
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
+    
+    #endregion
+
+    #region Private Methods
+
+    #if UNITY_5_4_OR_NEWER
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+    {
+        this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+    #endif
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
+
+    #if !UNITY_5_4_OR_NEWER
+    /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
+    void OnLevelWasLoaded(int level)
+    {
+    this.CalledOnLevelWasLoaded(level);
+    }
+    #endif
+
+
+    void CalledOnLevelWasLoaded(int level)
+    {
+        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f, 5f, 0f);
+        }
+    }
+
+#if UNITY_5_4_OR_NEWER
+    public void OnDisable()
+    {
+        // Always call the base to remove callbacks
+        //base.OnDisable ();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+#endif
+    
+    #endregion
+    
+    #region IPunObservable implementation
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(isFiring);
+            stream.SendNext(health);
+        }
+        else
+        {
+            // Network player, receive data
+            this.isFiring = (bool)stream.ReceiveNext();
+            this.health = (int)stream.ReceiveNext();
+        }
+    }
+
+    #endregion
+    
     private void Awake()
     {
         CreateBulletsContainer();
 
         SetManagers();
+        
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = this.gameObject;
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -54,29 +133,75 @@ public class PlayerController : MonoBehaviour
         ui.UpdateBulletsText(bulletAmount);
         ui.UpdateHealttext(health);
         
-        canMove = false;
+        
+        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+
+        if (_cameraWork != null)
+        {
+            if (photonView.IsMine)
+            {
+                _cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        }
+        
+        #if UNITY_5_4_OR_NEWER
+        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        #endif
+        
+        canMove = true;
     }
 
 
     private void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) 
+            return;
+
         if (transform.position.y < -4)
         {
             onGameOver?.Invoke();
         }
-        
+
+        if (health < 1f)
+        {
+            GameManager.instance.LeaveRoom();
+        }
+
         if (!canMove)
             return;
-        
+
         weaponManager.OnUpdate();
-        
-        float horizontalInput = Input.GetAxis("Horizontal");
 
-        ProcessAnimation(horizontalInput);
-        ProcessShoot();
+        if (photonView.IsMine)
+        {
+            ProcessInputs();
 
-        SpeedControl();
-        Move(horizontalInput);
+            ProcessAnimation(horizontalInput);
+            ProcessShoot();
+
+            SpeedControl();
+            Move(horizontalInput);
+        }
+    }
+
+    
+    private void ProcessInputs()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (canShoot && bulletAmount > 0)
+            {
+                isFiring = true;
+            }
+        }
     }
 
     private void SetManagers()
@@ -98,13 +223,12 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessShoot()
     {
-        if (Input.GetMouseButton(0))
+        if (isFiring)
         {
-            if (canShoot && bulletAmount > 0)
-            {
-                StartCoroutine(Shoot());
-            }
+            isFiring = false;
+            StartCoroutine(Shoot());
         }
+        
     }
 
     private void ProcessAnimation(float horizontalInput)
@@ -131,13 +255,12 @@ public class PlayerController : MonoBehaviour
         
         canShoot = false;
         yield return new WaitForSeconds(0.3f);
-        //yield return null;
         canShoot = true;
     }
 
     private void Move(float horizontalInput)
     {
-        Vector3 moveDir = transform.right * horizontalInput * strafeSpeed + transform.forward * speed;
+        Vector3 moveDir = transform.right * (horizontalInput * strafeSpeed) + transform.forward * speed;
         characterController.Move(moveDir * Time.deltaTime);
 
         gravity.y += gravityAmount * Time.deltaTime;
@@ -168,10 +291,15 @@ public class PlayerController : MonoBehaviour
     private void StartDeathRoutine()
     {
         canMove = false;
+        animator.SetTrigger("dead");
+        am.PlayLoseSFX();
     }
     
     private void OnTriggerEnter(Collider other)
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) 
+            return;
+        
         CheckForObstacle(other);
         CheckForBulletBonus(other);
         CheckForCrossBends(other);
@@ -181,7 +309,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            if (health > 0)
+            if (health >= 1)
             {
                 health--;
                 ui.UpdateHealttext(health);
@@ -190,8 +318,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 onGameOver?.Invoke();
-                animator.SetTrigger("dead");
-                am.PlayLoseSFX();
             }
         }
     }
@@ -204,8 +330,8 @@ public class PlayerController : MonoBehaviour
 
             bulletAmount++;
 
-            // if (bulletAmount > 30) 
-            //     bulletAmount = 30;
+            if (bulletAmount > 30) 
+                bulletAmount = 30;
 
             ui.UpdateBulletsText(bulletAmount);
             PoolManager.Return(other.gameObject.GetComponent<PoolItem>());

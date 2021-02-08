@@ -15,7 +15,56 @@ namespace Com.MyCompany.MyGame
         internal int score;
         internal bool isBestScore;
         private int bestScore;
+        
+        [Tooltip("The prefab to use for representing the player")]
+        public GameObject playerPrefab;
+        
 
+
+
+        private void Awake()
+        {
+            if (!instance)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+
+        }
+
+        private void Start()
+        {
+            //PlayerPrefs.SetInt("Coins", 0);
+            bestScore = PlayerPrefs.GetInt("Coins", 0);
+            score = 0;
+            
+            if (playerPrefab == null)
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'",this);
+            }
+            else
+            {
+                if (PlayerController.LocalPlayerInstance == null)
+                {
+                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 10f), Quaternion.identity, 0);
+
+                    playerController = playerPrefab.GetComponent<PlayerController>();
+                }
+                else
+                {
+                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                }
+            }
+
+            //Time.timeScale = 0;  // нельзя использовать в мультиплеере
+            
+            //OnHome();
+        }
 
         #region Photon Callbacks
 
@@ -92,31 +141,6 @@ namespace Com.MyCompany.MyGame
 
 
         #endregion
-        
-        
-        private void Awake()
-        {
-            if (!instance)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
-
-            playerController = FindObjectOfType<PlayerController>();
-        }
-
-        private void Start()
-        {
-            //PlayerPrefs.SetInt("Coins", 0);
-            bestScore = PlayerPrefs.GetInt("Coins", 0);
-            score = 0;
-
-            //Time.timeScale = 0;
-            //OnHome();
-        }
 
         public void OnHome()
         {
