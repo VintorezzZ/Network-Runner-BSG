@@ -54,8 +54,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SingleplayerLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scripts/Launcher.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UI_manager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Launcher.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -105,7 +105,7 @@
       <workItem from="1612424596556" duration="17313000" />
       <workItem from="1612451783214" duration="8485000" />
       <workItem from="1612509741915" duration="34081000" />
-      <workItem from="1612776996058" duration="10022000" />
+      <workItem from="1612776996058" duration="11819000" />
     </task>
     <servers />
   </component>

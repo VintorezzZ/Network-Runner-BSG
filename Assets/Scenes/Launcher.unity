@@ -323,8 +323,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1930168533}
-        m_TargetAssemblyTypeName: Photon.Pun.Demo.PunBasics.Launcher, PhotonUnityNetworking.Demos
+      - m_Target: {fileID: 1930168531}
+        m_TargetAssemblyTypeName: Com.MyCompany.MyGame.Launcher, Assembly-CSharp
         m_MethodName: Connect
         m_Mode: 1
         m_Arguments:
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930168530}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f40eb28acc19ae944aadc2ddc723b9e5, type: 3}
   m_Name: 
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930168530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4796bc1963eb34e1fa021b0a45b29df4, type: 3}
   m_Name: 
