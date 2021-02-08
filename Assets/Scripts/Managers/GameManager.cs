@@ -114,7 +114,7 @@ namespace Com.MyCompany.MyGame
             bestScore = PlayerPrefs.GetInt("Coins", 0);
             score = 0;
 
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             //OnHome();
         }
 
