@@ -35,6 +35,8 @@ public class RoomController : MonoBehaviour
             myPlayer.canMove = true;
             timerStarted = false;
             time = 0;
+            Debug.LogError("Time Out");
+
         }
     }
 
@@ -81,6 +83,8 @@ public class RoomController : MonoBehaviour
 
     private void OnGUI()
     {
+        GUILayout.BeginHorizontal();
+
         GUILayout.BeginVertical();
         foreach(var player in PhotonNetwork.CurrentRoom.Players)
         {
@@ -111,9 +115,18 @@ public class RoomController : MonoBehaviour
             {
                 StartGame();
             }
-        }
+        }  
 
         GUILayout.EndVertical();
+
+
+        if (timerStarted)
+        {
+            GUILayout.Label((time - PhotonNetwork.Time).ToString());
+
+        }
+
+        GUILayout.EndHorizontal();
 
     }
 
