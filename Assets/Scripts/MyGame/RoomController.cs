@@ -13,6 +13,10 @@ public class RoomController : MonoBehaviour
     private HashSet<string> _readyUsers = new HashSet<string>();
 
     private bool _canStartGame = false;
+    private bool timerStarted;
+    private double time;
+
+    public PlayerController myPlayer;
     private void Awake()
     {
         instance = this;
@@ -25,6 +29,13 @@ public class RoomController : MonoBehaviour
         {
             _canStartGame = PhotonNetwork.CurrentRoom.Players.Count <= _readyUsers.Count;
         }
+
+        if (timerStarted && PhotonNetwork.Time >= time)
+        {
+            myPlayer.canMove = true;
+            timerStarted = false;
+            time = 0;
+        }
     }
 
     private void OnDestroy()
@@ -35,13 +46,16 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
-        _photonView.RPC("StartGameRpc", RpcTarget.All);
+        _photonView.RPC("StartGameRpc", RpcTarget.All, PhotonNetwork.Time + 3f);
     }
 
 
     [PunRPC]
-    private void StartGameRpc()
+    private void StartGameRpc(double startTime)
     {
+        timerStarted = true;
+        time = startTime;
+        
         Debug.LogError("Start Game RPC");
     }
 

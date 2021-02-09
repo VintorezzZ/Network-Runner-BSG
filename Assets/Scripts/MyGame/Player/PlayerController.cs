@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 {
     #region Public Fields
 
-    public static bool canMove = true;
+    public bool canMove = true;
     public event Action onGameOver;
 
     #endregion
@@ -116,7 +116,8 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine)
         {
-            LocalPlayerInstance = this.gameObject;
+            LocalPlayerInstance = this.gameObject;  // убрать 
+            RoomController.instance.myPlayer = this;
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
@@ -154,7 +155,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         #endif
         
-        canMove = true;
+        canMove = false;
     }
 
 
@@ -175,6 +176,8 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
             if (!canMove)
                 return;
 
+            
+            
             weaponManager.OnUpdate();
 
         
@@ -188,7 +191,6 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         }
     }
 
-    
     private void ProcessInputs()
     {
         horizontalInput = Input.GetAxis("Horizontal");

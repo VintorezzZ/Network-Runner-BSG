@@ -75,7 +75,7 @@ public class UI_manager : MonoBehaviour
     {
         restart.SetActive(false);
         whilePlay.SetActive(true);
-        PlayerController.canMove = true;
+        //PlayerController.canMove = true;
         home.SetActive(false);
     }
 
