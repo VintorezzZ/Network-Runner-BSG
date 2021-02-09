@@ -3350,7 +3350,7 @@ MonoBehaviour:
   RoomListEntryPrefab: {fileID: 114706, guid: 03c5e15309335324fba99d68e38cb08b, type: 3}
   InsideRoomPanel: {fileID: 1370510199}
   StartGameButton: {fileID: 800069350}
-  PlayerListEntryPrefab: {fileID: 195212, guid: d68bf8413681d9b4aa7328277e632e3f, type: 3}
+  PlayerListEntryPrefab: {fileID: 5400434787266214843, guid: f7c2c871468dfbd4da7c5c8ff62be668, type: 3}
 --- !u!222 &1310044698
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3668,8 +3668,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1310044697}
         m_TargetAssemblyTypeName: Com.MyCompany.MyGame.MyLobbyMainPanel, Assembly-CSharp
-        m_MethodName: OnCreateRoomButtonClicked
-        m_Mode: 1
+        m_MethodName: SetActivePanel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
