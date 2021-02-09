@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using Photon.Pun;
 
@@ -17,10 +19,20 @@ public class RoomController : MonoBehaviour
     private double time;
 
     public PlayerController myPlayer;
+
+    private CinemachineVirtualCamera _camera;
     private void Awake()
     {
         instance = this;
         _photonView = GetComponent<PhotonView>();
+
+        _camera = FindObjectOfType<CinemachineVirtualCamera>();
+    }
+
+    private void Start()
+    {
+        _camera.Follow = myPlayer.transform;
+        _camera.LookAt = myPlayer.transform;
     }
 
     private void Update()
