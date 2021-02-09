@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MultiplayerLoader : MonoBehaviour
+public class LobbyLoader : MonoBehaviour
 {
     private Button button;
     void Start()
@@ -15,6 +15,6 @@ public class MultiplayerLoader : MonoBehaviour
 
     private void LoadMultiplayer()
     {
-        SceneManager.LoadScene("Launcher");
+        SceneManager.LoadScene("MyLobbyScene");
     }
 }

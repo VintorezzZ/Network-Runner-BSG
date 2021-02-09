@@ -11,14 +11,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolContainer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MultiplayerLoader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LobbyLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerNameInputField.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/IPoolObservable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolType.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pool/PoolItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/MyRunnerGame.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Launcher.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -47,7 +42,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Shell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MultiplayerLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerNameInputField.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/Guns/RPG.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SingleplayerLoader.cs" />
@@ -57,6 +51,19 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAnimatorManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MultiplayerLoader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/LobbyMainPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/LobbyTopPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyLobbyTopPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/PlayerListEntry.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/MyRunnerGame.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyPlayerListEntry.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/RoomListEntry.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyRoomListEntry.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyLobbyMainPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LobbyLoader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -108,6 +115,7 @@
       <workItem from="1612509741915" duration="34081000" />
       <workItem from="1612776996058" duration="11819000" />
       <workItem from="1612802071422" duration="8877000" />
+      <workItem from="1612855795775" duration="4078000" />
     </task>
     <servers />
   </component>

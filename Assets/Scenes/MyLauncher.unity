@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 570501736}
   - component: {fileID: 570501735}
   - component: {fileID: 570501734}
+  - component: {fileID: 570501737}
   m_Layer: 5
   m_Name: Play MP Button
   m_TagString: Untagged
@@ -322,19 +323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 570501735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1930168531}
-        m_TargetAssemblyTypeName: Com.MyCompany.MyGame.Launcher, Assembly-CSharp
-        m_MethodName: Connect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &570501735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +362,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570501732}
   m_CullTransparentMesh: 1
+--- !u!114 &570501737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570501732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c1bf7f07dbf8241a9d20aca636a7f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &655489281
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +657,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.86381245, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.1981132, g: 0.18486395, b: 0.18222676, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1208,7 +1209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1930168532}
   - component: {fileID: 1930168531}
-  - component: {fileID: 1930168533}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -1245,22 +1245,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1930168533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930168530}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4796bc1963eb34e1fa021b0a45b29df4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlPanel: {fileID: 19613051}
-  feedbackText: {fileID: 1955255643}
-  maxPlayersPerRoom: 4
-  loaderAnime: {fileID: 0}
 --- !u!1 &1955255641
 GameObject:
   m_ObjectHideFlags: 0

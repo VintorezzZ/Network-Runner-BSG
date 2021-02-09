@@ -160,26 +160,24 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) 
-            return;
-
-        if (transform.position.y < -4)
-        {
-            onGameOver?.Invoke();
-        }
-
-        if (health < 1f)
-        {
-            GameManager.instance.LeaveRoom();
-        }
-
-        if (!canMove)
-            return;
-
-        weaponManager.OnUpdate();
-
         if (photonView.IsMine)
         {
+            if (transform.position.y < -4)
+            {
+                onGameOver?.Invoke();
+            }
+
+            if (health < 1f)
+            {
+                GameManager.instance.LeaveRoom();
+            }
+
+            if (!canMove)
+                return;
+
+            weaponManager.OnUpdate();
+
+        
             ProcessInputs();
 
             ProcessAnimation(horizontalInput);
@@ -297,12 +295,12 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) 
-            return;
-        
-        CheckForObstacle(other);
-        CheckForBulletBonus(other);
-        CheckForCrossBends(other);
+        if (photonView.IsMine)
+        {
+            CheckForObstacle(other);
+            CheckForBulletBonus(other);
+            CheckForCrossBends(other);
+        }
     }
 
     private void CheckForObstacle(Collider other)
