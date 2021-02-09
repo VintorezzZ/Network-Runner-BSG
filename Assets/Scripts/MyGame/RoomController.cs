@@ -92,16 +92,20 @@ public class RoomController : MonoBehaviour
             GUILayout.Label($"{player.Value.NickName}  {player.Value.UserId}   ");
 
             bool isReady = _readyUsers.Contains(player.Value.UserId);
-            string text = isReady ? "Unready" : "Ready";
             if (player.Value.UserId == PhotonNetwork.LocalPlayer.UserId)
             {
+                string text = isReady ? "Unready" : "Ready";
+
                 if (GUILayout.Button(text))
                 {
+
                     Ready(!isReady);
                 }
             }
             else
             {
+                string text = isReady ? "Ready" : "Unready";
+
                 GUILayout.Label(text);
             }
 
