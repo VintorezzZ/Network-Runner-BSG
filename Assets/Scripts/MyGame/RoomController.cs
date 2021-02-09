@@ -35,7 +35,7 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
-        _photonView.RPC("StartGame", RpcTarget.All);
+        _photonView.RPC("StartGameRpc", RpcTarget.All);
     }
 
 

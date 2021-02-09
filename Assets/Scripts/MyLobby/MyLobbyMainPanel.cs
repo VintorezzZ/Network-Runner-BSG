@@ -274,7 +274,7 @@ namespace Com.MyCompany.MyGame
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
 
-            PhotonNetwork.LoadLevel("Room for 1");
+            PhotonNetwork.LoadLevel("Gameplay");
         }
 
         #endregion

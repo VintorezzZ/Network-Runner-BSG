@@ -14,6 +14,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LobbyLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerNameInputField.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/MyRunnerGame.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/RoomController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Launcher.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -44,7 +45,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerNameInputField.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/Guns/RPG.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SingleplayerLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scripts/Launcher.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UI_manager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Launcher.cs" />
@@ -57,13 +57,15 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyLobbyTopPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/PlayerListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/MyRunnerGame.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyPlayerListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/RoomListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyRoomListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LobbyLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyPlayerListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyLobbyMainPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SingleplayerLoader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/RoomController.cs" />
       </list>
     </option>
   </component>
@@ -115,7 +117,7 @@
       <workItem from="1612509741915" duration="34081000" />
       <workItem from="1612776996058" duration="11819000" />
       <workItem from="1612802071422" duration="8877000" />
-      <workItem from="1612855795775" duration="4848000" />
+      <workItem from="1612855795775" duration="6471000" />
     </task>
     <servers />
   </component>

@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MyLauncher.unity
     guid: 53a3c738faba07941abd9a7b9b690fca
   - enabled: 1
-    path: Assets/Scenes/Room for 1.unity
+    path: Assets/Scenes/Gameplay.unity
     guid: 7bcd770a99ce5a345ae6a58123670479
-  - enabled: 1
-    path: Assets/Scenes/Room for 2.unity
-    guid: e18f8d8ce8876434f99be87b4800fcc2
   - enabled: 1
     path: Assets/Scenes/MyLobbyScene.unity
     guid: 6231ef2f9fceaec439d66bb09621128b

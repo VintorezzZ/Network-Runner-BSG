@@ -472,6 +472,7 @@
               <e p="TextureOffset.cs" t="Include" />
               <e p="WorldBuilder.cs" t="Include" />
             </e>
+            <e p="RoomController.cs" t="Include" />
             <e p="Weapons" t="Include">
               <e p="BaseWeapon.cs" t="Include" />
               <e p="Guns" t="Include">

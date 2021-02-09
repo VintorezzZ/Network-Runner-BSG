@@ -15,7 +15,7 @@ public class SingleplayerLoader : MonoBehaviour
 
     private void LoadSingleplayer()
     {
-        SceneManager.LoadScene("Gameplay for 1");
+        SceneManager.LoadScene("Gameplay");
     }
 
 }
