@@ -67,6 +67,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/UI_manager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/RoomController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/WorldBuilder.cs" />
       </list>
     </option>
   </component>
@@ -118,7 +119,7 @@
       <workItem from="1612509741915" duration="34081000" />
       <workItem from="1612776996058" duration="11819000" />
       <workItem from="1612802071422" duration="8877000" />
-      <workItem from="1612855795775" duration="8145000" />
+      <workItem from="1612855795775" duration="9661000" />
     </task>
     <servers />
   </component>

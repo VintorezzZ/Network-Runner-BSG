@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using Photon.Pun;
+using Random = UnityEngine.Random;
 
 public class RoomController : MonoBehaviour
 {
@@ -60,16 +61,17 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
-        _photonView.RPC("StartGameRpc", RpcTarget.All, PhotonNetwork.Time + 3f);
+        _photonView.RPC("StartGameRpc", RpcTarget.All, PhotonNetwork.Time + 3f, Random.Range(0, 101));
     }
 
 
     [PunRPC]
-    private void StartGameRpc(double startTime)
+    private void StartGameRpc(double startTime, int randomSeed)
     {
         timerStarted = true;
         time = startTime;
-        
+
+        WorldBuilder.instance.Seed = randomSeed;
         Debug.LogError("Start Game RPC");
     }
 

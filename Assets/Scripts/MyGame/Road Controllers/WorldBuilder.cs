@@ -6,11 +6,14 @@ using Random = UnityEngine.Random;
 
 public class WorldBuilder : MonoBehaviour
 {
+    public static WorldBuilder instance;
     private Transform _lastPlatform = null;
 
     private bool _isObstacle;
     private bool _isCross;
-    
+
+    public int Seed { get; set; }
+
     private void OnEnable()
     {
         Destroyer.onRoadEnds += CreatePlatform;
@@ -23,6 +26,11 @@ public class WorldBuilder : MonoBehaviour
         Destroyer.onRoadEnds -= ReturnToPool;
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         Init();
@@ -30,6 +38,8 @@ public class WorldBuilder : MonoBehaviour
 
     public void Init()
     {
+        Random.InitState(Seed);
+        
         CreateFreePlatform();
         CreateObstaclePlatform();
         CreateObstaclePlatform();
