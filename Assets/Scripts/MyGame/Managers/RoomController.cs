@@ -21,25 +21,23 @@ public class RoomController : MonoBehaviour
     private double _startTime;
     private double _countdown;
     [SerializeField] private Text timerText;
-
-
+    
     public PlayerController myPlayer;
 
     private CinemachineVirtualCamera _camera;
 
+    public void Init(PlayerController playerController)
+    {
+        myPlayer = playerController;
 
+        _camera = FindObjectOfType<CinemachineVirtualCamera>();
+        _camera.Follow = myPlayer.transform;
+        _camera.LookAt = myPlayer.transform;
+    }
     private void Awake()
     {
         instance = this;
         _photonView = GetComponent<PhotonView>();
-
-        _camera = FindObjectOfType<CinemachineVirtualCamera>();
-    }
-
-    private void Start()
-    {
-        _camera.Follow = myPlayer.transform;
-        _camera.LookAt = myPlayer.transform;
     }
 
     private void Update()

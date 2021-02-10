@@ -6,7 +6,7 @@ using UnityEngine;
 using GameManager = Com.MyCompany.MyGame.GameManager;
 using Object = UnityEngine.Object;
 
-public class PlayerController : MonoBehaviourPun, IPunObservable
+public class PlayerController : MonoBehaviourPun
 {
     #region Public Fields
 
@@ -40,9 +40,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
-    
-    private PhotonView _photonView;
-    
+
     #endregion
 
     #region Private Methods
@@ -87,47 +85,27 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     
     #endregion
     
-    #region IPunObservable implementation
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        // if (stream.IsWriting)
-        // {
-        //     // We own this player: send the others our data
-        //     stream.SendNext(isFiring);
-        //     stream.SendNext(health);
-        // }
-        // else
-        // {
-        //     // Network player, receive data
-        //     this.isFiring = (bool)stream.ReceiveNext();
-        //     this.health = (int)stream.ReceiveNext();
-        // }
-    }
-
-    #endregion
-    
     private void Awake()
     {
-        _photonView = GetComponent<PhotonView>();
+        //_photonView = GetComponent<PhotonView>();
 
         CreateBulletsContainer();
         SetManagers();
-        
-        // #Important
-        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
-        if (_photonView.IsMine)
-        {
-            LocalPlayerInstance = this.gameObject;  // убрать 
-            RoomController.instance.myPlayer = this;
-        }
-        // #Critical
-        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        //DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = this.gameObject;  // убрать 
+            RoomController.instance.Init(this);
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        //DontDestroyOnLoad(this.gameObject);
+        
         onGameOver += gm.OnGameOver;
         onGameOver += StartDeathRoutine;
         characterController = gameObject.GetComponent<CharacterController>();
@@ -147,7 +125,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (_photonView.IsMine)
+        if (photonView.IsMine)
         {
             if (transform.position.y < -4)
                 onGameOver?.Invoke();
@@ -177,9 +155,8 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             if (canShoot && bulletAmount > 0)
             {
-                //isFiring = true;
-                
-                _photonView.RPC("ProcessShoot", RpcTarget.AllViaServer);
+                StartCoroutine(Shoot());
+                photonView.RPC("ProcessShoot", RpcTarget.Others);
             }
         }
     }
@@ -204,14 +181,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     [PunRPC]
     private void ProcessShoot()
     {
-        // if (isFiring)
-        // {
-        //     isFiring = false;
-        //     StartCoroutine(Shoot());
-        // }
-        
-        StartCoroutine(Shoot());
-        
+        weaponManager.Shoot();
     }
 
     private void ProcessAnimation(float horizontalInput)
@@ -228,7 +198,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         if (speed > maxSpeed)
             speed = maxSpeed;
     }
-
+    
     private IEnumerator Shoot()
     {
         weaponManager.Shoot();
@@ -280,7 +250,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     
     private void OnTriggerEnter(Collider other)
     {
-        if (_photonView.IsMine)
+        if (photonView.IsMine)
         {
             CheckForObstacle(other);
             CheckForBulletBonus(other);

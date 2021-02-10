@@ -4828,8 +4828,8 @@ GameObject:
   - component: {fileID: 6818908831965935279}
   - component: {fileID: 6818908830941468443}
   - component: {fileID: 6818908831965935264}
+  - component: {fileID: -2794692901901377974}
   - component: {fileID: 2931185499205261713}
-  - component: {fileID: 7463491142793712929}
   - component: {fileID: 6818908830941468442}
   m_Layer: 8
   m_Name: Player
@@ -4911,6 +4911,18 @@ MonoBehaviour:
   maxSpeed: 20
   health: 10
   bulletAmount: 30
+--- !u!114 &-2794692901901377974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824829187514955151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb5c67a8b62bfd4095c12d05b11b8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2931185499205261713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4930,28 +4942,10 @@ MonoBehaviour:
   Synchronization: 2
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 6818908831965935264}
-  - {fileID: 7463491142793712929}
   - {fileID: 6818908830941468442}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7463491142793712929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824829187514955151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &6818908830941468442
 MonoBehaviour:
   m_ObjectHideFlags: 0

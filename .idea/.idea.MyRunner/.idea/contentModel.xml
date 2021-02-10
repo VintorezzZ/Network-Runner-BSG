@@ -76,6 +76,7 @@
             </e>
           </e>
         </e>
+        <e p="ExitApp.cs" t="Include" />
         <e p="Photon" t="Include">
           <e p="PhotonChat" t="Include">
             <e p="Code" t="Include">
@@ -280,6 +281,7 @@
               <e p="LineCreator.cs" t="Include" />
               <e p="LobbyLoader.cs" t="Include" />
               <e p="Obstacle.cs" t="Include" />
+              <e p="PhotonSynchronization.cs" t="Include" />
               <e p="SingleplayerLoader.cs" t="Include" />
             </e>
             <e p="Player" t="Include">

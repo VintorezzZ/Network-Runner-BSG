@@ -11,7 +11,10 @@ public class Destroyer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Invoke(nameof(ActivateEvent), 1);
+            if (other.GetComponent<PlayerController>().photonView.IsMine)
+            {
+                Invoke(nameof(ActivateEvent), 1);
+            }
         }
     }
 
