@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 public class WorldBuilder : MonoBehaviour
 {
@@ -11,7 +11,8 @@ public class WorldBuilder : MonoBehaviour
 
     private bool _isObstacle;
     private bool _isCross;
-    
+
+    private Random _random;
     private void OnEnable()
     {
         Destroyer.onRoadEnds += CreatePlatform;
@@ -31,7 +32,7 @@ public class WorldBuilder : MonoBehaviour
 
     public void Init(int seed)
     {
-        Random.InitState(seed);
+        _random = new Random(seed);
         
         CreateFreePlatform();
         CreateObstaclePlatform();
@@ -51,7 +52,7 @@ public class WorldBuilder : MonoBehaviour
             CreateObstaclePlatform();
         else
         {
-            if (Random.value <= 0.5f)
+            if (_random.Next(0, 100) <= 50f)
                 CreateCrossPlatform();
             else
                 CreateObstaclePlatform();
@@ -79,7 +80,7 @@ public class WorldBuilder : MonoBehaviour
     {
         CreateBasePlatform(PoolType.RoadStraight);
         
-        _lastPlatform.GetComponent<RoadBlockController>().GenerateObstacles();
+        _lastPlatform.GetComponent<RoadBlockController>().GenerateObstacles(_random.Next());
         
         _isObstacle = true;
         _isCross = false;
@@ -87,7 +88,7 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateCrossPlatform()
     {
-        CreateBasePlatform(Random.value <= 0.5f ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
+        CreateBasePlatform(_random.Next(0, 100) <= 50f ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
 
         _isCross = true;
         _isObstacle = false;
