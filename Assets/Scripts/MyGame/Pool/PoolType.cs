@@ -1,10 +1,12 @@
 public enum PoolType
 {
-    Rockets,
-    Decals,
-    RoadBend,
     RoadStraight,
+    RoadBendLeft,
+    RoadBendRight,
     Obstacles,
     Bonuses,
-    ExplosionsFX
+    Rockets,
+    Decals,
+    ExplosionsFX,
+
 }

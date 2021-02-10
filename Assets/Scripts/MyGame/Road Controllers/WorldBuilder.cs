@@ -94,8 +94,8 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateCrossPlatform()
     {
-        CreateBasePlatform(PoolType.RoadBend);
-        
+        CreateBasePlatform(Random.Range(0, 101) <= 50 ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
+
         _isCross = true;
         _isObstacle = false;
     }

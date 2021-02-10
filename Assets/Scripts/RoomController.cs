@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class RoomController : MonoBehaviour
@@ -16,12 +17,17 @@ public class RoomController : MonoBehaviour
     private HashSet<string> _readyUsers = new HashSet<string>();
 
     private bool _canStartGame = false;
-    private bool timerStarted;
-    private double time;
+    private bool _timerStarted;
+    private double _startTime;
+    private double _countdown;
+    [SerializeField] private Text timerText;
+
 
     public PlayerController myPlayer;
 
     private CinemachineVirtualCamera _camera;
+
+
     private void Awake()
     {
         instance = this;
@@ -43,14 +49,27 @@ public class RoomController : MonoBehaviour
             _canStartGame = PhotonNetwork.CurrentRoom.Players.Count <= _readyUsers.Count;
         }
 
-        if (timerStarted && PhotonNetwork.Time >= time)
+        if (_timerStarted)
         {
-            myPlayer.canMove = true;
-            timerStarted = false;
-            time = 0;
-            Debug.LogError("Time Out");
-
+            double countdown = _startTime - PhotonNetwork.Time;
+            timerText.text = $"Game starts in {countdown:n0} seconds";
+            
         }
+        
+        if (_timerStarted && PhotonNetwork.Time >= _startTime)
+        {
+            OnTimerEnds();
+        }
+    }
+
+    private void OnTimerEnds()
+    {
+        myPlayer.canMove = true;
+        _timerStarted = false;
+        _startTime = 0;
+        timerText.text = string.Empty;
+        Debug.LogError("Time Out");
+
     }
 
     private void OnDestroy()
@@ -66,10 +85,10 @@ public class RoomController : MonoBehaviour
 
 
     [PunRPC]
-    private void StartGameRpc(double startTime, int randomSeed)
+    private void StartGameRpc(double time, int randomSeed)
     {
-        timerStarted = true;
-        time = startTime;
+        _timerStarted = true;
+        _startTime = time;
 
         WorldBuilder.instance.Seed = randomSeed;
         Debug.LogError("Start Game RPC");
@@ -138,9 +157,9 @@ public class RoomController : MonoBehaviour
         GUILayout.EndVertical();
 
 
-        if (timerStarted)
+        if (_timerStarted)
         {
-            GUILayout.Label((time - PhotonNetwork.Time).ToString());
+            GUILayout.Label((_startTime - PhotonNetwork.Time).ToString());
 
         }
 
