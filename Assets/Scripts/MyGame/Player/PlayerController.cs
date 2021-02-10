@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     
+    private PhotonView _photonView;
+    
     #endregion
 
     #region Private Methods
@@ -90,31 +92,32 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            stream.SendNext(isFiring);
-            stream.SendNext(health);
-        }
-        else
-        {
-            // Network player, receive data
-            this.isFiring = (bool)stream.ReceiveNext();
-            this.health = (int)stream.ReceiveNext();
-        }
+        // if (stream.IsWriting)
+        // {
+        //     // We own this player: send the others our data
+        //     stream.SendNext(isFiring);
+        //     stream.SendNext(health);
+        // }
+        // else
+        // {
+        //     // Network player, receive data
+        //     this.isFiring = (bool)stream.ReceiveNext();
+        //     this.health = (int)stream.ReceiveNext();
+        // }
     }
 
     #endregion
     
     private void Awake()
     {
-        CreateBulletsContainer();
+        _photonView = GetComponent<PhotonView>();
 
+        CreateBulletsContainer();
         SetManagers();
         
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
-        if (photonView.IsMine)
+        if (_photonView.IsMine)
         {
             LocalPlayerInstance = this.gameObject;  // убрать 
             RoomController.instance.myPlayer = this;
@@ -133,27 +136,11 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         
         ui.UpdateBulletsText(bulletAmount);
         ui.UpdateHealttext(health);
-        
-        
-        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
 
-
-        if (_cameraWork != null)
-        {
-            if (photonView.IsMine)
-            {
-                _cameraWork.OnStartFollowing();
-            }
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
-        
-        #if UNITY_5_4_OR_NEWER
+#if UNITY_5_4_OR_NEWER
         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-        #endif
+#endif
         
         canMove = false;
     }
@@ -161,30 +148,22 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (photonView.IsMine)
+        if (_photonView.IsMine)
         {
             if (transform.position.y < -4)
-            {
                 onGameOver?.Invoke();
-            }
 
             if (health < 1f)
-            {
                 GameManager.instance.LeaveRoom();
-            }
 
             if (!canMove)
                 return;
 
-            
-            
             weaponManager.OnUpdate();
-
         
             ProcessInputs();
 
             ProcessAnimation(horizontalInput);
-            ProcessShoot();
 
             SpeedControl();
             Move(horizontalInput);
@@ -199,7 +178,9 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             if (canShoot && bulletAmount > 0)
             {
-                isFiring = true;
+                //isFiring = true;
+                
+                _photonView.RPC("ProcessShoot", RpcTarget.AllViaServer);
             }
         }
     }
@@ -221,13 +202,16 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
     }
 
+    [PunRPC]
     private void ProcessShoot()
     {
-        if (isFiring)
-        {
-            isFiring = false;
-            StartCoroutine(Shoot());
-        }
+        // if (isFiring)
+        // {
+        //     isFiring = false;
+        //     StartCoroutine(Shoot());
+        // }
+        
+        StartCoroutine(Shoot());
         
     }
 
@@ -297,7 +281,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
+        if (_photonView.IsMine)
         {
             CheckForObstacle(other);
             CheckForBulletBonus(other);
