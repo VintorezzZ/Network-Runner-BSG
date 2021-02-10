@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class WeaponManager
 {
-    public static Transform gunHolder;
-    public static Transform RayCastPoint;
+    private Transform gunHolder;
+    private Transform RayCastPoint;
     
     private BaseWeapon currentWeapon;
     private string previousWeaponName;
@@ -13,8 +13,8 @@ public class WeaponManager
     private bool timerStarted = false;
     public WeaponManager(Transform gunHolder, Transform RayCastPoint)
     {
-        WeaponManager.gunHolder = gunHolder;
-        WeaponManager.RayCastPoint = RayCastPoint;
+        this.gunHolder = gunHolder;
+        this.RayCastPoint = RayCastPoint;
     }
 
     public void Init()
@@ -38,7 +38,7 @@ public class WeaponManager
 
     private void SetWeaponSettings(BaseWeapon weapon)
     {
-        weapon.Init();
+        weapon.Init(RayCastPoint);
         weapon.transform.SetParent(gunHolder);
         weapon.transform.position = gunHolder.position;
         weapon.transform.rotation = gunHolder.rotation;

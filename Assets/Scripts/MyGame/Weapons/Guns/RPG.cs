@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class RPG : BaseWeapon
 {
-    public override void Init()
+    public override void Init(Transform rayCastPoint)
     {
-        base.Init();
+        base.Init(rayCastPoint);
     }
 
     public override void Shoot()

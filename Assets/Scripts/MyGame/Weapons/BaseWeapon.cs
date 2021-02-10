@@ -7,11 +7,11 @@ public class BaseWeapon : MonoBehaviour
 {
     protected RaycastHit hit;
     protected const float RAY_DISTANCE = 30f;
-    protected Transform rayCastPoint = WeaponManager.RayCastPoint;
+    protected Transform rayCastPoint;
     protected Vector3 targetDirection;
-    public virtual void Init()
+    public virtual void Init(Transform rayCastPoint)
     {
-        
+        this.rayCastPoint = rayCastPoint;
     }
     public virtual void Shoot()
     {

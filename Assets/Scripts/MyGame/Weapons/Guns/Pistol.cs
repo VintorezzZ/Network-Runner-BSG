@@ -3,9 +3,9 @@ using UnityEngine;
 public class Pistol : BaseWeapon
 {
     private LineCreator lineCreator;
-    public override void Init()
+    public override void Init(Transform rayCastPoint)
     {
-        base.Init();
+        base.Init(rayCastPoint);
         lineCreator = GetComponent<LineCreator>();
     }
 

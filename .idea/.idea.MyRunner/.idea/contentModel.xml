@@ -265,20 +265,22 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Launcher.cs" t="Include" />
-          <e p="LobbyLoader.cs" t="Include" />
           <e p="MyGame" t="Include">
             <e p="Managers" t="Include">
               <e p="AudioManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
+              <e p="RoomController.cs" t="Include" />
               <e p="SwipeManager.cs" t="Include" />
               <e p="UI_manager.cs" t="Include" />
             </e>
             <e p="Other" t="Include">
               <e p="BladeRotator.cs" t="Include" />
               <e p="ButtonDownClick.cs" t="Include" />
+              <e p="Launcher.cs" t="Include" />
               <e p="LineCreator.cs" t="Include" />
+              <e p="LobbyLoader.cs" t="Include" />
               <e p="Obstacle.cs" t="Include" />
+              <e p="SingleplayerLoader.cs" t="Include" />
             </e>
             <e p="Player" t="Include">
               <e p="PlayerController.cs" t="Include" />
@@ -315,11 +317,9 @@
             <e p="MyLobbyTopPanel.cs" t="Include" />
             <e p="MyPlayerListEntry.cs" t="Include" />
             <e p="MyRoomListEntry.cs" t="Include" />
+            <e p="MyRunnerGame.cs" t="Include" />
+            <e p="PlayerNameInputField.cs" t="Include" />
           </e>
-          <e p="MyRunnerGame.cs" t="Include" />
-          <e p="PlayerNameInputField.cs" t="Include" />
-          <e p="RoomController.cs" t="Include" />
-          <e p="SingleplayerLoader.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
