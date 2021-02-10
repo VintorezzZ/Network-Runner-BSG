@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using GameManager = Com.MyCompany.MyGame.GameManager;
 using Object = UnityEngine.Object;
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     private WeaponManager weaponManager;
     private static readonly int Blend = Animator.StringToHash("Blend");
     private bool canShoot = true;
-    private bool isFiring = false;
+    //private bool isFiring = false;
     private float horizontalInput;
 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]

@@ -2,7 +2,6 @@
 using Photon.Realtime;
 using System.Collections.Generic;
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
