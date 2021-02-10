@@ -11,9 +11,7 @@ public class WorldBuilder : MonoBehaviour
 
     private bool _isObstacle;
     private bool _isCross;
-
-    public int Seed { get; set; }
-
+    
     private void OnEnable()
     {
         Destroyer.onRoadEnds += CreatePlatform;
@@ -31,14 +29,9 @@ public class WorldBuilder : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    public void Init(int seed)
     {
-        Init();
-    }
-
-    public void Init()
-    {
-        Random.InitState(Seed);
+        Random.InitState(seed);
         
         CreateFreePlatform();
         CreateObstaclePlatform();
@@ -58,7 +51,7 @@ public class WorldBuilder : MonoBehaviour
             CreateObstaclePlatform();
         else
         {
-            if (Random.Range(0, 101) < 50)
+            if (Random.value <= 0.5f)
                 CreateCrossPlatform();
             else
                 CreateObstaclePlatform();
@@ -94,7 +87,7 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateCrossPlatform()
     {
-        CreateBasePlatform(Random.Range(0, 101) <= 50 ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
+        CreateBasePlatform(Random.value <= 0.5f ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
 
         _isCross = true;
         _isObstacle = false;

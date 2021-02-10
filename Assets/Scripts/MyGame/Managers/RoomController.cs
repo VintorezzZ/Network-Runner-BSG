@@ -88,7 +88,7 @@ public class RoomController : MonoBehaviour
         _timerStarted = true;
         _startTime = time;
 
-        WorldBuilder.instance.Seed = randomSeed;
+        WorldBuilder.instance.Init(randomSeed);
         Debug.LogError("Start Game RPC");
     }
 
