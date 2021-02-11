@@ -4905,11 +4905,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  gunHolder: {fileID: 6818908830627183820}
+  rayCastPoint: {fileID: 6818908830578527745}
   speed: 10
   strafeSpeed: 6
   acceleration: 0.3
   maxSpeed: 20
-  health: 10
+  health: 1000
   bulletAmount: 30
 --- !u!114 &-2794692901901377974
 MonoBehaviour:

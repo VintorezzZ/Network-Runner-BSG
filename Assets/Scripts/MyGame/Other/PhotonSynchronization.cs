@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -5,7 +6,8 @@ using UnityEngine;
 
 public class PhotonSynchronization : MonoBehaviour, IPunObservable
 {
-    #region IPunObservable implementation
+    Vector3 receivedPosition = Vector3.zero;
+    Quaternion receivedRotation = Quaternion.identity;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -17,34 +19,30 @@ public class PhotonSynchronization : MonoBehaviour, IPunObservable
         }
         else
         {
-            // Network player, receive data
-            // Math.abs  Vector3.Dot(); если отлично от 1 или -1 
             
-            // receive all transfrom vectors from client
-            Vector3 receivedPosition = (Vector3)stream.ReceiveNext();
-            Vector3 position = transform.position;
-            
-            // check if z axis of player on one direction with world z axis
-            if (Mathf.Abs(Vector3.Dot(transform.forward, Vector3.forward)) == 1)   // comparison with float can lose value
-            {
-                // if true, sync copy z pos with client z poz
-                //position.z = 
-                Mathf.Lerp(position.x, receivedPosition.x, 10 * Time.deltaTime);
-                position.y = receivedPosition.y;
-            }
-            else
-            {
-                // if true, sync x poz with client x pos
-                //position.x = 
-                Mathf.Lerp(position.z, receivedPosition.z, 10 * Time.deltaTime);
-                position.y = receivedPosition.y;
-                
-            }
-            
-            //this.transform.position = 
-            this.transform.rotation = (Quaternion)stream.ReceiveNext();
+            receivedPosition = (Vector3)stream.ReceiveNext();
+            receivedRotation = (Quaternion)stream.ReceiveNext();
         }
     }
+  
+    private void Update()
+    {
+        if(GetComponent<PhotonView>().IsMine)
+            return;
+        
+        Vector3 tmpPos = transform.position;
+        tmpPos = Vector3.Lerp(tmpPos, receivedPosition, 10 * Time.deltaTime);
 
-    #endregion
+        transform.rotation = Quaternion.Lerp(transform.rotation, receivedRotation, 10 * Time.deltaTime);
+
+        if (Mathf.Abs(Vector3.Dot(RoomController.instance.myPlayer.transform.forward, Vector3.forward)).AlmostEquals(1f, 0.001f))   // comparison with float can lose value
+        {
+            tmpPos.z = RoomController.instance.myPlayer.transform.position.z;
+        }
+        else
+        {
+            tmpPos.x = RoomController.instance.myPlayer.transform.position.x;
+        }
+        transform.position = tmpPos;
+    }
 }

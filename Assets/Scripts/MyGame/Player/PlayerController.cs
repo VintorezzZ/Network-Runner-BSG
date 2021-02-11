@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviourPun
     #region Public Fields
 
     public bool canMove = true;
+
+    [SerializeField] private Transform gunHolder; 
+    [SerializeField] private Transform rayCastPoint;
+
     public event Action onGameOver;
 
     #endregion
@@ -35,7 +39,6 @@ public class PlayerController : MonoBehaviourPun
     private WeaponManager weaponManager;
     private static readonly int Blend = Animator.StringToHash("Blend");
     private bool canShoot = true;
-    //private bool isFiring = false;
     private float horizontalInput;
 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
@@ -87,8 +90,6 @@ public class PlayerController : MonoBehaviourPun
     
     private void Awake()
     {
-        //_photonView = GetComponent<PhotonView>();
-
         CreateBulletsContainer();
         SetManagers();
     }
@@ -166,9 +167,7 @@ public class PlayerController : MonoBehaviourPun
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
         am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
-        weaponManager = new WeaponManager(
-            GameObject.Find("GunHolder").transform, 
-            GameObject.Find("RayCastPoint").transform);
+        weaponManager = new WeaponManager(gunHolder, rayCastPoint);
         weaponManager.Init();
     }
 

@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 public class RoomController : MonoBehaviour
 {
-
     public static RoomController instance = null;
 
     private PhotonView _photonView = null;

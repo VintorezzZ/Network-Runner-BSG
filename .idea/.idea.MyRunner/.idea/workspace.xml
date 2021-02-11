@@ -62,11 +62,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Weapons/Guns/RPG.cs" />
         <option value="$PROJECT_DIR$/Assets/ExitApp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/Destroyer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/RoomController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/WorldBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/RoadBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Other/PhotonSynchronization.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/RoomController.cs" />
       </list>
     </option>
   </component>
@@ -129,7 +129,7 @@
       <workItem from="1612855795775" duration="9661000" />
       <workItem from="1612934678147" duration="8646000" />
       <workItem from="1612964988087" duration="9666000" />
-      <workItem from="1613024381525" duration="2607000" />
+      <workItem from="1613024381525" duration="9557000" />
     </task>
     <servers />
   </component>
