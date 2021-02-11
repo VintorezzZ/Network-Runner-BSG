@@ -1379,6 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f107507fb801584e8e7e6b46029561d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameStarted: 0
   timerText: {fileID: 850875232}
   myPlayer: {fileID: 0}
 --- !u!114 &920360792

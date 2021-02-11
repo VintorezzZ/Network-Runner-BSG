@@ -9,11 +9,11 @@ namespace Com.MyCompany.MyGame
     {
         public static GameManager instance;
 
-        [HideInInspector] public PlayerController playerController;
+        [HideInInspector] public PlayerController localPlayerController;
 
         internal int score;
         internal bool isBestScore;
-        private int bestScore;
+        private int _bestScore;
         
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
@@ -37,7 +37,7 @@ namespace Com.MyCompany.MyGame
         private void Start()
         {
             //PlayerPrefs.SetInt("Coins", 0);
-            bestScore = PlayerPrefs.GetInt("Coins", 0);
+            _bestScore = PlayerPrefs.GetInt("Coins", 0);
             score = 0;
             
             if (playerPrefab == null)
@@ -52,7 +52,7 @@ namespace Com.MyCompany.MyGame
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 10f), Quaternion.identity, 0);
 
-                    playerController = playerPrefab.GetComponent<PlayerController>();
+                    localPlayerController = playerPrefab.GetComponent<PlayerController>();
                 }
                 else
                 {
@@ -169,10 +169,10 @@ namespace Com.MyCompany.MyGame
 
         public void CalculateScore()
         {
-            if (score > bestScore)
+            if (score > _bestScore)
             {
-                bestScore = score;
-                PlayerPrefs.SetInt("Coins", bestScore);
+                _bestScore = score;
+                PlayerPrefs.SetInt("Coins", _bestScore);
                 isBestScore = true;
             }
         }

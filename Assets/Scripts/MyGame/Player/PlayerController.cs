@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using GameManager = Com.MyCompany.MyGame.GameManager;
-using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviourPun
 {
@@ -20,14 +18,14 @@ public class PlayerController : MonoBehaviourPun
     #endregion
 
     #region Private Variables
+    
+    private Animator _animator;
+    private CharacterController _characterController;
+    private GameManager _gm;
+    private UI_manager _ui;
+    private AudioManager _am;
 
-    private Animator animator;
-    private CharacterController characterController;
-    private GameManager gm;
-    private UI_manager ui;
-    private AudioManager am;
-
-    private Vector3 gravity;
+    private Vector3 _gravity;
     private float gravityAmount = -20;
     [SerializeField] public float speed = 5f;
     [SerializeField] private float strafeSpeed = 6;
@@ -35,11 +33,11 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] private float maxSpeed = 20;
     [SerializeField] private int health = 3;
     [SerializeField] private int bulletAmount = 3;
-    private Transform generatedBullets;
-    private WeaponManager weaponManager;
+    private Transform _generatedBullets;
+    private WeaponManager _weaponManager;
     private static readonly int Blend = Animator.StringToHash("Blend");
-    private bool canShoot = true;
-    private float horizontalInput;
+    private bool _canShoot = true;
+    private float _horizontalInput;
 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
@@ -58,16 +56,6 @@ public class PlayerController : MonoBehaviourPun
     #endregion
 
     #region MonoBehaviour Callbacks
-
-    #if !UNITY_5_4_OR_NEWER
-    /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
-    void OnLevelWasLoaded(int level)
-    {
-    this.CalledOnLevelWasLoaded(level);
-    }
-    #endif
-
-
     void CalledOnLevelWasLoaded(int level)
     {
         // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
@@ -107,13 +95,13 @@ public class PlayerController : MonoBehaviourPun
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
         //DontDestroyOnLoad(this.gameObject);
         
-        onGameOver += gm.OnGameOver;
+        onGameOver += _gm.OnGameOver;
         onGameOver += StartDeathRoutine;
-        characterController = gameObject.GetComponent<CharacterController>();
-        animator = gameObject.GetComponentInChildren<Animator>();
-        
-        ui.UpdateBulletsText(bulletAmount);
-        ui.UpdateHealttext(health);
+        _characterController = gameObject.GetComponent<CharacterController>();
+        _animator = gameObject.GetComponentInChildren<Animator>();
+
+        _ui.UpdateBulletsText(bulletAmount);
+        _ui.UpdateHealttext(health);
 
 #if UNITY_5_4_OR_NEWER
         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
@@ -137,24 +125,24 @@ public class PlayerController : MonoBehaviourPun
             if (!canMove)
                 return;
 
-            weaponManager.OnUpdate();
+            _weaponManager.OnUpdate();
         
             ProcessInputs();
 
-            ProcessAnimation(horizontalInput);
+            ProcessAnimation(_horizontalInput);
 
             SpeedControl();
-            Move(horizontalInput);
+            Move(_horizontalInput);
         }
     }
 
     private void ProcessInputs()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        _horizontalInput = Input.GetAxis("Horizontal");
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (canShoot && bulletAmount > 0)
+            if (_canShoot && bulletAmount > 0)
             {
                 StartCoroutine(Shoot());
                 photonView.RPC("ProcessShoot", RpcTarget.Others);
@@ -164,28 +152,28 @@ public class PlayerController : MonoBehaviourPun
 
     private void SetManagers()
     {
-        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
-        am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
-        weaponManager = new WeaponManager(gunHolder, rayCastPoint);
-        weaponManager.Init();
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        _ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
+        _am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
+        _weaponManager = new WeaponManager(gunHolder, rayCastPoint);
+        _weaponManager.Init();
     }
 
     private void CreateBulletsContainer()
     {
-        generatedBullets = new GameObject("generatedBullets").transform;
-        generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
+        _generatedBullets = new GameObject("generatedBullets").transform;
+        _generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
     }
 
     [PunRPC]
     private void ProcessShoot()
     {
-        weaponManager.Shoot();
+        _weaponManager.Shoot();
     }
 
     private void ProcessAnimation(float horizontalInput)
     {
-        animator.SetFloat(Blend, horizontalInput);
+        _animator.SetFloat(Blend, horizontalInput);
         
         CheckForAwesomeTrigger();
     }
@@ -200,23 +188,23 @@ public class PlayerController : MonoBehaviourPun
     
     private IEnumerator Shoot()
     {
-        weaponManager.Shoot();
+        _weaponManager.Shoot();
         
         bulletAmount--;
-        ui.UpdateBulletsText(bulletAmount);
+        _ui.UpdateBulletsText(bulletAmount);
         
-        canShoot = false;
+        _canShoot = false;
         yield return new WaitForSeconds(0.3f);
-        canShoot = true;
+        _canShoot = true;
     }
 
     private void Move(float horizontalInput)
     {
         Vector3 moveDir = transform.right * (horizontalInput * strafeSpeed) + transform.forward * speed;
-        characterController.Move(moveDir * Time.deltaTime);
+        _characterController.Move(moveDir * Time.deltaTime);
 
-        gravity.y += gravityAmount * Time.deltaTime;
-        characterController.Move(gravity * Time.deltaTime);
+        _gravity.y += gravityAmount * Time.deltaTime;
+        _characterController.Move(_gravity * Time.deltaTime);
     }
 
     private void CheckForAwesomeTrigger()
@@ -229,7 +217,7 @@ public class PlayerController : MonoBehaviourPun
         {
             if (hits[i].transform.CompareTag("AwesomeTrigger"))
             {
-                StartCoroutine(ui.ShowAwesomeText());
+                StartCoroutine(_ui.ShowAwesomeText());
                 AddCoins(50);
             }
         }
@@ -237,14 +225,14 @@ public class PlayerController : MonoBehaviourPun
 
     private void AddCoins(int amount)
     {
-        gm.score += amount;
+        _gm.score += amount;
     }
 
     private void StartDeathRoutine()
     {
         canMove = false;
-        animator.SetTrigger("dead");
-        am.PlayLoseSFX();
+        _animator.SetTrigger("dead");
+        _am.PlayLoseSFX();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -264,7 +252,7 @@ public class PlayerController : MonoBehaviourPun
             if (health >= 1)
             {
                 health--;
-                ui.UpdateHealttext(health);
+                _ui.UpdateHealttext(health);
                 PoolManager.Return(other.gameObject.GetComponentInParent<PoolItem>());
             }
             else
@@ -278,14 +266,14 @@ public class PlayerController : MonoBehaviourPun
     {
         if (other.CompareTag("Bullet"))
         {
-            weaponManager.SwitchWeapon("RPG7", 5f);
+            _weaponManager.SwitchWeapon("RPG7", 5f);
 
             bulletAmount++;
 
             if (bulletAmount > 30) 
                 bulletAmount = 30;
 
-            ui.UpdateBulletsText(bulletAmount);
+            _ui.UpdateBulletsText(bulletAmount);
             PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
         }
     }

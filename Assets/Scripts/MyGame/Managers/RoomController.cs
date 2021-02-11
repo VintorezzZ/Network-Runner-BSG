@@ -16,9 +16,9 @@ public class RoomController : MonoBehaviour
     private HashSet<string> _readyUsers = new HashSet<string>();
 
     private bool _canStartGame = false;
-    private bool _timerStarted;
+    private bool _timerStarted = false;
     private double _startTime;
-    private double _countdown;
+    public bool isGameStarted = false;
     [SerializeField] private Text timerText;
     
     public PlayerController myPlayer;
@@ -47,16 +47,17 @@ public class RoomController : MonoBehaviour
         }
 
         if (_timerStarted)
-        {
-            double countdown = _startTime - PhotonNetwork.Time;
-            timerText.text = $"Game starts in {countdown:n0} seconds";
-            
-        }
+            OnTimerStarts();
         
         if (_timerStarted && PhotonNetwork.Time >= _startTime)
-        {
             OnTimerEnds();
-        }
+        
+    }
+
+    private void OnTimerStarts()
+    {
+        double countdown = _startTime - PhotonNetwork.Time;
+        timerText.text = $"Game starts in {countdown:n0} seconds";
     }
 
     private void OnTimerEnds()
@@ -65,8 +66,7 @@ public class RoomController : MonoBehaviour
         _timerStarted = false;
         _startTime = 0;
         timerText.text = string.Empty;
-        Debug.LogError("Time Out");
-
+        //Debug.LogError("Time Out");
     }
 
     private void OnDestroy()
@@ -86,9 +86,10 @@ public class RoomController : MonoBehaviour
     {
         _timerStarted = true;
         _startTime = time;
-
+        isGameStarted = true;
+        
         WorldBuilder.instance.Init(randomSeed);
-        Debug.LogError("Start Game RPC");
+        //Debug.LogError("Start Game RPC");
     }
 
     public void Ready(bool val)
