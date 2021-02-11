@@ -64,10 +64,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/RoadBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Other/PhotonSynchronization.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModelsHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/RoomController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModelsHandler.cs" />
       </list>
     </option>
   </component>
@@ -132,7 +132,7 @@
       <workItem from="1612964988087" duration="9666000" />
       <workItem from="1613024381525" duration="9557000" />
       <workItem from="1613058546648" duration="197000" />
-      <workItem from="1613058921415" duration="4874000" />
+      <workItem from="1613058921415" duration="6172000" />
     </task>
     <servers />
   </component>

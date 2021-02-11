@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Com.MyCompany.MyGame;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
@@ -62,6 +63,7 @@ public class RoomController : MonoBehaviour
 
     private void OnTimerEnds()
     {
+        GameManager.instance.OnStart();
         myPlayer.canMove = true;
         _timerStarted = false;
         _startTime = 0;

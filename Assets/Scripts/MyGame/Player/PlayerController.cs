@@ -174,8 +174,11 @@ public class PlayerController : MonoBehaviourPun
     private void ProcessAnimation(float horizontalInput)
     {
         _animator.SetFloat(Blend, horizontalInput);
-        
-        CheckForAwesomeTrigger();
+
+        if (horizontalInput > 0.2f || horizontalInput < -0.2f)
+        {
+            CheckForAwesomeTrigger();
+        }
     }
 
 

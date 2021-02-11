@@ -18,9 +18,6 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
         
-
-
-
         private void Awake()
         {
             if (!instance)
