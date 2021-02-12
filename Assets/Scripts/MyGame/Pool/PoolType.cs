@@ -8,5 +8,6 @@ public enum PoolType
     Rockets,
     Decals,
     ExplosionsFX,
+    RoadGraphics
 
 }

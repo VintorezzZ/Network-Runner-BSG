@@ -389,6 +389,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602fef9ab505d4745bac41df105d1a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &281940975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 281940976}
+  - component: {fileID: 281940977}
+  m_Layer: 0
+  m_Name: RoadGraphics Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &281940976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281940975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1444426652}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281940977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281940975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b624e59f3b5140b0b3d166ed4f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 8
+  amount: 5
+  expandable: 1
+  examplePrefabs:
+  - {fileID: 4263216370747259034, guid: 87d5386fe96996846a58505de4e7031b, type: 3}
+  - {fileID: 5001896668877902344, guid: b48aca8043a3dbe40a5135070b284814, type: 3}
+  - {fileID: 3822194987301862009, guid: 0b473900353b127419a19eec118e0670, type: 3}
+  - {fileID: 1539293690171384590, guid: dd3c8079a9f43aa48b674f5335bf20ba, type: 3}
+  - {fileID: 2337952262606225752, guid: 03a4af5d20c2ff6449bedb3921f20e9c, type: 3}
+  - {fileID: 5602526646975429580, guid: 85f23b009f2880c4fa935deb1c12650e, type: 3}
+  - {fileID: 4322856661231684229, guid: bc61ff5ac77eb5a488ce3ab9e6a4c6a9, type: 3}
+  pooledItems: []
 --- !u!1 &421696567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,6 +1867,7 @@ Transform:
   - {fileID: 1804181176}
   - {fileID: 1911677372}
   - {fileID: 840227632}
+  - {fileID: 281940976}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

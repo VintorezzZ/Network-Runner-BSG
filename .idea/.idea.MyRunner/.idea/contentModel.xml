@@ -282,6 +282,7 @@
               <e p="LobbyLoader.cs" t="Include" />
               <e p="Obstacle.cs" t="Include" />
               <e p="PhotonSynchronization.cs" t="Include" />
+              <e p="RoadGraphics.cs" t="Include" />
               <e p="SingleplayerLoader.cs" t="Include" />
             </e>
             <e p="Player" t="Include">

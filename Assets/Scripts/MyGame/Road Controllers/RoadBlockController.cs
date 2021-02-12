@@ -8,33 +8,61 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 {
     public Transform endPoint;
     public Transform[] obstaclePoints;
+    public Transform[] graphicsPoints;
     public List<Obstacle> pooledObstacles;
+    public List<RoadGraphics> pooledGraphics;
 
-    private PoolItem poolItem;
-    private Destroyer[] destroyers;
-    Transform generatedObstacles;
+    private PoolItem _poolItem;
+    private Destroyer[] _destroyers;
+    private Transform _generatedObstacles;
+    private Transform _generatedGraphics;
 
     private Random _random;
     private void Awake()
     {
         CreateObstaclesContainer();
+        CreateGraphicsContainer();
     }
 
     private void Start()
     {
-       poolItem = GetComponent<PoolItem>();
-       destroyers = GetComponentsInChildren<Destroyer>();
+       _poolItem = GetComponent<PoolItem>();
+       _destroyers = GetComponentsInChildren<Destroyer>();
 
-       foreach (Destroyer destroyer in destroyers)
+       foreach (Destroyer destroyer in _destroyers)
        {
-           destroyer.parentPoolItem = poolItem;
+           destroyer.parentPoolItem = _poolItem;
        }
+    }
+
+    private void GenerateGraphics()
+    {
+        if (graphicsPoints.Length > 0)
+        {
+            for (int i = 0; i < graphicsPoints.Length; i++)
+            {
+                RoadGraphics roadGraphics = GetRoadGraphics();
+                
+                roadGraphics.transform.SetParent(_generatedGraphics);
+                roadGraphics.transform.position = graphicsPoints[i].position;
+                roadGraphics.transform.rotation = graphicsPoints[i].rotation;
+                    
+                roadGraphics.gameObject.SetActive(true);
+
+                pooledGraphics.Add(roadGraphics);
+            }
+        }
     }
 
     private void CreateObstaclesContainer()
     {
-        generatedObstacles = new GameObject("GeneratedObstacles").transform;
-        generatedObstacles.SetParent(transform);
+        _generatedObstacles = new GameObject("GeneratedObstacles").transform;
+        _generatedObstacles.SetParent(transform);
+    }
+    private void CreateGraphicsContainer()
+    {
+        _generatedGraphics = new GameObject("GeneratedGraphics").transform;
+        _generatedGraphics.SetParent(transform);
     }
 
     public void GenerateObstacles(int next)
@@ -48,13 +76,11 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
             {
                 if (i % 2 == 0)
                 {
-                    Obstacle roadItem = null;
-
-                    roadItem = GetRoadItem();
+                    Obstacle roadItem = GetRoadItem();
 
                     roadItem.onReturnToPool += RemoveObstacleFromList;
 
-                    roadItem.transform.SetParent(generatedObstacles);
+                    roadItem.transform.SetParent(_generatedObstacles);
                     roadItem.transform.position = obstaclePoints[i].position;
                     roadItem.transform.rotation = obstaclePoints[i].rotation;
                     
@@ -77,10 +103,19 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 
         return roadItem;
     }
+    
+    private RoadGraphics GetRoadGraphics()
+    {
+        RoadGraphics roadItem = PoolManager.Get(PoolType.RoadGraphics).GetComponent<RoadGraphics>();
 
+        return roadItem;
+    }
+
+    
     public void OnReturnToPool()
     {
         ReturnObstaclesToPool();
+        ReturnGraphicsToPool();
     }
 
     public void ReturnObstaclesToPool()
@@ -93,6 +128,15 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 
         pooledObstacles.Clear();
     }
+    public void ReturnGraphicsToPool()
+    {
+        foreach (var graph in pooledGraphics)
+        {
+            graph.RemoveGraphics();
+        }
+
+        pooledGraphics.Clear();
+    }
 
     private void RemoveObstacleFromList(Obstacle obst)
     {
@@ -102,6 +146,6 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 
     public void OnTakeFromPool()
     {
-
+        GenerateGraphics();
     }
 }

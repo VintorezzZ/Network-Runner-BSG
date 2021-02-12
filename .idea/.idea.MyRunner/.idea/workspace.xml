@@ -12,13 +12,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/Other/RoadGraphics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyGame/Other/PhotonSynchronization.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Other/Obstacle.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/LineCreator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/Bullet.cs" />
         <option value="$PROJECT_DIR$/Assets/JMO Assets/WarFX/Scripts/CFX_AutoDestructShuriken.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Other/PlayerController.cs" />
@@ -51,7 +50,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SingleplayerLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/UI_manager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/RoomController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Pool/PoolType.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyPlayerListEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyLobby/MyLobbyMainPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Weapons/WeaponManager.cs" />
@@ -61,13 +59,16 @@
         <option value="$PROJECT_DIR$/Assets/ExitApp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/Destroyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/WorldBuilder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/RoadBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Other/PhotonSynchronization.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerModelsHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Managers/RoomController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Pool/PoolType.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Other/Obstacle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Other/RoadGraphics.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MyGame/Road Controllers/RoadBlockController.cs" />
       </list>
     </option>
   </component>
@@ -132,7 +133,8 @@
       <workItem from="1612964988087" duration="9666000" />
       <workItem from="1613024381525" duration="9557000" />
       <workItem from="1613058546648" duration="197000" />
-      <workItem from="1613058921415" duration="6172000" />
+      <workItem from="1613058921415" duration="6324000" />
+      <workItem from="1613115323148" duration="4712000" />
     </task>
     <servers />
   </component>
@@ -149,10 +151,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613058715298" />
-    <state x="794" y="221" key="RiderGenerateDialog" timestamp="1612542027645">
+    <state x="794" y="221" key="RiderGenerateDialog" timestamp="1613117186244">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="794" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612542027645" />
+    <state x="794" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613117186244" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1613058684787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

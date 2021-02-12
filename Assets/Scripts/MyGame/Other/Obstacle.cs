@@ -7,16 +7,16 @@ public class Obstacle : MonoBehaviour, IPoolObservable, IDamageable
 {
     public event Action<Obstacle> onReturnToPool;
 
-    private PoolItem poolItem;
+    private PoolItem _poolItem;
 
     private void Start()
     {
-        poolItem = GetComponent<PoolItem>();
+        _poolItem = GetComponent<PoolItem>();
     }
 
     public void RemoveObstacle()
     {
-        PoolManager.Return(this.poolItem);
+        PoolManager.Return(this._poolItem);
     }
     public void OnReturnToPool()
     {
@@ -31,6 +31,6 @@ public class Obstacle : MonoBehaviour, IPoolObservable, IDamageable
 
     public void TakeDamage()
     {
-        PoolManager.Return(this.poolItem);
+        PoolManager.Return(this._poolItem);
     }
 }
