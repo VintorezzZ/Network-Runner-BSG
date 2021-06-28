@@ -34,3 +34,4 @@ public class Obstacle : MonoBehaviour, IPoolObservable, IDamageable
         PoolManager.Return(this._poolItem);
     }
 }
+

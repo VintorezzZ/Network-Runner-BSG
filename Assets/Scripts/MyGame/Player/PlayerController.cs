@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviourPun
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
+    private bool groundedPlayer;
+
     #endregion
 
     #region Private Methods
@@ -116,6 +118,8 @@ public class PlayerController : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            groundedPlayer = _characterController.isGrounded;
+            
             if (transform.position.y < -4)
                 onGameOver?.Invoke();
 
@@ -136,6 +140,15 @@ public class PlayerController : MonoBehaviourPun
         }
     }
 
+    private void SetManagers()
+    {
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        _ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
+        _am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
+        _weaponManager = new WeaponManager(gunHolder, rayCastPoint);
+        _weaponManager.Init();
+    }
+
     private void ProcessInputs()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
@@ -148,15 +161,17 @@ public class PlayerController : MonoBehaviourPun
                 photonView.RPC("ProcessShoot", RpcTarget.Others);
             }
         }
+        
+        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        {
+            Jump();
+        }
     }
 
-    private void SetManagers()
+ 
+    private void Jump()
     {
-        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        _ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
-        _am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
-        _weaponManager = new WeaponManager(gunHolder, rayCastPoint);
-        _weaponManager.Init();
+        _gravity.y += Mathf.Sqrt(0.8f * -3.0f * gravityAmount);
     }
 
     private void CreateBulletsContainer()
@@ -203,9 +218,14 @@ public class PlayerController : MonoBehaviourPun
 
     private void Move(float horizontalInput)
     {
+        if (groundedPlayer && _gravity.y < 0)
+        {
+            _gravity.y = 0f;
+        }
+        
         Vector3 moveDir = transform.right * (horizontalInput * strafeSpeed) + transform.forward * speed;
         _characterController.Move(moveDir * Time.deltaTime);
-
+        
         _gravity.y += gravityAmount * Time.deltaTime;
         _characterController.Move(_gravity * Time.deltaTime);
     }
