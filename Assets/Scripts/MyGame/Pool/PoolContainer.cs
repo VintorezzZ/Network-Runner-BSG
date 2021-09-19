@@ -10,13 +10,7 @@ public class PoolContainer : MonoBehaviour  // container
     public bool expandable;
     public List<GameObject> examplePrefabs; // only for set
     public List<PoolItem> pooledItems;
-
-    private Transform worldBuilder;
-    private void Awake()
-    {
-        worldBuilder = FindObjectOfType<WorldBuilder>().transform;
-    }
-
+    
     public void Init()
     {
         for (int i = 0; i < amount; i++)
