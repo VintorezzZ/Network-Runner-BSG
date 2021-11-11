@@ -1,28 +1,27 @@
 using System;
 using System.Collections;
-using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Utils;
 using GameManager = Com.MyCompany.MyGame.GameManager;
 
-public class PlayerController : MonoBehaviourPun
+public class PlayerController : MonoBehaviour
 {
     #region Public Fields
 
     public bool canMove = true;
+    public int score;
 
-    [SerializeField] private Transform gunHolder; 
+    [SerializeField] private Transform gunHolder;
     [SerializeField] private Transform rayCastPoint;
-
-    public event Action onGameOver;
 
     #endregion
 
     #region Private Variables
-    
+
     private Animator _animator;
     private CharacterController _characterController;
     private GameManager _gm;
-    private UI_manager _ui;
     private AudioManager _am;
 
     private Vector3 _gravity;
@@ -31,8 +30,10 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField] private float strafeSpeed = 6;
     [SerializeField] private float acceleration = 1;
     [SerializeField] private float maxSpeed = 20;
-    [SerializeField] private int health = 3;
-    [SerializeField] private int bulletAmount = 3;
+    [SerializeField] private int startHealth = 3;
+    [SerializeField] private int startBullets = 3;
+    private int _health;
+    private int _bullets;
     private Transform _generatedBullets;
     private WeaponManager _weaponManager;
     private static readonly int Blend = Animator.StringToHash("Blend");
@@ -46,6 +47,28 @@ public class PlayerController : MonoBehaviourPun
 
     #endregion
 
+    public int Ammo
+    {
+        get => _bullets;
+
+        set
+        {
+            _bullets += value;
+            EventHub.OnBulletsChanged(_bullets);
+        }
+    }
+    
+    public int Health
+    {
+        get => _health;
+
+        set
+        {
+            _health += value;
+            EventHub.OnHealthChanged(_health);
+        }
+    }
+    
     #region Private Methods
 
     #if UNITY_5_4_OR_NEWER
@@ -86,64 +109,46 @@ public class PlayerController : MonoBehaviourPun
 
     private void Start()
     {
-        // #Important
-        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
-        if (photonView.IsMine)
-        {
-            LocalPlayerInstance = this.gameObject;  // убрать 
-            RoomController.instance.Init(this);
-        }
-        // #Critical
-        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        //DontDestroyOnLoad(this.gameObject);
+        LocalPlayerInstance = gameObject;  // убрать 
         
-        onGameOver += _gm.OnGameOver;
-        onGameOver += StartDeathRoutine;
         _characterController = gameObject.GetComponent<CharacterController>();
         _animator = gameObject.GetComponentInChildren<Animator>();
 
-        _ui.UpdateBulletsText(bulletAmount);
-        _ui.UpdateHealttext(health);
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-#if UNITY_5_4_OR_NEWER
-        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-#endif
-        
         canMove = false;
+
+        Health = startHealth;
+        Ammo = startBullets;
     }
 
 
     private void Update()
     {
-        if (photonView.IsMine)
-        {
-            groundedPlayer = _characterController.isGrounded;
+        groundedPlayer = _characterController.isGrounded;
             
-            if (transform.position.y < -4)
-                onGameOver?.Invoke();
+        if (transform.position.y < -4)
+            StartDeathRoutine();
 
-            if (health < 1f)
-                GameManager.instance.LeaveRoom();
+        if (_health < 1f)
+            GameManager.Instance.OnGameOver();
 
-            if (!canMove)
-                return;
+        if (!canMove)
+            return;
 
-            _weaponManager.OnUpdate();
+        _weaponManager.OnUpdate();
         
-            ProcessInputs();
+        ProcessInputs();
 
-            ProcessAnimation(_horizontalInput);
+        ProcessAnimation(_horizontalInput);
 
-            SpeedControl();
-            Move(_horizontalInput);
-        }
+        SpeedControl();
+        Move(_horizontalInput);
     }
 
     private void SetManagers()
     {
         _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        _ui = GameObject.FindGameObjectWithTag("UI_manager").GetComponent<UI_manager>();
         _am = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
         _weaponManager = new WeaponManager(gunHolder, rayCastPoint);
         _weaponManager.Init();
@@ -155,10 +160,9 @@ public class PlayerController : MonoBehaviourPun
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (_canShoot && bulletAmount > 0)
+            if (_canShoot && _bullets > 0)
             {
                 StartCoroutine(Shoot());
-                photonView.RPC("ProcessShoot", RpcTarget.Others);
             }
         }
         
@@ -168,7 +172,6 @@ public class PlayerController : MonoBehaviourPun
         }
     }
 
- 
     private void Jump()
     {
         _gravity.y += Mathf.Sqrt(0.8f * -3.0f * gravityAmount);
@@ -179,8 +182,7 @@ public class PlayerController : MonoBehaviourPun
         _generatedBullets = new GameObject("generatedBullets").transform;
         _generatedBullets.SetParent(FindObjectOfType<WorldBuilder>().transform);
     }
-
-    [PunRPC]
+    
     private void ProcessShoot()
     {
         _weaponManager.Shoot();
@@ -207,10 +209,9 @@ public class PlayerController : MonoBehaviourPun
     private IEnumerator Shoot()
     {
         _weaponManager.Shoot();
-        
-        bulletAmount--;
-        _ui.UpdateBulletsText(bulletAmount);
-        
+
+        Ammo--;
+
         _canShoot = false;
         yield return new WaitForSeconds(0.3f);
         _canShoot = true;
@@ -240,7 +241,7 @@ public class PlayerController : MonoBehaviourPun
         {
             if (hits[i].transform.CompareTag("AwesomeTrigger"))
             {
-                StartCoroutine(_ui.ShowAwesomeText());
+                //StartCoroutine(_ui.ShowAwesomeText());
                 AddCoins(50);
             }
         }
@@ -248,7 +249,7 @@ public class PlayerController : MonoBehaviourPun
 
     private void AddCoins(int amount)
     {
-        _gm.score += amount;
+        score += amount;
     }
 
     private void StartDeathRoutine()
@@ -256,31 +257,30 @@ public class PlayerController : MonoBehaviourPun
         canMove = false;
         _animator.SetTrigger("dead");
         _am.PlayLoseSFX();
+        
+        EventHub.OnGameOvered();
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
-        {
-            CheckForObstacle(other);
-            CheckForBulletBonus(other);
-            CheckForCrossBends(other);
-        }
+        CheckForObstacle(other); 
+        CheckForBulletBonus(other);
+        CheckForCrossBends(other);
     }
 
     private void CheckForObstacle(Collider other)
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            if (health >= 1)
+            if (Health >= 1)
             {
-                health--;
-                _ui.UpdateHealttext(health);
+                Health--;
+                
                 PoolManager.Return(other.gameObject.GetComponentInParent<PoolItem>());
             }
             else
             {
-                onGameOver?.Invoke();
+                StartDeathRoutine();
             }
         }
     }
@@ -291,12 +291,11 @@ public class PlayerController : MonoBehaviourPun
         {
             _weaponManager.SwitchWeapon("RPG7", 5f);
 
-            bulletAmount++;
+            Ammo++;
 
-            if (bulletAmount > 30) 
-                bulletAmount = 30;
-
-            _ui.UpdateBulletsText(bulletAmount);
+            if (Ammo > 30) 
+                Ammo = 30;
+            
             PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
         }
     }

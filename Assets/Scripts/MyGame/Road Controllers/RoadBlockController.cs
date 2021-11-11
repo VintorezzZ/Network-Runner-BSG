@@ -13,7 +13,7 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     public List<RoadGraphics> pooledGraphics;
 
     private PoolItem _poolItem;
-    private Destroyer[] _destroyers;
+    private RoadEnd[] _destroyers;
     private Transform _generatedObstacles;
     private Transform _generatedGraphics;
 
@@ -27,9 +27,9 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     private void Start()
     {
        _poolItem = GetComponent<PoolItem>();
-       _destroyers = GetComponentsInChildren<Destroyer>();
+       _destroyers = GetComponentsInChildren<RoadEnd>();
 
-       foreach (Destroyer destroyer in _destroyers)
+       foreach (RoadEnd destroyer in _destroyers)
        {
            destroyer.parentPoolItem = _poolItem;
        }

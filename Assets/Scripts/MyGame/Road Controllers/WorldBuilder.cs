@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public class WorldBuilder : MonoBehaviour
+public class WorldBuilder : SingletonBehaviour<WorldBuilder>
 {
-    public static WorldBuilder instance;
     private Transform _lastPlatform = null;
 
     private bool _isObstacle;
@@ -15,19 +14,19 @@ public class WorldBuilder : MonoBehaviour
     private Random _random;
     private void OnEnable()
     {
-        Destroyer.onRoadEnds += CreatePlatform;
-        Destroyer.onRoadEnds += ReturnToPool;
+        RoadEnd.onRoadEnd += CreatePlatform;
+        RoadEnd.onRoadEnd += ReturnToPool;
     }
 
     private void OnDestroy()
     {
-        Destroyer.onRoadEnds -= CreatePlatform;
-        Destroyer.onRoadEnds -= ReturnToPool;
+        RoadEnd.onRoadEnd -= CreatePlatform;
+        RoadEnd.onRoadEnd -= ReturnToPool;
     }
 
     private void Awake()
     {
-        instance = this;
+        InitializeSingleton();
     }
 
     public void Init(int seed)

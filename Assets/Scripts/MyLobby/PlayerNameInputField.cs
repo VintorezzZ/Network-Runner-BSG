@@ -1,14 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
-using Photon.Pun;
-using Photon.Realtime;
-
-
-using System.Collections;
-
-
 namespace Com.MyCompany.MyGame
 {
     /// <summary>
@@ -48,7 +40,7 @@ namespace Com.MyCompany.MyGame
             }
 
 
-            PhotonNetwork.NickName =  defaultName;
+            //PhotonNetwork.NickName =  defaultName;
         }
 
 
@@ -70,7 +62,7 @@ namespace Com.MyCompany.MyGame
                 Debug.LogError("Player Name is null or empty");
                 return;
             }
-            PhotonNetwork.NickName = value;
+            //PhotonNetwork.NickName = value;
 
 
             PlayerPrefs.SetString(playerNamePrefKey,value);
