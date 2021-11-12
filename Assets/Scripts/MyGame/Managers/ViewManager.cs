@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Views;
 
-namespace Views
+namespace MyGame.Managers
 {
     public class ViewManager : SingletonBehaviour<ViewManager>
     {

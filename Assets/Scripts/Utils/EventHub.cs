@@ -5,8 +5,9 @@ namespace Utils
     public static class EventHub
     {
         public static event Action gameOvered;
+        public static event Action gameStarted;
         public static event Action<bool> gamePaused;
-        public static event Action<int> scoreChanged;
+        public static event Action<float> scoreChanged;
         public static event Action<int> healthChanged;
         public static event Action<int> bulletsChanged;
 
@@ -33,6 +34,11 @@ namespace Utils
         public static void OnBulletsChanged(int bullets)
         {
             bulletsChanged?.Invoke(bullets);
+        }
+
+        public static void OnGameStarted()
+        {
+            gameStarted?.Invoke();
         }
     }
 }

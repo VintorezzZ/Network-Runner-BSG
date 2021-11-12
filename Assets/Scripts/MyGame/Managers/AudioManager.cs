@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utils;
+using Random = UnityEngine.Random;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonBehaviour<AudioManager>
 {
-    public static AudioManager instance;
-
     public bool globalMute;
     public bool pauseMute;
 
@@ -20,18 +21,22 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!instance)
-        {
-            instance = this;
-        }
-
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Music");
         if (objs.Length > 1)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+
+        InitializeSingleton();
+        
+        EventHub.gameOvered += OnGameOvered;
+    }
+
+    private void OnGameOvered()
+    {
+        PlayLoseSFX();
     }
 
     private void Start()
@@ -79,5 +84,10 @@ public class AudioManager : MonoBehaviour
     {
         int i = Random.Range(0, transitionsSFX.Length);
         audioSource.PlayOneShot(transitionsSFX[i]);
+    }
+
+    private void OnDestroy()
+    {
+        EventHub.gameOvered -= OnGameOvered;
     }
 }

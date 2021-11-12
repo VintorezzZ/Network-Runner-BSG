@@ -13,15 +13,12 @@ namespace Views
         [SerializeField] private Text scoreText;
         [SerializeField] private Text hpText;
         [SerializeField] private Text bulletsText;
-
-        private PlayerController _player;
+        private Player _player => GameManager.Instance.localPlayer;
         public override void Initialize()
         {
             EventHub.healthChanged += UpdateHealth;
             EventHub.bulletsChanged += UpdateBullets;
             SceneManager.sceneLoaded += OnSceneLoaded;
-
-            _player = GameManager.Instance.localPlayerController;
         }
 
         private void Update()
@@ -47,9 +44,9 @@ namespace Views
             bulletsText.text = "0";
         }
 
-        private void UpdateScore(int score)
+        private void UpdateScore(float score)
         {
-            scoreText.text = score.ToString();
+            scoreText.text = score.ToString("0");
         }
         
         private void UpdateHealth(int hp)

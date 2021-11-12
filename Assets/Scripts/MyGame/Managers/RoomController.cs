@@ -11,7 +11,7 @@ public class RoomController : SingletonBehaviour<RoomController>
     private double _startGameDelay = 3;
     [SerializeField] private Text timerText;
     
-    public PlayerController myPlayer;
+    public Player myPlayer;
     private CinemachineVirtualCamera _camera;
 
     public Timer startTimer = new Timer();
@@ -22,9 +22,9 @@ public class RoomController : SingletonBehaviour<RoomController>
         InitializeSingleton();
     }
 
-    public void Init(PlayerController playerController)
+    public void Init(Player player)
     {
-        myPlayer = playerController;
+        myPlayer = player;
 
         _camera = FindObjectOfType<CinemachineVirtualCamera>();
         _camera.Follow = myPlayer.transform;
@@ -56,9 +56,7 @@ public class RoomController : SingletonBehaviour<RoomController>
     {
         isGameStarted = true;
         startTimer.Stop();
-        WorldBuilder.Instance.Init(0);
         GameManager.Instance.StartGame();
-        myPlayer.canMove = true;
         timerText.text = string.Empty;
         
         Debug.LogError("Start Game RPC");

@@ -9,7 +9,7 @@ public class RoadEnd : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerController player))
+        if (other.TryGetComponent(out Player player))
         {
             Invoke(nameof(ActivateOnRoadEndEvent), 1);
         }

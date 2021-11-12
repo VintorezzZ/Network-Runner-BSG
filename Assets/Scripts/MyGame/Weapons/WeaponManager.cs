@@ -15,14 +15,10 @@ public class WeaponManager
     {
         this.gunHolder = gunHolder;
         this.RayCastPoint = RayCastPoint;
-    }
-
-    public void Init()
-    {
         LoadWeapon("M1911");
     }
 
-    public void OnUpdate()
+    public void Tick()
     {
         DeactivateWeaponByTimer();
     }

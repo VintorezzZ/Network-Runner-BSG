@@ -1,6 +1,8 @@
 using Com.MyCompany.MyGame;
+using MyGame.Managers;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Views
 {
@@ -8,6 +10,8 @@ namespace Views
     {
         [SerializeField] private Button exitButton;
         [SerializeField] private Button restartButton;
+
+        [SerializeField] private Text bestScoreText;
         
         public override void Initialize()
         {
@@ -18,6 +22,13 @@ namespace Views
                 Hide();
                 ViewManager.Show<MainMenuView>();
             });
+
+            EventHub.gameOvered += UpdateBestScore;
+        }
+
+        private void UpdateBestScore()
+        {
+            bestScoreText.text = PlayerPrefs.GetFloat("bestscore").ToString();
         }
     }
 }
