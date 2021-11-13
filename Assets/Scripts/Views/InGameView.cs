@@ -18,7 +18,6 @@ namespace Views
         {
             EventHub.healthChanged += UpdateHealth;
             EventHub.bulletsChanged += UpdateBullets;
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         private void Update()
@@ -27,14 +26,6 @@ namespace Views
                 return;
             
             UpdateScore(_player.score);
-        }
-
-        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-        {
-            if(arg0.buildIndex == 1)
-            {
-                Clear();
-            }        
         }
 
         private void Clear()
@@ -64,7 +55,6 @@ namespace Views
             EventHub.scoreChanged -= UpdateScore;
             EventHub.healthChanged -= UpdateHealth;
             EventHub.bulletsChanged -= UpdateBullets;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

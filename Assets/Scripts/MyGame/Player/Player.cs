@@ -203,19 +203,4 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    private void CheckForBulletBonus(Collider other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            weaponManager.SwitchWeapon("RPG7", 5f);
-
-            Ammo++;
-
-            if (Ammo > 30) 
-                Ammo = 30;
-            
-            PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
-        }
-    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerModelsHandler : MonoBehaviour
 {
    public List<PlayerModel> playerModels;
-   private PlayerModel _currentModel;
+   public int currentModelIndex;
 
    private void Awake()
    {
@@ -13,52 +13,32 @@ public class PlayerModelsHandler : MonoBehaviour
          playerModel.gameObject.SetActive(false);
       }
       
-      playerModels[0].gameObject.SetActive(true);
-      _currentModel = playerModels[0];
+      if(PlayerPrefs.HasKey("playermodel"))
+      {
+         playerModels[PlayerPrefs.GetInt("playermodel")].gameObject.SetActive(true);
+         currentModelIndex = PlayerPrefs.GetInt("playermodel");
+      }
+      else
+      {
+         playerModels[0].gameObject.SetActive(true);
+         currentModelIndex = 0;
+      }
    }
 
-   private void Update()
+   public void ActivateModel(int modelIndex)
    {
-      if (RoomController.Instance.isGameStarted)
-            return;
-         
-      if (Input.GetKeyDown(KeyCode.Alpha1))
-      {
-         ActivateModel(0);
-      }
-      if (Input.GetKeyDown(KeyCode.Alpha2))
-      {
-         ActivateModel(1);
-      }
-      if (Input.GetKeyDown(KeyCode.Alpha3))
-      {
-         ActivateModel(2);
-      }
-      if (Input.GetKeyDown(KeyCode.Alpha4))
-      {
-         ActivateModel(3);
-      }
-      if (Input.GetKeyDown(KeyCode.Alpha5))
-      {
-         ActivateModel(4);
-      }
-   }
-   
-   private void ActivateModel(int chosenModel)
-   {
-      if (_currentModel != playerModels[chosenModel])
-      {
-         DeActivateCurrentModel();
-         
-         _currentModel = playerModels[chosenModel];
-         playerModels[chosenModel].gameObject.SetActive(true);
-      }
+      if(currentModelIndex == modelIndex || modelIndex == -1 || modelIndex >= playerModels.Count)
+         return;
+      
+      DeActivateCurrentModel();
+      playerModels[modelIndex].gameObject.SetActive(true);
+      currentModelIndex = modelIndex;
+      PlayerPrefs.SetInt("playermodel", currentModelIndex);
    }
 
    private void DeActivateCurrentModel()
    {
-      PlayerModel previousModel = _currentModel;
-      previousModel.gameObject.SetActive(false);
+      playerModels[currentModelIndex].gameObject.SetActive(false);
    }
 }
 

@@ -7331,6 +7331,7 @@ MonoBehaviour:
   - {fileID: 7094598780843346471}
   - {fileID: 7094598780843346470}
   - {fileID: 7094598780843346469}
+  currentModelIndex: -1
 --- !u!114 &-8317029546905257348
 MonoBehaviour:
   m_ObjectHideFlags: 0

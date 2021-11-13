@@ -123,25 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &100798057 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7074320015856561616, guid: ef325660443a06f44a3b119fb26fc481, type: 3}
-  m_PrefabInstance: {fileID: 7074320016570422771}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &100798060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100798057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832f555ea244448b8f7efa3e85b478a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  awesomeSpritePrefab: {fileID: 1840753478}
-  awesomeSprites: []
 --- !u!1 &178422989
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,11 +903,6 @@ MonoBehaviour:
   examplePrefabs:
   - {fileID: 7728894842135338018, guid: 4760cae51503d564b8b1bfc0c64b73b5, type: 3}
   pooledItems: []
---- !u!1 &1840753478 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9223008164783130215, guid: bfaf0383c3775c6468536f5c183c4d4f, type: 3}
-  m_PrefabInstance: {fileID: 9223008163792602694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1911677371
 GameObject:
   m_ObjectHideFlags: 0
