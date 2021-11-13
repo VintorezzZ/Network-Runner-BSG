@@ -31,6 +31,7 @@ public class Obstacle : MonoBehaviour, IPoolObservable, IDamageable
 
     public void TakeDamage()
     {
+        
         PoolManager.Return(this._poolItem);
     }
 }

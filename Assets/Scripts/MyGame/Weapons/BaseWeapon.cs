@@ -9,6 +9,8 @@ public class BaseWeapon : MonoBehaviour
     protected const float RAY_DISTANCE = 30f;
     protected Transform rayCastPoint;
     protected Vector3 targetDirection;
+    [SerializeField] protected AudioClip shootSound;
+    [SerializeField] protected AudioSource audioSource;
     public virtual void Init(Transform rayCastPoint)
     {
         this.rayCastPoint = rayCastPoint;
@@ -25,7 +27,7 @@ public class BaseWeapon : MonoBehaviour
             //Debug.DrawRay(WeaponManager.RayCastPoint.position, WeaponManager.RayCastPoint.forward * 10f, Color.magenta, 2f);
             targetDirection = -rayCastPoint.forward;
         }
+        
+        SoundManager.Instance.PlayFire(audioSource, shootSound);
     }
-    
-    
 }

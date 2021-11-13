@@ -25,6 +25,7 @@ namespace Views
         private static void LoadMainMenu()
         {
             ViewManager.Show<MainMenuView>();
+            GameManager.Instance.InitAudio();
             WorldBuilder.Instance.Init(0);
         }
 

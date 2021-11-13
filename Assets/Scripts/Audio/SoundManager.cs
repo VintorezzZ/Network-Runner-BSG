@@ -7,8 +7,8 @@ using Utils;
 public class SoundManager : SingletonBehaviour<SoundManager>
 {
     public static float CurrentVolume => AudioListener.volume;
-
-    public float globalVolume = .5f;
+    public float globalVolume => AudioSettings.globalVolume;
+    
     [SerializeField] AudioSource musicSource, uiSource, inGameSource;
     [SerializeField] AudioMixer uiMixer, musicMixer, inGameMixer;
 
@@ -35,26 +35,30 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         DontDestroyOnLoad(gameObject);
         
         InitializeSingleton();
-
-        AudioListener.volume = globalVolume;
+        
         inGameSource.outputAudioMixerGroup = inGameMixer.FindMatchingGroups("Master")[0];
         
+        AudioSettings.Init();
+        AudioListener.volume = AudioSettings.globalVolume;
+        FadeMixerGroup(musicMixer, AudioSettings.musicVolume);
+        FadeMixerGroup(uiMixer, AudioSettings.uiVolume);
+        
+        EventHub.audioSettingsChanged += OnAudioSettingsChanged;
         EventHub.gamePaused += OnGamePaused;
         EventHub.gameOvered += OnGameOvered;
     }
 
-    private void OnGameOvered()
+    private void OnAudioSettingsChanged()
     {
-        FadeMixerGroup(inGameMixer, CurrentVolume * .5f);
-        FadeMixerGroup(musicMixer, CurrentVolume * .5f);
-        PlayLose();
+        FadeMixerGroup(musicMixer, AudioSettings.musicVolume);
+        FadeMixerGroup(uiMixer, AudioSettings.uiVolume);
     }
 
-    private void OnDisable()
+    private void OnGameOvered()
     {
-        StopAllCoroutines();
-        EventHub.gamePaused -= OnGamePaused;
-        EventHub.gameOvered -= OnGameOvered;
+        FadeMixerGroup(inGameMixer, AudioSettings.globalVolume * .5f);
+        FadeMixerGroup(musicMixer, AudioSettings.musicVolume * .5f);
+        PlayLose();
     }
 
     private void OnGamePaused(bool paused)
@@ -73,7 +77,7 @@ public class SoundManager : SingletonBehaviour<SoundManager>
     {
         inGameSource.PlayOneShot(boomSfx);
     }
-    
+
     public void PlayClick()
     {
         uiSource.PlayOneShot(clickSfx);
@@ -93,26 +97,46 @@ public class SoundManager : SingletonBehaviour<SoundManager>
     {
         uiSource.PlayOneShot(pickUpSfx);
     }
-    
+
     public void PlayMusic()
     {
         musicSource.clip = music;
         musicSource.Play();
     }
     
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
     public void PlayHit()
     {
         uiSource.PlayOneShot(hitSfx);
     }
-    
+
     public void PlayCoinPickUp()
     {
         uiSource.PlayOneShot(coinPickUpSfx);
     }
-    
-    public void PlayFire()
+
+    public void PlayFire(AudioSource audioSource, AudioClip shootSound)
     {
-        inGameSource.PlayOneShot(fireSfx);
+        audioSource.PlayOneShot(shootSound);
     }
-    
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        EventHub.audioSettingsChanged -= OnAudioSettingsChanged;
+        EventHub.gamePaused -= OnGamePaused;
+        EventHub.gameOvered -= OnGameOvered;
+    }
+
+    public void PreRestartGame()
+    {
+        StopMusic();
+        AudioListener.volume = AudioSettings.globalVolume;
+        FadeMixerGroup(musicMixer, AudioSettings.musicVolume);
+        FadeMixerGroup(uiMixer, AudioSettings.uiVolume);
+    }
 }

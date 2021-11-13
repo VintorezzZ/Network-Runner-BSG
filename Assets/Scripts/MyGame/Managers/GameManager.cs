@@ -52,6 +52,7 @@ namespace Com.MyCompany.MyGame
 
         public void RestartGame()
         {
+            SoundManager.Instance.PreRestartGame();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
@@ -64,6 +65,14 @@ namespace Com.MyCompany.MyGame
         public void UnpauseGame()
         {
             
+        }
+
+        public void InitAudio()
+        {
+            if(SoundManager.Instance != null)
+                return;
+
+            var sm = Instantiate(Resources.Load<SoundManager>("Managers/AudioManager"));
         }
     }
 }

@@ -8,7 +8,7 @@ public class Shell : MonoBehaviour, IPoolObservable
    private PoolItem poolItem;
    private Rocket rocket;
    private Vector3 targetDirection;
-   public float playerVelocity { get; set; }
+   public float PlayerVelocity { get; set; }
 
    public void Init(Vector3 targetDir)
    {
@@ -31,13 +31,6 @@ public class Shell : MonoBehaviour, IPoolObservable
    {
       transform.localPosition += -targetDirection * speed * Time.deltaTime;
    }
-
-   private float PlayerVelocity()
-   {
-      return playerVelocity * 0.1f;
-   }
-
-
    private IEnumerator ReturnToPool(float time)
    {
       yield return new WaitForSeconds(time);

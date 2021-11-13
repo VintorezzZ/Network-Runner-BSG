@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour, IPoolObservable
 {
-    private PoolItem poolItem;
+    private PoolItem _poolItem;
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] private Transform targetRotation;
     
     public void Init(PoolItem parentPoolItem)
     {
-        if(!poolItem)
-            poolItem = parentPoolItem;
+        if(!_poolItem)
+            _poolItem = parentPoolItem;
     }
 
     private void Update()
@@ -37,13 +37,14 @@ public class Rocket : MonoBehaviour, IPoolObservable
 
         SetExplosionFXSettings(explosionFX, other);
        
-        PoolManager.Return(poolItem);
+        PoolManager.Return(_poolItem);
     }
 
     private void SetExplosionFXSettings(Transform explosion, Collision collision)
     {
         explosion.position = collision.transform.position;
         explosion.gameObject.SetActive(true);
+        SoundManager.Instance.PlayBoom();
     }
 
 

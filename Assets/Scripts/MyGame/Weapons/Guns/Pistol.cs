@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Pistol : BaseWeapon
 {
-    private LineCreator lineCreator;
+    private LineCreator _lineCreator;
     public override void Init(Transform rayCastPoint)
     {
         base.Init(rayCastPoint);
-        lineCreator = GetComponent<LineCreator>();
+        _lineCreator = GetComponent<LineCreator>();
     }
 
     public override void Shoot()
@@ -27,11 +27,11 @@ public class Pistol : BaseWeapon
                 SetImpactSettings(impact);
             }
 
-            lineCreator.CreateShotLine(transform.position, hit.point, Color.red);
+            _lineCreator.CreateShotLine(transform.position, hit.point, Color.red);
         }
         else
         {
-            lineCreator.CreateShotLine(transform.position, rayCastPoint.position + rayCastPoint.forward * RAY_DISTANCE, Color.yellow);
+            _lineCreator.CreateShotLine(transform.position, rayCastPoint.position + rayCastPoint.forward * RAY_DISTANCE, Color.yellow);
         }
     }
 
