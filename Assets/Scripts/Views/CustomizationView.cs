@@ -19,7 +19,10 @@ public class CustomizationView : View
     {
           leftArrow.onClick.AddListener(SelectPreviousPlayerModel);
           rightArrow.onClick.AddListener(SelectNextPlayerModel);
-          closeButton.onClick.AddListener(ViewManager.ShowLast);
+          closeButton.onClick.AddListener(() =>
+          {
+              ViewManager.Show<MainMenuView>();
+          });
     }
 
     public override void Show()

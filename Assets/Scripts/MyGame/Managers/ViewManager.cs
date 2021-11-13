@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Views;
@@ -11,16 +12,19 @@ namespace MyGame.Managers
         private View _currentView;
         private readonly Stack<View> _history = new Stack<View>();
 
-        private void Awake() => InitializeSingleton();
-
-        private void Start()
+        private void Awake()
         {
+            InitializeSingleton();
+            
             foreach (var view in views)
             {
                 view.Initialize();  
                 view.Hide();
             }
-        
+        }
+
+        private void Start()
+        {
             if(startingView)
                 Show(startingView, true);
         }
@@ -52,9 +56,10 @@ namespace MyGame.Managers
                     
                     Instance._currentView.Hide();
                 }
-                
-                view.Show();
+
                 Instance._currentView = view;
+                view.Show();
+                break;
             }
         }
 
@@ -67,9 +72,9 @@ namespace MyGame.Managers
             
                 Instance._currentView.Hide();
             }
-        
-            view.Show();
+
             Instance._currentView = view;
+            view.Show();
         }
 
         public static void ShowLast()

@@ -191,10 +191,11 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
+            SoundManager.Instance.PlayHit();
+            
             if (Health >= 1)
             {
                 Health--;
-                
                 PoolManager.Return(other.gameObject.GetComponentInParent<PoolItem>());
             }
             else

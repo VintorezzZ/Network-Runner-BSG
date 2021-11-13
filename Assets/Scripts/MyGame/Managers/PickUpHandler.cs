@@ -24,6 +24,7 @@ namespace MyGame.Managers
         {
             StartCoroutine(ShowAwesomeSprite());
             GameManager.Instance.localPlayer.score += score;
+            SoundManager.Instance.PlayCoinPickUp();
         }
         
         private IEnumerator ShowAwesomeSprite()
@@ -51,6 +52,8 @@ namespace MyGame.Managers
                 if (_player.Ammo > 30) 
                     _player.Ammo = 30;
             
+                SoundManager.Instance.PlayPickUp();
+                
                 PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
             }
         }

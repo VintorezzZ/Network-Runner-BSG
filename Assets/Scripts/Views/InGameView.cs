@@ -20,6 +20,12 @@ namespace Views
             EventHub.bulletsChanged += UpdateBullets;
         }
 
+        public override void Show()
+        {
+            base.Show();
+            SoundManager.Instance.PlayMusic();
+        }
+
         private void Update()
         {
             if(!RoomController.Instance.isGameStarted)

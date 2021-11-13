@@ -12,7 +12,12 @@ public class SettingsView : View
         
     public override void Initialize()
     {
-        backButton.onClick.AddListener(ViewManager.ShowLast);
+        backButton.onClick.AddListener(() =>
+        {
+            // Hide();
+            // ViewManager.Show<MainView>();
+            ViewManager.ShowLast();
+        });
         enterButton.onClick.AddListener(() =>
         {
             PlayerPrefs.SetString("playername", playerNameInput.text);

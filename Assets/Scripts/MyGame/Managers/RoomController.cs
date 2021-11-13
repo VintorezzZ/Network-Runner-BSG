@@ -58,7 +58,7 @@ public class RoomController : SingletonBehaviour<RoomController>
         startTimer.Stop();
         GameManager.Instance.StartGame();
         timerText.text = string.Empty;
-        
+
         Debug.LogError("Start Game RPC");
     }
 }

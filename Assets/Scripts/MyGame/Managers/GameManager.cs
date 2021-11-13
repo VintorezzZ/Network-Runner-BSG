@@ -44,12 +44,7 @@ namespace Com.MyCompany.MyGame
         {
             SceneManager.LoadScene(0);
         }
-        
-        public void OnClick()
-        {
-            AudioManager.Instance.PlayClickSFX();
-        }
-
+  
         public void QuitGame()
         {
             Application.Quit();
@@ -63,7 +58,6 @@ namespace Com.MyCompany.MyGame
         public void StartGame()
         {
             EventHub.OnGameStarted();
-            ViewManager.Show<InGameView>();
             Time.timeScale = 1;
         }
 

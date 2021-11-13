@@ -30,14 +30,13 @@ namespace Views
 
         public override void Show()
         {
+            base.Show();
+            playerNameInput.text = "Player " + Random.Range(1000, 10000);
+            
             if(PlayerPrefs.HasKey("playername"))
             {
                 LoadMainMenu();
-                return;
             }
-            
-            base.Show();
-            playerNameInput.text = "Player " + Random.Range(1000, 10000);
         }
     }
 }

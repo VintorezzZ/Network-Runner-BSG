@@ -1,21 +1,33 @@
-﻿using Com.MyCompany.MyGame;
+using Com.MyCompany.MyGame;
 using MyGame.Managers;
 using UnityEngine;
 using UnityEngine.UI;
+using Views;
 
-namespace Views
+public class MainMenuView : View
 {
-    public class MainMenuView : View
+    [SerializeField] private Button exitButton;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button customizationButton;
+        
+    public override void Initialize()
     {
-        public override void Initialize()
+        exitButton.onClick.AddListener(() => GameManager.Instance.QuitGame());
+        settingsButton.onClick.AddListener(() =>
         {
-            
-        }
-
-        public override void Show()
+            ViewManager.Show<SettingsView>();
+        });
+        
+        customizationButton.onClick.AddListener(() =>
         {
-            base.Show();
-            ViewManager.Show<MainView>();
-        }
+            ViewManager.Show<CustomizationView>();
+        });
+        
+        startButton.onClick.AddListener(() =>
+        {
+            RoomController.Instance.startTimer.Start();
+            ViewManager.Show<InGameView>();
+        });
     }
 }
