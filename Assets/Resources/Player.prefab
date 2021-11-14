@@ -7287,13 +7287,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff506f4748dece54fbb4c0d8976fc541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  god: 0
   canMove: 0
   score: 0
   moveController: {fileID: 8727077871878123062}
+  _animator: {fileID: 6818908830941468443}
   gunHolder: {fileID: 1014875303}
   rayCastPoint: {fileID: 6818908830578527745}
   startHealth: 3
   startBullets: 3
+  pickUpHandler: {fileID: -8317029546905257348}
 --- !u!114 &8727077871878123062
 MonoBehaviour:
   m_ObjectHideFlags: 0

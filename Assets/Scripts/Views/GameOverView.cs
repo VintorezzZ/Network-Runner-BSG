@@ -16,6 +16,7 @@ namespace Views
         {
             restartButton.onClick.AddListener(() =>
             {
+                ViewManager.Show<MainMenuView>();
                 GameManager.Instance.RestartGame();
             });
 

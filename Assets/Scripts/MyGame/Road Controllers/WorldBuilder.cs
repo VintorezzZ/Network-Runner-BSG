@@ -33,7 +33,7 @@ public class WorldBuilder : SingletonBehaviour<WorldBuilder>
     {
         _random = new Random(seed);
         
-        CreateFreePlatform();
+        CreateFreePlatform(false);
         CreateObstaclePlatform();
         CreateObstaclePlatform();
         CreateCrossPlatform();
@@ -58,7 +58,7 @@ public class WorldBuilder : SingletonBehaviour<WorldBuilder>
         }
     }
 
-    private void CreateBasePlatform(PoolType platformType)
+    private PoolItem CreateBasePlatform(PoolType platformType)
     {
         Transform endPoint = (_lastPlatform == null) ? transform : _lastPlatform.GetComponent<RoadBlockController>().endPoint;
         Vector3 pos = (_lastPlatform == null) ? transform.position : endPoint.position;
@@ -66,11 +66,16 @@ public class WorldBuilder : SingletonBehaviour<WorldBuilder>
         PoolItem result = PoolManager.Get(platformType);
         
         _lastPlatform = SetSpawnSettings(result, pos, endPoint);
+
+        return result;
     }
 
-    private void CreateFreePlatform()
+    private void CreateFreePlatform(bool generateCoins = true)
     {
-        CreateBasePlatform(PoolType.RoadStraight);
+        var platform = CreateBasePlatform(PoolType.RoadStraight);
+        
+        if(generateCoins)
+            platform.GetComponent<RoadBlockController>().GenerateCoins(_random.Next());
         
         _isObstacle = false;
     }
@@ -87,8 +92,9 @@ public class WorldBuilder : SingletonBehaviour<WorldBuilder>
 
     private void CreateCrossPlatform()
     {
-        CreateBasePlatform(_random.Next(0, 100) <= 50f ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
-
+        var crossRoad = CreateBasePlatform(_random.Next(0, 100) <= 100f ? PoolType.RoadBendLeft : PoolType.RoadBendRight);
+        crossRoad.GetComponent<RoadBlockController>().GenerateObstacles(_random.Next());
+        
         _isCross = true;
         _isObstacle = false;
     }

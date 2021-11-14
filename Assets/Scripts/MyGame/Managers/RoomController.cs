@@ -1,18 +1,20 @@
 using System;
 using Cinemachine;
 using Com.MyCompany.MyGame;
+using MyGame.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Views;
 
 
 public class RoomController : SingletonBehaviour<RoomController>
 {
     private double _startGameDelay = 3;
-    [SerializeField] private Text timerText;
+    private Text _timerText;
     
-    public Player myPlayer;
-    private CinemachineVirtualCamera _camera;
+    [HideInInspector] public Player localPlayer;
+    [SerializeField] private CinemachineVirtualCamera playerCamera;
 
     public Timer startTimer = new Timer();
     public bool isGameStarted = false;
@@ -22,14 +24,16 @@ public class RoomController : SingletonBehaviour<RoomController>
         InitializeSingleton();
     }
 
-    public void Init(Player player)
+    private void Start()
     {
-        myPlayer = player;
-
-        _camera = FindObjectOfType<CinemachineVirtualCamera>();
-        _camera.Follow = myPlayer.transform;
-        _camera.LookAt = myPlayer.transform;
+        localPlayer = Instantiate(Resources.Load<Player>("Player"), new Vector3(0f, 0f, 10f), Quaternion.identity);
+        localPlayer.Init();
+        localPlayer.transform.SetParent(transform);
+        playerCamera.Follow = localPlayer.transform;
+        playerCamera.LookAt = localPlayer.transform;
+        _timerText = ViewManager.GetView<InGameView>().timerText;
     }
+
     private void Update()
     {
         if(!startTimer.IsStarted)
@@ -39,25 +43,21 @@ public class RoomController : SingletonBehaviour<RoomController>
             UpdateTimerView();
         
         if (startTimer.Time >= _startGameDelay)
-            OnTimerEnds();
+            StartGame();
     }
 
     private void UpdateTimerView()
     {
         double countdown = _startGameDelay - startTimer.Time;
-        timerText.text = $"Game starts in {countdown:n0} seconds";
+        _timerText.text = $"Game starts in {countdown:n0} seconds";
     }
 
-    private void OnTimerEnds()
-    {
-        StartGame();
-    }
     private void StartGame()
     {
         isGameStarted = true;
         startTimer.Stop();
         GameManager.Instance.StartGame();
-        timerText.text = string.Empty;
+        _timerText.text = string.Empty;
 
         Debug.LogError("Start Game RPC");
     }

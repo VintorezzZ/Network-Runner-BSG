@@ -8,31 +8,32 @@ namespace Com.MyCompany.MyGame
 {
     public class GameManager : SingletonBehaviour<GameManager>
     {
-        [HideInInspector] public Player localPlayer;
-        
-        [Tooltip("The prefab to use for representing the player")]
-        public GameObject playerPrefab;
-        public float addScoreDelay = 3f;
-        
         private void Awake()
         {
             InitializeSingleton();
-
+            
             EventHub.gameOvered += OnGameOver;
+
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                if (scene.name == "Gameplay")
+                {
+                    InitGameScene();
+                }
+            };
+
+            SceneManager.sceneUnloaded += scene =>
+            {
+                if (scene.name == "Gameplay")
+                {
+                    LoadGameScene();
+                }
+            };
         }
 
-        private void Start()
+        private void InitGameScene()
         {
-            if (playerPrefab == null)
-            {
-                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'",this);
-            }
-            else
-            {
-                var player = Instantiate(playerPrefab, new Vector3(0f, 0f, 10f), Quaternion.identity);
-                localPlayer = player.GetComponent<Player>();
-                RoomController.Instance.Init(localPlayer);
-            }
+            WorldBuilder.Instance.Init(0);
         }
 
         private void OnGameOver()
@@ -53,7 +54,7 @@ namespace Com.MyCompany.MyGame
         public void RestartGame()
         {
             SoundManager.Instance.PreRestartGame();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.UnloadSceneAsync("Gameplay");
         }
 
         public void StartGame()
@@ -66,13 +67,10 @@ namespace Com.MyCompany.MyGame
         {
             
         }
-
-        public void InitAudio()
+        
+        public void LoadGameScene()
         {
-            if(SoundManager.Instance != null)
-                return;
-
-            var sm = Instantiate(Resources.Load<SoundManager>("Managers/AudioManager"));
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
     }
 }

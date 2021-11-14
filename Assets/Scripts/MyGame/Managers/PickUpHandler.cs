@@ -23,7 +23,7 @@ namespace MyGame.Managers
         public void AddAwesomeTriggerScore(int score)
         {
             StartCoroutine(ShowAwesomeSprite());
-            GameManager.Instance.localPlayer.score += score;
+            _player.score += score;
             SoundManager.Instance.PlayCoinPickUp();
         }
         
@@ -39,6 +39,7 @@ namespace MyGame.Managers
         private void OnTriggerEnter(Collider other)
         {
             CheckForBulletBonus(other);
+            CheckForCoin(other);
         }
 
         private void CheckForBulletBonus(Collider other)
@@ -55,6 +56,19 @@ namespace MyGame.Managers
                 SoundManager.Instance.PlayPickUp();
                 
                 PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
+            }
+        }
+        
+        private void CheckForCoin(Collider other)
+        {
+            if (other.TryGetComponent(out Coin coin))
+            {
+                _player.Coins++;
+            
+                SoundManager.Instance.PlayCoinPickUp();
+                
+                other.gameObject.SetActive(false);
+                //PoolManager.Return(other.gameObject.GetComponent<PoolItem>());
             }
         }
     }

@@ -13,7 +13,7 @@ public class CustomizationView : View
     [SerializeField] private Button closeButton;
 
     private PlayerModelsHandler _playerModelsHandler;
-    private Player _player => GameManager.Instance.localPlayer;
+    private Player _player => RoomController.Instance.localPlayer;
 
     public override void Initialize()
     {

@@ -8,6 +8,7 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
 {
     public Transform endPoint;
     public Transform[] obstaclePoints;
+    public Transform[] coinsPoints;
     public Transform[] graphicsPoints;
     public List<Obstacle> pooledObstacles;
     public List<RoadGraphics> pooledGraphics;
@@ -147,5 +148,18 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     public void OnTakeFromPool()
     {
         GenerateGraphics();
+    }
+
+    public void GenerateCoins(int next)
+    {
+        _random = new Random(next);
+        
+        if (coinsPoints.Length > 0)
+        {
+            foreach (var coin in coinsPoints)
+            {
+                coin.gameObject.SetActive(true);
+            }
+        }
     }
 }

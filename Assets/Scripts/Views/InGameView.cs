@@ -10,19 +10,22 @@ namespace Views
 {
     public class InGameView : View
     {
+        [SerializeField] private Image[] hearts;
         [SerializeField] private Text scoreText;
-        [SerializeField] private Text hpText;
         [SerializeField] private Text bulletsText;
-        private Player _player => GameManager.Instance.localPlayer;
+        [SerializeField] private Text coinsText;
+        public Text timerText;
+        private Player _player => RoomController.Instance.localPlayer;
         public override void Initialize()
         {
-            EventHub.healthChanged += UpdateHealth;
             EventHub.bulletsChanged += UpdateBullets;
+            EventHub.coinsChanged += UpdateCoins;
         }
 
         public override void Show()
         {
             base.Show();
+            Clear();
             SoundManager.Instance.PlayMusic();
         }
 
@@ -37,29 +40,37 @@ namespace Views
         private void Clear()
         {
             scoreText.text = "0";
-            hpText.text = "0";
-            bulletsText.text = "0";
+            coinsText.text = "0";
         }
 
         private void UpdateScore(float score)
         {
             scoreText.text = score.ToString("0");
         }
-        
-        private void UpdateHealth(int hp)
+
+        public void AddHealth(int hp)
         {
-            hpText.text = hp.ToString();
+            hearts[hp].gameObject.SetActive(true);
         }
         
+        public void RemoveHealth(int hp)
+        {
+            hearts[hp].gameObject.SetActive(false);
+        }
+
         private void UpdateBullets(int bullets)
         {
-            bulletsText.text = bullets.ToString(); 
+            bulletsText.text = bullets + "/30"; 
         }
-        
+
+        private void UpdateCoins(int coins)
+        {
+            coinsText.text = coins.ToString();
+        }
+
         private void OnDestroy()
         {
             EventHub.scoreChanged -= UpdateScore;
-            EventHub.healthChanged -= UpdateHealth;
             EventHub.bulletsChanged -= UpdateBullets;
         }
     }

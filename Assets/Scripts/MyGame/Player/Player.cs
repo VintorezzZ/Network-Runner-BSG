@@ -1,38 +1,46 @@
+using System;
 using System.Collections;
 using MyGame.Managers;
 using MyGame.Player;
 using UnityEngine;
 using Utils;
+using Views;
 
 [RequireComponent(typeof(PickUpHandler), typeof(MoveController))]
 public class Player : MonoBehaviour
 {
     #region Public Fields
 
+    public bool god;
     public bool canMove = true;
     public float score;
     public MoveController moveController;
     public WeaponManager weaponManager;
 
-    [SerializeField] private Transform gunHolder;
-    [SerializeField] private Transform rayCastPoint;
-
     #endregion
 
     #region Private Variables
 
-    private Animator _animator;
-    
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform gunHolder;
+    [SerializeField] private Transform rayCastPoint;
     [SerializeField] private int startHealth = 3;
     [SerializeField] private int startBullets = 3;
+    [SerializeField] private PickUpHandler pickUpHandler;
     private int _health;
     private int _bullets;
+    private int _coins;
     private Transform _generatedBullets;
-    private PickUpHandler _pickUpHandler;
     private static readonly int Blend = Animator.StringToHash("Blend");
     private bool _canShoot = true;
 
     #endregion
+
+    private int Health
+    {
+        get => _health;
+        set => _health = value;
+    }
 
     public int Ammo
     {
@@ -44,18 +52,17 @@ public class Player : MonoBehaviour
             EventHub.OnBulletsChanged(_bullets);
         }
     }
-    
-    public int Health
+
+    public int Coins
     {
-        get => _health;
+        get => _coins;
 
         set
         {
-            _health = value;
-            EventHub.OnHealthChanged(_health);
+            _coins = value;
+            EventHub.OnCoinsChanged(_coins);
         }
     }
-    
     void CalledOnLevelWasLoaded(int level)
     {
         // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
@@ -64,38 +71,36 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(0f, 5f, 0f);
         }
     }
-    
-    private void Awake()
+
+    public void Init()
     {
         CreateBulletsContainer();
 
-        weaponManager = new WeaponManager(gunHolder, rayCastPoint);
-        _animator = GetComponentInChildren<Animator>();
-        _pickUpHandler = GetComponent<PickUpHandler>();
-        _pickUpHandler.Init(this);
-        moveController = GetComponent<MoveController>();
-        moveController.Init(this);
-        EventHub.gameStarted += OnGameStarted;
-    }
-
-    private void OnGameStarted()
-    {
-        canMove = true;
-    }
-
-    private void Start()
-    {
         canMove = false;
         Health = startHealth;
         Ammo = startBullets;
+        Coins = 0;
+        
+        AddHealth(Health);
+        
+        weaponManager = new WeaponManager(gunHolder, rayCastPoint);
+        pickUpHandler.Init(this);
+        moveController.Init(this);
+        EventHub.gameStarted += OnGameStarted;
     }
     
+    private void OnGameStarted()
+    {
+        _animator.SetTrigger("run");
+        canMove = true;
+    }
+
     private void Update()
     {
         if (!canMove)
             return;
         
-        if (_health < 0f || transform.position.y < -4)
+        if (_health <= 0f || transform.position.y < -4)
             StartDeathRoutine();
         
         weaponManager.Tick();
@@ -136,11 +141,6 @@ public class Player : MonoBehaviour
     private void ProcessAnimation(float horizontalInput)
     {
         _animator.SetFloat(Blend, horizontalInput);
-
-        if (horizontalInput > 0.2f || horizontalInput < -0.2f)
-        {
-            CheckForAwesomeTrigger();
-        }
     }
     
     private IEnumerator Shoot()
@@ -154,6 +154,14 @@ public class Player : MonoBehaviour
         _canShoot = true;
     }
 
+    private void AddHealth(int health)
+    {
+        for (int i = 0; i < health; i++)
+        {
+            ViewManager.GetView<InGameView>().AddHealth(i);
+        }
+    }
+    
     private void CheckForAwesomeTrigger()
     {
         RaycastHit[] hits;
@@ -164,7 +172,7 @@ public class Player : MonoBehaviour
         {
             if (hits[i].transform.CompareTag("AwesomeTrigger"))
             {
-                _pickUpHandler.AddAwesomeTriggerScore(50);
+                pickUpHandler.AddAwesomeTriggerScore(50);
             }
         }
     }
@@ -192,10 +200,11 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             SoundManager.Instance.PlayHit();
-            
+            if(!god)
+                Health--;
+            ViewManager.GetView<InGameView>().RemoveHealth(Health);
             if (Health >= 1)
             {
-                Health--;
                 PoolManager.Return(other.gameObject.GetComponentInParent<PoolItem>());
             }
             else
@@ -203,5 +212,10 @@ public class Player : MonoBehaviour
                 StartDeathRoutine();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventHub.gameStarted -= OnGameStarted;
     }
 }

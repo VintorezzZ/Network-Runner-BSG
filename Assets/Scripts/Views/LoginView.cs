@@ -25,15 +25,14 @@ namespace Views
         private static void LoadMainMenu()
         {
             ViewManager.Show<MainMenuView>();
-            GameManager.Instance.InitAudio();
-            WorldBuilder.Instance.Init(0);
+            GameManager.Instance.LoadGameScene();
         }
 
         public override void Show()
         {
             base.Show();
             playerNameInput.text = "Player " + Random.Range(1000, 10000);
-            
+
             if(PlayerPrefs.HasKey("playername"))
             {
                 LoadMainMenu();

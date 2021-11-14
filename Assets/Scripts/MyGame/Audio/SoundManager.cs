@@ -26,14 +26,6 @@ public class SoundManager : SingletonBehaviour<SoundManager>
 
     private void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Music");
-        if (objs.Length > 1)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-        
         InitializeSingleton();
         
         inGameSource.outputAudioMixerGroup = inGameMixer.FindMatchingGroups("Master")[0];

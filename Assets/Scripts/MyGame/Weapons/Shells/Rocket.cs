@@ -22,27 +22,23 @@ public class Rocket : MonoBehaviour, IPoolObservable
 
     private void OnCollisionEnter(Collision other)
     {
-        Collider[] colliders;
-        colliders = Physics.OverlapSphere(other.transform.position, 5);
+        Collider[] colliders = Physics.OverlapSphere(other.transform.position, 5);
 
         foreach (var coll in colliders)
         {
             if (coll.gameObject.TryGetComponent(out IDamageable iDamageable))
             {
+                SetExplosionFXSettings(PoolManager.Get(PoolType.ExplosionsFX).transform, coll.transform);
                 iDamageable.TakeDamage();
             }
         }
         
-        Transform explosionFX = PoolManager.Get(PoolType.ExplosionsFX).transform;
-
-        SetExplosionFXSettings(explosionFX, other);
-       
         PoolManager.Return(_poolItem);
     }
 
-    private void SetExplosionFXSettings(Transform explosion, Collision collision)
+    private void SetExplosionFXSettings(Transform explosion, Transform collision)
     {
-        explosion.position = collision.transform.position;
+        explosion.position = collision.position;
         explosion.gameObject.SetActive(true);
         SoundManager.Instance.PlayBoom();
     }
