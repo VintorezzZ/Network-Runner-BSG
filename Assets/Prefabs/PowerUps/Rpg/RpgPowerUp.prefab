@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4627257459412399397}
   - component: {fileID: 645487046}
   - component: {fileID: 1054402575902336979}
+  - component: {fileID: 6952234486931991138}
   m_Layer: 0
-  m_Name: Bonus Bullet
+  m_Name: RpgPowerUp
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,6 +59,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8906f0903ec28884ea76fa3a5924397f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6952234486931991138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627257459412399393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6556844a54940a9953c554bc9f05f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  duration: 5
+  image: {fileID: 21300000, guid: dc09f79e1ce72544ba7e42b15b049b77, type: 3}
+  background: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1001 &4292618547524166167
 PrefabInstance:
   m_ObjectHideFlags: 0

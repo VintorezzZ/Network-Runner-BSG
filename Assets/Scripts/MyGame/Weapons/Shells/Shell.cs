@@ -5,21 +5,21 @@ using UnityEngine;
 public class Shell : MonoBehaviour, IPoolObservable
 {
    private float speed = 50f;
-   private PoolItem poolItem;
-   private Rocket rocket;
-   private Vector3 targetDirection;
+   private PoolItem _poolItem;
+   private Rocket _rocket;
+   private Vector3 _targetDirection;
    public float PlayerVelocity { get; set; }
 
    public void Init(Vector3 targetDir)
    {
-      if(!poolItem)
-         poolItem = GetComponent<PoolItem>();
+      if(!_poolItem)
+         _poolItem = GetComponent<PoolItem>();
 
-      if (!rocket)
-         rocket = GetComponentInChildren<Rocket>();
+      if (!_rocket)
+         _rocket = GetComponentInChildren<Rocket>();
 
-      targetDirection = targetDir;
-      rocket.Init(poolItem);
+      _targetDirection = targetDir;
+      _rocket.Init(_poolItem);
    }
 
    private void OnEnable()
@@ -29,12 +29,12 @@ public class Shell : MonoBehaviour, IPoolObservable
 
    private void Update()
    {
-      transform.localPosition += -targetDirection * speed * Time.deltaTime;
+      transform.localPosition += -_targetDirection * speed * Time.deltaTime;
    }
    private IEnumerator ReturnToPool(float time)
    {
       yield return new WaitForSeconds(time);
-      PoolManager.Return(poolItem);
+      PoolManager.Return(_poolItem);
    }
 
    public void OnReturnToPool()

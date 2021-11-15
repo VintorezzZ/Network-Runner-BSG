@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public class RoadBlockController : MonoBehaviour, IPoolObservable
+public class RoadBlock : MonoBehaviour, IPoolObservable
 {
     public Transform endPoint;
     public Transform[] obstaclePoints;
@@ -72,7 +72,6 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
         
         if (obstaclePoints.Length > 0)
         {
-            
             for (int i = 0; i < obstaclePoints.Length; i++)
             {
                 if (i % 2 == 0)
@@ -97,17 +96,17 @@ public class RoadBlockController : MonoBehaviour, IPoolObservable
     {
         Obstacle roadItem;
         
-        if (_random.Next(0, 100) < 30)
+        if (_random.Next(0, 100) < 10)
             roadItem = PoolManager.Get(PoolType.Bonuses).GetComponent<Obstacle>();
         else
-            roadItem = PoolManager.Get(PoolType.Obstacles).GetComponent<Obstacle>();
+            roadItem = PoolManager.GetRandom(PoolType.Obstacles).GetComponent<Obstacle>();
 
         return roadItem;
     }
     
     private RoadGraphics GetRoadGraphics()
     {
-        RoadGraphics roadItem = PoolManager.Get(PoolType.RoadGraphics).GetComponent<RoadGraphics>();
+        RoadGraphics roadItem = PoolManager.GetRandom(PoolType.RoadGraphics).GetComponent<RoadGraphics>();
 
         return roadItem;
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229604129989192723}
   - component: {fileID: 3724583225055116707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SidePrefab 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_RoomRound_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
       propertyPath: m_RootOrder
@@ -122,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_Foundation_03
       objectReference: {fileID: 0}
+    - target: {fileID: 184438, guid: 4cecd3ee2e6a59e42b606f8b165f43b2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400074, guid: 4cecd3ee2e6a59e42b606f8b165f43b2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -183,6 +191,10 @@ PrefabInstance:
     - target: {fileID: 189980, guid: 7b4a57ebbd1f0564d95d520ab4703141, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_Room_06
+      objectReference: {fileID: 0}
+    - target: {fileID: 189980, guid: 7b4a57ebbd1f0564d95d520ab4703141, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 487576, guid: 7b4a57ebbd1f0564d95d520ab4703141, type: 3}
       propertyPath: m_RootOrder
@@ -246,6 +258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_Foundation_02
       objectReference: {fileID: 0}
+    - target: {fileID: 157484, guid: 2065fe8f26032bf4e9694fa0f198c147, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 486592, guid: 2065fe8f26032bf4e9694fa0f198c147, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -308,6 +324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_RoomTall_03
       objectReference: {fileID: 0}
+    - target: {fileID: 149178, guid: 00493817ea46851478eedace9c7071aa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 460598, guid: 00493817ea46851478eedace9c7071aa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -369,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_RoomRound_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 192126, guid: bd10d173afce986489058a8e31f1be04, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 428378, guid: bd10d173afce986489058a8e31f1be04, type: 3}
       propertyPath: m_RootOrder

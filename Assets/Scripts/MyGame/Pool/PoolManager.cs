@@ -33,6 +33,17 @@ public class PoolManager : MonoBehaviour
         return Instance._pools[poolType].TakeFromPool();
     }
 
+    public static PoolItem GetRandom(PoolType poolType)
+    {
+        if (!Instance._pools.ContainsKey(poolType))
+        {
+            Debug.LogError("Unknown pool name: " + poolType);
+            return null;
+        }
+
+        return Instance._pools[poolType].TakeRandomFromPool();
+    }
+
     public static void Return(PoolItem item)
     {
         if (!Instance._pools.ContainsKey(item.PoolType))

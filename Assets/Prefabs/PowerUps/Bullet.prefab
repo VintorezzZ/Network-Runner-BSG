@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9178928700620704926}
   - component: {fileID: 4216125453170569506}
   - component: {fileID: 8122305449275359753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -54,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

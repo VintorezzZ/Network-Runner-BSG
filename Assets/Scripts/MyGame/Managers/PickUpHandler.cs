@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Com.MyCompany.MyGame;
+using MyGame.Other;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using Utils;
+using Views;
 
 namespace MyGame.Managers
 {
@@ -44,9 +46,10 @@ namespace MyGame.Managers
 
         private void CheckForBulletBonus(Collider other)
         {
-            if (other.CompareTag("Bullet"))
+            if (other.TryGetComponent(out PowerUp powerUp))
             {
-                _player.weaponManager.SwitchWeapon("RPG7", 5f);
+                ViewManager.GetView<InGameView>().ActivatePowerUp(powerUp);
+                _player.weaponManager.SwitchWeapon("RPG7", powerUp.duration);
 
                 _player.Ammo++;
 

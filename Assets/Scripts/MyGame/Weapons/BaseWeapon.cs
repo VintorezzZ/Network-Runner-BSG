@@ -24,10 +24,11 @@ public class BaseWeapon : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(WeaponManager.RayCastPoint.position, WeaponManager.RayCastPoint.forward * 10f, Color.magenta, 2f);
+            //Debug.DrawRay(WeaponManager._rayCastPoint.position, WeaponManager._rayCastPoint.forward * 10f, Color.magenta, 20f);
             targetDirection = -rayCastPoint.forward;
         }
         
+        //Debug.DrawRay(WeaponManager._rayCastPoint.position, WeaponManager._rayCastPoint.forward * 10f, Color.magenta, 20f);
         SoundManager.Instance.PlayFire(audioSource, shootSound);
     }
 }

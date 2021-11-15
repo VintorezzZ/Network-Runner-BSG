@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5944262602946518098}
   - component: {fileID: -2735583857181109503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SidePrefab 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,10 @@ PrefabInstance:
     - target: {fileID: 193714, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_Room_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 193714, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 422222, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
       propertyPath: m_RootOrder
@@ -120,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_FoundationRock_01
       objectReference: {fileID: 0}
+    - target: {fileID: 192068, guid: 2cbe4111caaa52243a97077dfc33593c, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 416368, guid: 2cbe4111caaa52243a97077dfc33593c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -182,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_Foundation_Beams_01
       objectReference: {fileID: 0}
+    - target: {fileID: 108878, guid: a1d89dfa5be4ffa4395c55529be0064f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 401876, guid: a1d89dfa5be4ffa4395c55529be0064f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -243,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 193714, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_Room_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 193714, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 422222, guid: 53a1fad510b98f74c96763872cbd652f, type: 3}
       propertyPath: m_RootOrder

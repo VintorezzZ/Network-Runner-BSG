@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8690299010985230212}
   - component: {fileID: 7987412051872882160}
   - component: {fileID: 5139463526289855338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 2533881854764352094}
   - component: {fileID: 2639269233052411312}
   - component: {fileID: 919132147685060425}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: conveyor belts
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -154,7 +155,7 @@ GameObject:
   - component: {fileID: 7819617130638356141}
   - component: {fileID: 3172093220086465802}
   - component: {fileID: 3060500600464009042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bokovini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,6 +195,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -235,7 +237,7 @@ GameObject:
   - component: {fileID: 8728917356104431460}
   - component: {fileID: 2136697620146009508}
   - component: {fileID: 5080467353293425935}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,6 +277,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -317,7 +320,7 @@ GameObject:
   - component: {fileID: 3911015633853288313}
   - component: {fileID: 8424454860580435230}
   - component: {fileID: 1461887315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lenta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,6 +360,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

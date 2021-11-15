@@ -1,20 +1,22 @@
 using System;
 using UnityEngine;
+using Utils;
 
 public class WeaponManager
 {
-    private Transform gunHolder;
-    private Transform RayCastPoint;
+    private Transform _gunHolder;
+    private Transform _rayCastPoint;
     
-    private BaseWeapon currentWeapon;
-    private string previousWeaponName;
+    private BaseWeapon _currentWeapon;
+    private string _previousWeaponName;
 
-    private float timer = 0f;
-    private bool timerStarted = false;
-    public WeaponManager(Transform gunHolder, Transform RayCastPoint)
+    private float _weaponLifeTime;
+    private Timer _timer = new Timer();
+    
+    public WeaponManager(Transform gunHolder, Transform rayCastPoint)
     {
-        this.gunHolder = gunHolder;
-        this.RayCastPoint = RayCastPoint;
+        _gunHolder = gunHolder;
+        _rayCastPoint = rayCastPoint;
         LoadWeapon("M1911");
     }
 
@@ -22,41 +24,44 @@ public class WeaponManager
     {
         DeactivateWeaponByTimer();
     }
-    public BaseWeapon LoadWeapon(string weaponName)
+
+    private BaseWeapon LoadWeapon(string weaponName)
     {
         string path = "Weapons/" + weaponName;
         
         BaseWeapon weapon = GameObject.Instantiate(Resources.Load<BaseWeapon>(path)).GetComponent<BaseWeapon>();
         SetWeaponSettings(weapon);
-        currentWeapon = weapon;
+        _currentWeapon = weapon;
         return weapon;
     }
 
     private void SetWeaponSettings(BaseWeapon weapon)
     {
-        weapon.Init(RayCastPoint);
-        weapon.transform.SetParent(gunHolder);
-        weapon.transform.position = gunHolder.position;
-        weapon.transform.rotation = gunHolder.rotation;
+        weapon.Init(_rayCastPoint);
+        weapon.transform.SetParent(_gunHolder);
+        weapon.transform.position = _gunHolder.position;
+        weapon.transform.rotation = _gunHolder.rotation;
     }
 
     public void SwitchWeapon(string weaponName, float deactivationTime)
     {
-        if (GetWeaponName(currentWeapon) == weaponName)
+        if (GetWeaponName(_currentWeapon) == weaponName)
+        {
+            SetTimer(deactivationTime);
             return;
-
-        SetTimer(deactivationTime);
-
-        previousWeaponName = GetWeaponName(currentWeapon);
+        }
         
-        GameObject.Destroy(currentWeapon.gameObject);
-        currentWeapon = LoadWeapon(weaponName);
+        SetTimer(deactivationTime);
+        _previousWeaponName = GetWeaponName(_currentWeapon);
+        GameObject.Destroy(_currentWeapon.gameObject);
+        _currentWeapon = LoadWeapon(weaponName);
     }
 
     private void SetTimer(float time)
     {
-        timer = time;
-        timerStarted = true;
+        _weaponLifeTime = time;
+        _timer.Stop();
+        _timer.Start();
     }
 
     private string GetWeaponName(BaseWeapon weapon)
@@ -66,19 +71,17 @@ public class WeaponManager
 
     public void DeactivateWeaponByTimer()   
     {
-        timer -= Time.deltaTime;
-
-        if (timerStarted && timer < 0)
-        {
-            timerStarted = false;
-            GameObject.Destroy(currentWeapon.gameObject);
-            LoadWeapon(previousWeaponName);
-        }
+        if(_timer.Time <= _weaponLifeTime)
+            return;
+        
+        _timer.Stop();
+        GameObject.Destroy(_currentWeapon.gameObject);
+        LoadWeapon(_previousWeaponName);
     }
 
     public void Shoot()
     {
-        currentWeapon.Shoot();
+        _currentWeapon.Shoot();
     }
 
 

@@ -33,6 +33,7 @@ public class Rocket : MonoBehaviour, IPoolObservable
             }
         }
         
+        SetExplosionFXSettings(PoolManager.Get(PoolType.ExplosionsFX).transform, other.transform);
         PoolManager.Return(_poolItem);
     }
 

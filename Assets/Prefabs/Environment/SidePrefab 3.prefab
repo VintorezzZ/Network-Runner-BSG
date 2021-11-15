@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4115821986668587228}
   - component: {fileID: 795625596301618033}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SidePrefab 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,10 @@ PrefabInstance:
     - target: {fileID: 152466, guid: 46446b93c123716498506636ebe9ef68, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_Foundation_07
+      objectReference: {fileID: 0}
+    - target: {fileID: 152466, guid: 46446b93c123716498506636ebe9ef68, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 481464, guid: 46446b93c123716498506636ebe9ef68, type: 3}
       propertyPath: m_RootOrder
@@ -119,6 +123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_House_TopRoomSmall_05
       objectReference: {fileID: 0}
+    - target: {fileID: 154720, guid: 7d7fac1794be19f468eda587e63e6774, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 467240, guid: 7d7fac1794be19f468eda587e63e6774, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -180,6 +188,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 718ea5c67c197f54f8b02a9e57c8d21e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_House_Foundation_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 718ea5c67c197f54f8b02a9e57c8d21e, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 488060, guid: 718ea5c67c197f54f8b02a9e57c8d21e, type: 3}
       propertyPath: m_RootOrder

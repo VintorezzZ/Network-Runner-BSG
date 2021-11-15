@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PoolContainer : MonoBehaviour  // container
 {
@@ -52,6 +53,24 @@ public class PoolContainer : MonoBehaviour  // container
         }
         
         return null; 
+    }
+
+    public PoolItem TakeRandomFromPool()
+    {
+        var freeItems = new List<PoolItem>();
+        for (int i = 0; i < pooledItems.Count; i++)
+        {
+            if(pooledItems[i].isFree)
+            {
+                freeItems.Add(pooledItems[i]);
+            }
+        }
+        
+        if(freeItems.Count == 0) return expandable ? ExpandItem() : null;
+        
+        var randomIndex = Random.Range(0, freeItems.Count);
+        freeItems[randomIndex].TakeFromPool();
+        return freeItems[randomIndex];
     }
 
     private PoolItem ExpandItem()

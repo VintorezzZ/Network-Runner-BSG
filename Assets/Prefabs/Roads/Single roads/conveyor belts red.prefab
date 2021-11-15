@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1052309229869502799}
   - component: {fileID: 2808967540999494582}
   - component: {fileID: 3042776148759456993}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: conveyor belts red
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -74,6 +74,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -115,7 +116,7 @@ GameObject:
   - component: {fileID: 5953820423299500923}
   - component: {fileID: 4963776271311366415}
   - component: {fileID: 7883856888215709589}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +156,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -197,7 +199,7 @@ GameObject:
   - component: {fileID: 2052703779670424454}
   - component: {fileID: 6833000525789512161}
   - component: {fileID: 3042776149092128172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lenta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,6 +239,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -293,7 +296,7 @@ GameObject:
   - component: {fileID: 5097723556054850130}
   - component: {fileID: 450242534961426933}
   - component: {fileID: 18869671101895597}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bokovini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,6 +336,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -374,7 +378,7 @@ GameObject:
   - component: {fileID: 5987892906060465051}
   - component: {fileID: 4007376711861780827}
   - component: {fileID: 7834977932078381552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,6 +418,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
