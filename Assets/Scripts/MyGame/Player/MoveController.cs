@@ -13,18 +13,21 @@ namespace MyGame.Player
         [SerializeField] private float maxSpeed = 20;
         [SerializeField] private float strafeSpeed = 6;
         [SerializeField] private float acceleration = 0.1f;
-        [SerializeField] public float speed;
+
+        public float Speed { get; private set; }
 
         private global::Player _player;
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-            speed = startSpeed;
         }
 
         public void Init(global::Player player)
         {
             _player = player;
+            Speed = GameSettings.Config.startSpeed;
+            strafeSpeed = GameSettings.Config.strafeSpeed;
+            acceleration = GameSettings.Config.acceleration;
         }
 
         private void ProcessInputs()
@@ -51,7 +54,7 @@ namespace MyGame.Player
                 _gravity.y = 0f;
             }
         
-            Vector3 moveDir = transform.right * (horizontalInput * strafeSpeed) + transform.forward * speed;
+            Vector3 moveDir = transform.right * (horizontalInput * strafeSpeed) + transform.forward * Speed;
             _characterController.Move(moveDir * Time.deltaTime);
         
             _gravity.y += gravityAmount * Time.deltaTime;
@@ -65,9 +68,9 @@ namespace MyGame.Player
     
         private void SpeedControl()
         {
-            speed += acceleration * Time.deltaTime;
-            if (speed > maxSpeed)
-                speed = maxSpeed;
+            Speed += acceleration * Time.deltaTime;
+            if (Speed > maxSpeed)
+                Speed = maxSpeed;
         }
         
         private void CheckForCrossBends(Collider other)

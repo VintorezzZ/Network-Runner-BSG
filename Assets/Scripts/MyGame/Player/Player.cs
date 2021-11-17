@@ -77,8 +77,8 @@ public class Player : MonoBehaviour
         CreateBulletsContainer();
 
         canMove = false;
-        Health = startHealth;
-        Ammo = startBullets;
+        Health = GameSettings.Config.startHealth;
+        Ammo = GameSettings.Config.startAmmo;
         Coins = 0;
         
         AddHealth(Health);
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     
     private void UpdateScore()
     {
-        score += moveController.speed * Time.deltaTime;
+        score += moveController.Speed * Time.deltaTime;
     }
 
     public void CheckForBestScore()
@@ -159,21 +159,6 @@ public class Player : MonoBehaviour
         for (int i = 0; i < health; i++)
         {
             ViewManager.GetView<InGameView>().AddHealth(i);
-        }
-    }
-    
-    private void CheckForAwesomeTrigger()
-    {
-        RaycastHit[] hits;
-        Ray ray = new Ray(transform.position, Vector3.forward);
-        //Debug.DrawRay(transform.position, Vector3.forward * 3, Color.red, 1);
-        hits = Physics.RaycastAll(ray, 3);
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i].transform.CompareTag("AwesomeTrigger"))
-            {
-                pickUpHandler.AddAwesomeTriggerScore(50);
-            }
         }
     }
 

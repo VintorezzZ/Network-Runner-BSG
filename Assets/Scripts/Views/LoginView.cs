@@ -20,6 +20,8 @@ namespace Views
                 PlayerPrefs.SetString("playername", playerNameInput.text);
                 LoadMainMenu();
             });
+            
+            GameSettings.GetSettingsFromFile();
         }
 
         private static void LoadMainMenu()

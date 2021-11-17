@@ -29,7 +29,7 @@ public class RPG : BaseWeapon
     
     private void SetShellSettings(Shell shell)                        // уточнить 
     {
-        shell.PlayerVelocity = RoomController.Instance.localPlayer.moveController.speed;
+        shell.PlayerVelocity = RoomController.Instance.localPlayer.moveController.Speed;
         shell.transform.position = transform.position + -transform.forward + Vector3.up;
         shell.transform.rotation = RoomController.Instance.localPlayer.transform.rotation;
         shell.Init(targetDirection);

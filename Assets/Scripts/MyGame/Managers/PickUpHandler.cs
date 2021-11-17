@@ -22,22 +22,6 @@ namespace MyGame.Managers
             _player = player;
         }
 
-        public void AddAwesomeTriggerScore(int score)
-        {
-            StartCoroutine(ShowAwesomeSprite());
-            _player.score += score;
-            SoundManager.Instance.PlayCoinPickUp();
-        }
-        
-        private IEnumerator ShowAwesomeSprite()
-        {
-            //int index = Random.Range(0, awesomeSprites.Count);
-            //awesomeSpritePrefab.GetComponent<Image>().sprite = awesomeSprites[index];
-            awesomeSpritePrefab.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            awesomeSpritePrefab.SetActive(false);
-        }
-        
         private void OnTriggerEnter(Collider other)
         {
             CheckForBulletBonus(other);
@@ -66,7 +50,7 @@ namespace MyGame.Managers
         {
             if (other.TryGetComponent(out Coin coin))
             {
-                _player.Coins++;
+                _player.Coins += GameSettings.Config.pickUpBonusCoins;
             
                 SoundManager.Instance.PlayCoinPickUp();
                 
