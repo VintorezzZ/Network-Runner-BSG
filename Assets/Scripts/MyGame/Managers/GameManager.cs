@@ -18,7 +18,7 @@ namespace Com.MyCompany.MyGame
             {
                 if (scene.name == "Gameplay")
                 {
-                    InitGameScene();
+                    InitGameScene(scene);
                 }
             };
 
@@ -31,8 +31,9 @@ namespace Com.MyCompany.MyGame
             };
         }
 
-        private void InitGameScene()
+        private void InitGameScene(Scene scene)
         {
+            SceneManager.SetActiveScene(scene);
             WorldBuilder.Instance.Init(0);
         }
 
